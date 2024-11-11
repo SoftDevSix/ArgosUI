@@ -30,6 +30,34 @@ const theme = createTheme({
       default: COLORS.PRIMARY_ACTION,
     },
   },
+  typography: {
+    fontFamily: '"Comme", sans-serif',
+    h1: {
+      fontFamily: '"Comme", sans-serif',
+      fontWeight: 700, 
+      fontSize: '32px',
+    },
+    h2: {
+      fontFamily: '"Comme", sans-serif',
+      fontWeight: 700,
+      fontSize: '24px',
+    },
+    h3: {
+      fontFamily: '"Comme", sans-serif',
+      fontWeight: 700,
+      fontSize: '18.72px',
+    },
+    h4: {
+      fontFamily: '"Comme", sans-serif',
+      fontWeight: 700, 
+      fontSize: '16px',
+    },
+    body1: {
+      fontFamily: '"Comme", sans-serif',
+      fontWeight: 400, 
+      fontSize: '16px',
+    },
+  },
   components: {
     MuiContainer: {
       styleOverrides: {
