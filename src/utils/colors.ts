@@ -1,4 +1,4 @@
-export enum COLORS {
+export enum Color {
   PRIMARY_DEFAULT = "#2A2F40",
   PRIMARY_ACTION = "#1D212F",
   PRIMARY_HOVER = "#12141D",
