@@ -16,6 +16,11 @@ To run the project on port 5174:
 npm run dev
 ```
 
+To run the tests:
+```bash
+npm test
+```
+
 ## Project Structure
 
 Folder Structure:
