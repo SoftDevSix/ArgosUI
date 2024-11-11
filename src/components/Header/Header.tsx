@@ -1,7 +1,12 @@
 import React from "react";
+import { Container, Typography } from "@mui/material";
 
 const Header: React.FC = () => {
-  return <div>Header</div>;
+  return (
+    <Container>
+      <Typography>Header</Typography>
+    </Container>
+  );
 };
 
 export default Header;
