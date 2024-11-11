@@ -1,5 +1,16 @@
-:root{
-    /* Define global variables here */
+:root {
+  --primary-default: #2a2f40;
+  --primary-action: #1d212f;
+  --primary-hover: #12141d;
+  --secondary: #d8b4fe;
+  --link: #93c5fd;
+  --neutral-white: #fff;
+  --neutral-black: #000;
+  --error: #fca5a5;
+  --success: #86efac;
+  --warning-default: #fef08a;
+  --warning-heavy: #fdba74;
+  --warning-critical: #d97706;
 }
 
 /* Define global styles here  */
