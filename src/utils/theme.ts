@@ -1,66 +1,66 @@
 import { createTheme } from "@mui/material/styles";
-import { Color } from "./colors";
+import { COLORS, FONT_FAMILY, FONT_SIZES, FONT_WEIGHTS } from "./styleConstants";
 
 const theme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: Color.PRIMARY_DEFAULT,
-      light: Color.PRIMARY_HOVER,
-      dark: Color.PRIMARY_ACTION,
+      main: COLORS.PRIMARY_DEFAULT,
+      light: COLORS.PRIMARY_HOVER,
+      dark: COLORS.PRIMARY_ACTION,
     },
     secondary: {
-      main: Color.SECONDARY,
+      main: COLORS.SECONDARY,
     },
     info: {
-      main: Color.LINK,
+      main: COLORS.LINK,
     },
     success: {
-      main: Color.SUCCESS,
+      main: COLORS.SUCCESS,
     },
     error: {
-      main: Color.ERROR,
+      main: COLORS.ERROR,
     },
     warning: {
-      main: Color.WARNING_DEFAULT,
-      light: Color.WARNING_CRITICAL,
-      dark: Color.WARNING_HEAVY,
+      main: COLORS.WARNING_DEFAULT,
+      light: COLORS.WARNING_CRITICAL,
+      dark: COLORS.WARNING_HEAVY,
     },
     background: {
-      default: Color.PRIMARY_ACTION,
+      default: COLORS.PRIMARY_ACTION,
     },
   },
   typography: {
     allVariants: {
-      color: Color.NEUTRAL_WHITE,
+      color: COLORS.NEUTRAL_WHITE,
       wordWrap: "break-word",
       wordBreak: "break-word",
     },
-    fontFamily: '"Comme", sans-serif',
+    fontFamily: FONT_FAMILY,
     h1: {
-      fontFamily: '"Comme", sans-serif',
-      fontWeight: 700,
-      fontSize: "32px",
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.BOLD,
+      fontSize: FONT_SIZES.H1,
     },
     h2: {
-      fontFamily: '"Comme", sans-serif',
-      fontWeight: 700,
-      fontSize: "24px",
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.BOLD,
+      fontSize: FONT_SIZES.H2,
     },
     h3: {
-      fontFamily: '"Comme", sans-serif',
-      fontWeight: 700,
-      fontSize: "18.72px",
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.BOLD,
+      fontSize: FONT_SIZES.H3,
     },
     h4: {
-      fontFamily: '"Comme", sans-serif',
-      fontWeight: 700,
-      fontSize: "16px",
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.BOLD,
+      fontSize: FONT_SIZES.H4,
     },
     body1: {
-      fontFamily: '"Comme", sans-serif',
-      fontWeight: 400,
-      fontSize: "16px",
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.REGULAR,
+      fontSize: FONT_SIZES.BODY1,
     },
   },
   components: {
@@ -75,7 +75,7 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: Color.PRIMARY_DEFAULT,
+          backgroundColor: COLORS.PRIMARY_DEFAULT,
           borderRadius: "16px",
         },
       },
@@ -96,16 +96,16 @@ const theme = createTheme({
           fontSize: 40,
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: Color.PRIMARY_DEFAULT,
+              borderColor: COLORS.PRIMARY_DEFAULT,
             },
             "&:hover fieldset": {
-              borderColor: Color.SECONDARY,
+              borderColor: COLORS.SECONDARY,
             },
             "&.Mui-focused fieldset": {
-              borderColor: Color.SECONDARY,
+              borderColor: COLORS.SECONDARY,
             },
             "& .MuiInputBase-input": {
-              color: Color.NEUTRAL_WHITE,
+              color: COLORS.NEUTRAL_WHITE,
             },
           },
         },
@@ -124,7 +124,7 @@ const theme = createTheme({
           color: "#000",
           fontSize: "17px",
           "&.Mui-focused": {
-            color: Color.SECONDARY,
+            color: COLORS.SECONDARY,
           },
         },
       },
@@ -136,16 +136,16 @@ const theme = createTheme({
           borderColor: "#fff",
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: Color.SECONDARY,
+              borderColor: COLORS.SECONDARY,
             },
             "&:hover fieldset": {
-              borderColor: Color.SECONDARY,
+              borderColor: COLORS.SECONDARY,
             },
             "&.Mui-focused fieldset": {
-              borderColor: Color.SECONDARY,
+              borderColor: COLORS.SECONDARY,
             },
             "& .MuiInputBase-input": {
-              color: Color.NEUTRAL_WHITE,
+              color: COLORS.NEUTRAL_WHITE,
             },
           },
         },
@@ -154,14 +154,14 @@ const theme = createTheme({
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: Color.SECONDARY,
+          backgroundColor: COLORS.SECONDARY,
         },
       },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: Color.PRIMARY_ACTION,
+          backgroundColor: COLORS.PRIMARY_ACTION,
         },
       },
     },
@@ -169,10 +169,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "&:hover": {
-            backgroundColor: Color.PRIMARY_ACTION,
+            backgroundColor: COLORS.PRIMARY_ACTION,
           },
           "&.Mui-selected": {
-            backgroundColor: Color.PRIMARY_HOVER,
+            backgroundColor: COLORS.PRIMARY_HOVER,
           },
         },
       },
