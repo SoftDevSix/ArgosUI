@@ -10,7 +10,7 @@ To install the required dependencies, run:
 npm i
 ```
 
-To run the project on port 5173:
+To run the project on port 5174:
 
 ```bash
 npm run dev
