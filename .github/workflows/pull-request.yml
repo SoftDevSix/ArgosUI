@@ -19,11 +19,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --no-package-lock
+        run: npm install --no-save
 
       - name: Build the project
         run: npm run build
@@ -42,11 +42,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --no-package-lock
+        run: npm install --no-save
 
       - name: Run tests
         run: npm test
@@ -65,11 +65,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --no-package-lock
+        run: npm install --no-save
 
       - name: Run Linter
         run: npm run lint
