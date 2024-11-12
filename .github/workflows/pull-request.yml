@@ -21,9 +21,10 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: 'false'
 
       - name: Install dependencies
-        run: npm install --no-save
+        run: npm install --legacy-peer-deps --no-package-lock
 
       - name: Build the project
         run: npm run build
@@ -44,9 +45,10 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: 'false'
 
       - name: Install dependencies
-        run: npm install --no-save
+        run: npm install --legacy-peer-deps --no-package-lock
 
       - name: Run tests
         run: npm test
@@ -67,9 +69,10 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: 'false'
 
       - name: Install dependencies
-        run: npm install --no-save
+        run: npm install --legacy-peer-deps --no-package-lock
 
       - name: Run Linter
         run: npm run lint
