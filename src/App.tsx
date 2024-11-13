@@ -10,9 +10,9 @@ import Header from "./components/Header";
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline/>
+      <CssBaseline />
       <BrowserRouter>
-        <Header/>
+        <Header />
         <Container>
           <Routes>
             <Route path={PageNames.HOME} Component={Home} />

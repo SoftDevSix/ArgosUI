@@ -6,7 +6,7 @@ describe("Home component", () => {
   it("should render the Home text", () => {
     render(<Home />);
     const headline = screen.getByText(/Home Page/i);
-    
+
     expect(headline).toBeInTheDocument();
   });
 });

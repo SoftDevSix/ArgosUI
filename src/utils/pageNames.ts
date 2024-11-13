@@ -1,4 +1,4 @@
 export enum PageNames {
-    HOME = "/",
-    ERROR_404 = "*"
+  HOME = "/",
+  ERROR_404 = "*",
 }
