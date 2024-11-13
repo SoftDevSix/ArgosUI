@@ -112,7 +112,7 @@ jobs:
     steps:
       - uses: gsactions/commit-message-checker@v2
         with:
-          pattern: '^(?!Merge)(?:feat|fix|chore|docs|build|ci|style|refactor|perf|revert)(?:\(\w+\))?:\s[a-z]{1,2}.+'
+          pattern: '^(Merge|(?:feat|fix|chore|docs|build|ci|style|refactor|perf|revert)(?:\(\w+\))?:\s[a-z]{1,2}.+)'
           error: 'Commit message must follow the format: <type>(?): <description>'
           excludeDescription: 'true'
           excludeTitle: 'true'
