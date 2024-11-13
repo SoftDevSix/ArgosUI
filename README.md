@@ -24,7 +24,8 @@ To run the tests:
 npm test
 ```
 
-Format Code
+**Format Code**
+
 To automatically format the code according to Prettier's rules, run:
 ```bash
 npm run prettier:write
