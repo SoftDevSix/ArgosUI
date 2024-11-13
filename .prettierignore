@@ -7,3 +7,4 @@ tsconfig.app.js
 tsconfig.node.json
 vite.config.ts
 .gitignore
+README.md

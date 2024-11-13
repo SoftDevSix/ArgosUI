@@ -16,7 +16,7 @@ To run the project on port 5173:
 npm run dev
 ```
 
-Open ```http://localhost:5173```
+Open `http://localhost:5173`
 
 To run the tests:
 
@@ -27,6 +27,7 @@ npm test
 **Format Code**
 
 To automatically format the code according to Prettier's rules, run:
+
 ```bash
 npm run prettier:write
 ```
