@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - 'develop'
-      - 'feature/cs-045/create-ui-project'
 
 jobs:
   build:

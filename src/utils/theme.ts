@@ -1,5 +1,10 @@
 import { createTheme } from "@mui/material/styles";
-import { COLORS, FONT_FAMILY, FONT_SIZES, FONT_WEIGHTS } from "./styleConstants";
+import {
+  COLORS,
+  FONT_FAMILY,
+  FONT_SIZES,
+  FONT_WEIGHTS,
+} from "./styleConstants";
 
 const theme = createTheme({
   palette: {
