@@ -1,0 +1,9 @@
+.github/
+
+**/*.config.js
+
+tsconfig.json
+tsconfig.app.js
+tsconfig.node.json
+vite.config.ts
+.gitignore

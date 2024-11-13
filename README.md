@@ -17,6 +17,7 @@ npm run dev
 ```
 
 To run the tests:
+
 ```bash
 npm test
 ```
@@ -73,19 +74,19 @@ Component Example:
 
 ```tsx
 // src/components/Button/Button.tsx
-import React from 'react';
-import styles from './Button.module.css';
+import React from "react";
+import styles from "./Button.module.css";
 
 interface ButtonProps {
-text: string;
-onClick: () => void;
-disabled?: boolean;
+  text: string;
+  onClick: () => void;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({ text, onClick, disabled = false }) => (
-<button className={styles.button} onClick={onClick} disabled={disabled}>
+  <button className={styles.button} onClick={onClick} disabled={disabled}>
     {text}
-</button>
+  </button>
 );
 
 export default Button;
@@ -129,30 +130,32 @@ Custom Hook Example:
 
 ```ts
 // src/hooks/useFetch.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-const useFetch = <T,>(url: string): { data: T | null, error: string | null, loading: boolean } => {
-const [data, setData] = useState<T | null>(null);
-const [error, setError] = useState<string | null>(null);
-const [loading, setLoading] = useState<boolean>(true);
+const useFetch = <T>(
+  url: string,
+): { data: T | null; error: string | null; loading: boolean } => {
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-    try {
+      try {
         const response = await fetch(url);
         const result = await response.json();
         setData(result);
-    } catch (err) {
+      } catch (err) {
         setError(err.message);
-    } finally {
+      } finally {
         setLoading(false);
-    }
+      }
     };
 
     fetchData();
-}, [url]);
+  }, [url]);
 
-return { data, error, loading };
+  return { data, error, loading };
 };
 
 export default useFetch;
@@ -174,12 +177,12 @@ Service Example:
 
 ```ts
 // src/services/api.ts
-const API_URL = 'https://api.example.com';
+const API_URL = "https://api.example.com";
 
 export const fetchUsers = async () => {
   const response = await fetch(`${API_URL}/users`);
   if (!response.ok) {
-    throw new Error('Network response was not ok');
+    throw new Error("Network response was not ok");
   }
   return response.json();
 };
@@ -248,6 +251,7 @@ CSS Module Example:
 ```
 
 Global Styles:
+
 ```
 src/
 ├── assets/
