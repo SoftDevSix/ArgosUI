@@ -1,4 +1,4 @@
-import {Box, Typography, List, ListItem, ListItemText, Divider} from "@mui/material";
+import { Box, Typography, List, ListItem, ListItemText, Divider } from "@mui/material";
 import { PieChart } from "@mui/x-charts";
 
 interface CoverageSummaryProps {
@@ -18,6 +18,9 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
                                                              decreasedFiles,
                                                              coverageChange,
                                                          }) => {
+
+    const colors = ["#4caf50", "#ffd700", "#ff9800", "#ff5722"];
+
     return (
         <Box
             sx={{ maxWidth: 800, p: 2, bgcolor: "#1e1e2f", color: "white", borderRadius: 2 }}
@@ -28,18 +31,27 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
 
             <Box sx={{ display: "flex", gap: 4, mb: 2 }}>
                 <Box>
-                    <Typography sx={{ color: "#4caf50" }}>
+                    <Typography sx={{ color: colors[0] }}>
                         Overall Coverage: {summaryData[0]?.value}%
                     </Typography>
-                    <Typography sx={{ color: "#ffd700" }}>Line Coverage: {summaryData[1]?.value}%</Typography>
-                    <Typography sx={{ color: "#ff9800" }}>Method Coverage: {summaryData[2]?.value}%</Typography>
-                    <Typography sx={{ color: "#ff5722" }}>Class Coverage: {summaryData[3]?.value}%</Typography>
+                    <Typography sx={{ color: colors[1] }}>
+                        Line Coverage: {summaryData[1]?.value}%
+                    </Typography>
+                    <Typography sx={{ color: colors[2] }}>
+                        Method Coverage: {summaryData[2]?.value}%
+                    </Typography>
+                    <Typography sx={{ color: colors[3] }}>
+                        Class Coverage: {summaryData[3]?.value}%
+                    </Typography>
                 </Box>
 
                 <PieChart
                     series={[
                         {
-                            data: summaryData,
+                            data: summaryData.map((item, index) => ({
+                                ...item,
+                                color: colors[index],
+                            })),
                             outerRadius: 50,
                             highlightScope: { faded: "global", highlighted: "item" },
                             faded: { innerRadius: 5, additionalRadius: -5 },
@@ -60,11 +72,13 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
 
             <Box sx={{ display: "flex", gap: 4 }}>
                 <Box>
-                    <Typography sx={{ color: "#4caf50" }}>
+                    <Typography sx={{ color: colors[0] }}>
                         Coverage Change: {coverageChange > 0 ? "+" : ""}
                         {coverageChange}% {coverageChange > 0 ? "(Improved)" : "(Decreased)"}
                     </Typography>
-                    <Typography sx={{ color: "#ffd700" }}>Line Coverage: {comparisonData[1]?.value}%</Typography>
+                    <Typography sx={{ color: colors[1] }}>
+                        Line Coverage: {comparisonData[1]?.value}%
+                    </Typography>
 
                     <Typography sx={{ color: "#64b5f6", mt: 2, mb: 1 }}>
                         Files Improved:
@@ -106,7 +120,10 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
                 <PieChart
                     series={[
                         {
-                            data: comparisonData,
+                            data: comparisonData.map((item, index) => ({
+                                ...item,
+                                color: colors[index],
+                            })),
                             outerRadius: 50,
                             highlightScope: { faded: "global", highlighted: "item" },
                             faded: { innerRadius: 5, additionalRadius: -5 },
