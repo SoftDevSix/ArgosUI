@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Box,
   Typography,
@@ -30,11 +30,23 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
 }) => {
   const colors = [COLORS.GREEN, COLORS.YELLOW, COLORS.ORANGE, COLORS.RED];
 
-  const mapDataWithColors = (data: { value: number; label: string }[]) =>
-    data.map((item, index) => ({
-      ...item,
-      color: colors[index],
-    }));
+  const summaryDataWithColors = useMemo(
+    () =>
+      summaryData.map((item, index) => ({
+        ...item,
+        color: colors[index],
+      })),
+    [summaryData, colors]
+  );
+
+  const comparisonDataWithColors = useMemo(
+    () =>
+      comparisonData.map((item, index) => ({
+        ...item,
+        color: colors[index],
+      })),
+    [comparisonData, colors]
+  );
 
   return (
     <Box
@@ -66,7 +78,7 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
           </Typography>
         </Box>
         <Box>
-            <CustomPieChart data={mapDataWithColors(summaryData)} />
+          <CustomPieChart data={summaryDataWithColors} />
         </Box>
       </Box>
 
@@ -91,10 +103,10 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
           </Typography>
           <List dense>
             {improvedFiles.length > 0 ? (
-              improvedFiles.map((file, index) => (
-                <ListItem key={index} sx={{ py: 0 }}>
+              improvedFiles.map((file) => (
+                <ListItem key={file} sx={{ py: 0 }}>
                   <ListItemText
-                    primary={`• ${file}`}
+                    primary={file}
                     primaryTypographyProps={{
                       sx: { color: COLORS.NEUTRAL_WHITE },
                     }}
@@ -102,7 +114,14 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
                 </ListItem>
               ))
             ) : (
-              <Typography sx={{ ml: 2 }}>• None</Typography>
+              <ListItem sx={{ py: 0 }}>
+                <ListItemText
+                  primary="None"
+                  primaryTypographyProps={{
+                    sx: { color: COLORS.NEUTRAL_WHITE },
+                  }}
+                />
+              </ListItem>
             )}
           </List>
 
@@ -111,10 +130,10 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
           </Typography>
           <List dense>
             {decreasedFiles.length > 0 ? (
-              decreasedFiles.map((file, index) => (
-                <ListItem key={index} sx={{ py: 0 }}>
+              decreasedFiles.map((file) => (
+                <ListItem key={file} sx={{ py: 0 }}>
                   <ListItemText
-                    primary={`• ${file}`}
+                    primary={file}
                     primaryTypographyProps={{
                       sx: { color: COLORS.NEUTRAL_WHITE },
                     }}
@@ -122,12 +141,19 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
                 </ListItem>
               ))
             ) : (
-              <Typography sx={{ ml: 2 }}>• None</Typography>
+              <ListItem sx={{ py: 0 }}>
+                <ListItemText
+                  primary="None"
+                  primaryTypographyProps={{
+                    sx: { color: COLORS.NEUTRAL_WHITE },
+                  }}
+                />
+              </ListItem>
             )}
           </List>
         </Box>
-            <CustomPieChart data={mapDataWithColors(comparisonData)} />
-        </Box>
+        <CustomPieChart data={comparisonDataWithColors} />
+      </Box>
     </Box>
   );
 };
