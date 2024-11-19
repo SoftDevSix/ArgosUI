@@ -1,3 +1,3 @@
-import CoverageSummary from './CoverageSummary';
+import CoverageSummary from "./CoverageSummary";
 
 export default CoverageSummary;

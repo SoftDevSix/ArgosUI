@@ -1,3 +1,3 @@
-import CustomPieChart from './CustomPieChart.tsx';
+import CustomPieChart from "./CustomPieChart.tsx";
 
 export default CustomPieChart;

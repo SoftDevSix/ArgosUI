@@ -4,7 +4,7 @@ import { Box, Typography, Divider } from "@mui/material";
 import { COLORS } from "../../utils/styleConstants";
 import CustomPieChart from "../CustomPieChart";
 import CoverageDetails from "./CoverageDeatils/CoverageDetails.tsx";
-import CoverageFilesList from "./CovergaeFilesList/CoverageFilesList.tsx";
+import CoverageFilesList from "./CoverageFilesList/CoverageFilesList.tsx";
 
 interface CoverageSummaryProps {
   baseBranchName: string;
