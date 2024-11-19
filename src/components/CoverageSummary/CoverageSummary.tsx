@@ -1,15 +1,10 @@
 import React, { useMemo } from "react";
-import {
-  Box,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-} from "@mui/material";
+import { Box, Typography, Divider } from "@mui/material";
 
 import { COLORS } from "../../utils/styleConstants";
 import CustomPieChart from "../CustomPieChart";
+import CoverageDetails from "./CoverageDeatils/CoverageDetails.tsx";
+import CoverageFilesList from "./CovergaeFilesList/CoverageFilesList.tsx";
 
 interface CoverageSummaryProps {
   baseBranchName: string;
@@ -62,27 +57,14 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
         Summary
       </Typography>
 
-      <Box sx={{ display: "flex", gap: 4, mb: 2 }}>
-        <Box>
-          <Typography sx={{ color: colors[0] }}>
-            Overall Coverage: {summaryData[0]?.value}%
-          </Typography>
-          <Typography sx={{ color: colors[1] }}>
-            Line Coverage: {summaryData[1]?.value}%
-          </Typography>
-          <Typography sx={{ color: colors[2] }}>
-            Method Coverage: {summaryData[2]?.value}%
-          </Typography>
-          <Typography sx={{ color: colors[3] }}>
-            Class Coverage: {summaryData[3]?.value}%
-          </Typography>
-        </Box>
-        <Box>
-          <CustomPieChart data={summaryDataWithColors} />
-        </Box>
-      </Box>
+      <CoverageDetails
+        colors={colors}
+        summaryData={summaryData}
+        pieChartData={summaryDataWithColors}
+      />
 
       <Divider />
+
       <Typography variant="h6" sx={{ color: COLORS.SECONDARY, mb: 1 }}>
         Comparison with Base Branch ({baseBranchName})
       </Typography>
@@ -98,59 +80,12 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
             Line Coverage: {comparisonData[1]?.value}%
           </Typography>
 
-          <Typography sx={{ color: COLORS.LINK, mt: 2, mb: 1 }}>
-            Files Improved:
-          </Typography>
-          <List dense>
-            {improvedFiles.length > 0 ? (
-              improvedFiles.map((file) => (
-                <ListItem key={file} sx={{ py: 0 }}>
-                  <ListItemText
-                    primary={file}
-                    primaryTypographyProps={{
-                      sx: { color: COLORS.NEUTRAL_WHITE },
-                    }}
-                  />
-                </ListItem>
-              ))
-            ) : (
-              <ListItem sx={{ py: 0 }}>
-                <ListItemText
-                  primary="None"
-                  primaryTypographyProps={{
-                    sx: { color: COLORS.NEUTRAL_WHITE },
-                  }}
-                />
-              </ListItem>
-            )}
-          </List>
+          <CoverageFilesList title="Files Improved" files={improvedFiles} />
 
-          <Typography sx={{ color: COLORS.LINK, mt: 1, mb: 1 }}>
-            Files Decreased Coverage:
-          </Typography>
-          <List dense>
-            {decreasedFiles.length > 0 ? (
-              decreasedFiles.map((file) => (
-                <ListItem key={file} sx={{ py: 0 }}>
-                  <ListItemText
-                    primary={file}
-                    primaryTypographyProps={{
-                      sx: { color: COLORS.NEUTRAL_WHITE },
-                    }}
-                  />
-                </ListItem>
-              ))
-            ) : (
-              <ListItem sx={{ py: 0 }}>
-                <ListItemText
-                  primary="None"
-                  primaryTypographyProps={{
-                    sx: { color: COLORS.NEUTRAL_WHITE },
-                  }}
-                />
-              </ListItem>
-            )}
-          </List>
+          <CoverageFilesList
+            title="Files Decreased Coverage"
+            files={decreasedFiles}
+          />
         </Box>
         <CustomPieChart data={comparisonDataWithColors} />
       </Box>
