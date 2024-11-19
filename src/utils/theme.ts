@@ -182,6 +182,14 @@ const theme = createTheme({
         },
       },
     },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          backgroundColor: COLORS.NEUTRAL_WHITE,
+          margin: "16px 0",
+        },
+      },
+    },
   },
 });
 
