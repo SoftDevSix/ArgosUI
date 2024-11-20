@@ -1,4 +1,4 @@
-name: Sonaqube
+name: SonarQube
 
 on:
   pull_request:
@@ -7,23 +7,32 @@ on:
 
 jobs:
   build:
-    name: Build and analyze - Sonarqube
+    name: Build and analyze - SonarQube
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests with coverage
+        run: npm run test -- --coverage
+
       - uses: sonarsource/sonarqube-scan-action@v3
         with:
           args: |
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.projectName="ArgosUI"
             -Dsonar.sources=./src
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+
       - uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
         env:
