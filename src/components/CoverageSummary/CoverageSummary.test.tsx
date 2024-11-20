@@ -14,8 +14,8 @@ vi.mock("./CoverageFilesList/CoverageFilesList", () => ({
     <div data-testid="coverage-files-list">
       <span>{title}</span>
       <ul>
-        {files.map((file: string, index: number) => (
-          <li key={index}>{file}</li>
+        {files.map((file: string) => (
+          <li key={file}>{file}</li>
         ))}
       </ul>
     </div>
