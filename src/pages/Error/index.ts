@@ -1,3 +1,3 @@
-import Error from "./Error";
+import Error404Page from "./Error404Page";
 
-export default Error;
+export default Error404Page;
