@@ -23,7 +23,10 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
   decreasedFiles,
   coverageChange,
 }) => {
-  const colors = [COLORS.GREEN, COLORS.YELLOW, COLORS.ORANGE, COLORS.RED];
+    const colors = useMemo(
+        () => [COLORS.GREEN, COLORS.YELLOW, COLORS.ORANGE, COLORS.RED],
+        []
+    );
 
   const summaryDataWithColors = useMemo(
     () =>
