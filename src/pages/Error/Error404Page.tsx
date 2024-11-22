@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import React from "react";
 
-const Error: React.FC = () => {
+const Error404Page: React.FC = () => {
   return (
     <div>
       <Typography variant="h2">Error 404 - Page Not Found</Typography>
@@ -9,4 +9,4 @@ const Error: React.FC = () => {
   );
 };
 
-export default Error;
+export default Error404Page;
