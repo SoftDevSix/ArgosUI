@@ -1,0 +1,30 @@
+.line {
+    display: flex;
+    align-items: start;
+    font-family: "Fira Code", monospace;
+    font-size: 12px;
+    color: white;
+    padding: 4px 8px;
+  }
+  
+  .lineNumber {
+    color: #6a6a6a; 
+    width: 50px; 
+    text-align: right;
+    margin-right: 16px; 
+    user-select: none; 
+  }
+  
+  .code {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .withoutCoverage {
+    color: #ff5722;
+  }
+  
+  .token {
+    display: inline-block;
+  }
+  

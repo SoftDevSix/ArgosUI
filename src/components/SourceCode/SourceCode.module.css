@@ -1,0 +1,19 @@
+.viewerContainer {
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 8px;
+    overflow: auto;
+    max-height: 500px;
+    border: 1px solid #ffffff;
+  }
+  
+  .fileName {
+    color: #93c5fd;
+    font-family: "Fira Code", monospace;
+    margin-bottom: 8px;
+  }
+  
+  .codeContainer {
+    overflow-x: auto;
+  }
+  
