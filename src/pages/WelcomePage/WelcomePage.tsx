@@ -1,0 +1,45 @@
+import React, {useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
+import styles from "./WelcomePage.module.css";
+import { PageNames } from "../../utils/pageNames";
+import { useHeader } from '../../components/Header/HeaderContext';
+
+const WelcomePage: React.FC = () => {
+
+const navigate = useNavigate();
+const { setShowHeader } = useHeader();
+
+useEffect(() => {
+  setShowHeader(false);
+  return () => setShowHeader(true); 
+}, [setShowHeader]);
+
+const handleAnalyzeClick = () => {
+    navigate(PageNames.HOME);
+};
+  return (
+    <div className={styles.container}>
+        <img
+  src="src\assets\images\welcome-background.png"
+  alt="Welcome background"
+  style={{
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    zIndex: -1,
+  }}
+/>
+      <div className={styles.overlay}></div>
+      <h1 className={styles.title}>Argos</h1>
+      <p className={styles.subtitle}>The code quality tool for better code</p>
+      <button className={styles.button} onClick={handleAnalyzeClick}>
+        Analyze your project
+      </button>
+    </div>
+  );
+};
+
+export default WelcomePage;
