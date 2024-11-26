@@ -1,6 +1,7 @@
 import React from "react";
 import CustomTextField from "../../Inputs/CustomTextField";
 import { ProjectInfoData } from "../../../types/interfaces";
+import ProjectUploader from "../ProjectUploader";
 
 interface ProjectFormProps {
   projectData: ProjectInfoData;
@@ -23,6 +24,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
       placeholder: "Eg: Argos",
       multiline: true,
       mt: 4,
+      minRows: 4
     },
   ];
 
@@ -35,14 +37,17 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
       {fields.map((field) => (
         <CustomTextField
           key={field.key}
+          name={field.key}
           value={projectData[field.key as keyof typeof projectData]}
           setValue={(val) => handleFieldChange(field.key, val)}
           label={field.label}
           placeholder={field.placeholder}
           multiline={field.multiline}
           mt={field.mt}
+          minRows={field.minRows}
         />
       ))}
+      <ProjectUploader/>
     </div>
   );
 };
