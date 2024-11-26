@@ -1,45 +1,15 @@
 import React from 'react';
-import { Box, Typography, CircularProgress } from '@mui/material';
+import {Typography} from '@mui/material';
 import styles from './CoverageSummary.module.css';
+import MetricCircle from "../MetricCircle/MetricCircle.tsx";
+import { GrTextAlignLeft } from "react-icons/gr";
+import { COLORS } from "../../utils/styleConstants.ts";
 
 interface CoverageSummaryProps {
     fileCoverage?: number;
     methodCoverage?: number;
     linesOfCode?: number;
 }
-
-interface MetricCircleProps {
-    value: number;
-    color: string;
-    label: string;
-}
-
-const MetricCircle: React.FC<MetricCircleProps> = ({ value, color, label }) => (
-    <div className={styles.metricContainer}>
-        <Box position="relative">
-            <CircularProgress
-                variant="determinate"
-                value={100}
-                size={80}
-                thickness={4}
-                sx={{ color: '#2d2d3b' }}
-            />
-            <CircularProgress
-                variant="determinate"
-                value={value}
-                size={80}
-                thickness={4}
-                sx={{
-                    color: color,
-                    position: 'absolute',
-                    left: 0,
-                }}
-            />
-            <Typography className={styles.circleLabel}>{`${value}%`}</Typography>
-        </Box>
-        <Typography className={styles.metricLabel}>{label}</Typography>
-    </div>
-);
 
 const CoverageSummary: React.FC<CoverageSummaryProps> = ({
                                                              fileCoverage = 10,
@@ -48,16 +18,14 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
                                                          }) => {
     return (
         <div className={styles.container}>
-            <MetricCircle value={fileCoverage} color="#4caf50" label="File coverage" />
-            <MetricCircle value={methodCoverage} color="#f44336" label="Method coverage" />
+            <MetricCircle value={fileCoverage} color={COLORS.GREEN} label="File coverage" circleSize={110}/>
+            <MetricCircle value={methodCoverage} color={COLORS.RED} label="Method coverage" circleSize={80}/>
             <div className={styles.linesContainer}>
-                <div className={styles.lines}>
-                    <span className={styles.line} />
-                    <span className={styles.line} />
-                    <span className={styles.line} />
+                <div className={styles.iconAndCount}>
+                    <GrTextAlignLeft size="44px" color={COLORS.YELLOW}/>
+                    <Typography className={styles.linesCount} sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>{linesOfCode}</Typography>
                 </div>
-                <Typography className={styles.linesCount}>{linesOfCode}</Typography>
-                <Typography className={styles.metricLabel}>Lines of code</Typography>
+                <Typography className={styles.metricLabel} sx={{color: COLORS.SECONDARY_TEXT }}>Lines of code</Typography>
             </div>
         </div>
     );

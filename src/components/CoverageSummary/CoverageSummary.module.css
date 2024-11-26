@@ -1,59 +1,32 @@
 .container {
     display: flex;
+    flex-direction: row;
+    align-items: flex-end;
     gap: 2rem;
     padding: 1.5rem;
     background-color: #1a1b26;
     border-radius: 0.5rem;
-    align-items: center;
     justify-content: center;
-}
-
-.metricContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 120px;
-}
-
-.circleLabel {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
-.metricLabel {
-    color: #6c7693;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
 }
 
 .linesContainer {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.lines {
-    display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-}
-
-.line {
-    width: 24px;
-    height: 3px;
-    background-color: #e6db74;
-    border-radius: 2px;
+    align-items: center;
 }
 
 .linesCount {
     color: white;
-    font-weight: bold;
-    font-size: 2rem;
 }
 
+.iconAndCount {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.metricLabel {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    text-align: center;
+}
