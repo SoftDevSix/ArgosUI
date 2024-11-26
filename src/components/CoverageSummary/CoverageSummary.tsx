@@ -1,99 +1,66 @@
-import React, { useMemo } from "react";
-import { Box, Typography, Divider } from "@mui/material";
-
-import { COLORS } from "../../utils/styleConstants";
-import CustomPieChart from "../CustomPieChart";
-import CoverageDetails from "./CoverageDeatils/CoverageDetails.tsx";
-import CoverageFilesList from "./CoverageFilesList/CoverageFilesList.tsx";
+import React from 'react';
+import { Box, Typography, CircularProgress } from '@mui/material';
+import styles from './CoverageSummary.module.css';
 
 interface CoverageSummaryProps {
-  baseBranchName: string;
-  summaryData: { value: number; label: string }[];
-  comparisonData: { value: number; label: string }[];
-  improvedFiles: string[];
-  decreasedFiles: string[];
-  coverageChange: number;
+    fileCoverage?: number;
+    methodCoverage?: number;
+    linesOfCode?: number;
 }
 
-const CoverageSummary: React.FC<CoverageSummaryProps> = ({
-  baseBranchName,
-  summaryData,
-  comparisonData,
-  improvedFiles,
-  decreasedFiles,
-  coverageChange,
-}) => {
-  const colors = useMemo(
-    () => [COLORS.GREEN, COLORS.YELLOW, COLORS.ORANGE, COLORS.RED],
-    []
-  );
+interface MetricCircleProps {
+    value: number;
+    color: string;
+    label: string;
+}
 
-  const summaryDataWithColors = useMemo(
-    () =>
-      summaryData.map((item, index) => ({
-        ...item,
-        color: colors[index],
-      })),
-    [summaryData, colors]
-  );
-
-  const comparisonDataWithColors = useMemo(
-    () =>
-      comparisonData.map((item, index) => ({
-        ...item,
-        color: colors[index],
-      })),
-    [comparisonData, colors]
-  );
-
-  return (
-    <Box
-      sx={{
-        maxWidth: 800,
-        p: 2,
-        bgcolor: COLORS.PRIMARY_DEFAULT,
-        color: COLORS.NEUTRAL_WHITE,
-        borderRadius: 2,
-      }}
-    >
-      <Typography variant="h6" sx={{ color: COLORS.SECONDARY, mb: 2 }}>
-        Summary
-      </Typography>
-
-      <CoverageDetails
-        colors={colors}
-        summaryData={summaryData}
-        pieChartData={summaryDataWithColors}
-      />
-
-      <Divider />
-
-      <Typography variant="h6" sx={{ color: COLORS.SECONDARY, mb: 1 }}>
-        Comparison with Base Branch ({baseBranchName})
-      </Typography>
-
-      <Box sx={{ display: "flex", gap: 4 }}>
-        <Box>
-          <Typography sx={{ color: colors[0] }}>
-            Coverage Change: {coverageChange > 0 ? "+" : ""}
-            {coverageChange}%{" "}
-            {coverageChange > 0 ? "(Improved)" : "(Decreased)"}
-          </Typography>
-          <Typography sx={{ color: colors[1] }}>
-            Line Coverage: {comparisonData[1]?.value}%
-          </Typography>
-
-          <CoverageFilesList title="Files Improved" files={improvedFiles} />
-
-          <CoverageFilesList
-            title="Files Decreased Coverage"
-            files={decreasedFiles}
-          />
+const MetricCircle: React.FC<MetricCircleProps> = ({ value, color, label }) => (
+    <div className={styles.metricContainer}>
+        <Box position="relative">
+            <CircularProgress
+                variant="determinate"
+                value={100}
+                size={80}
+                thickness={4}
+                sx={{ color: '#2d2d3b' }}
+            />
+            <CircularProgress
+                variant="determinate"
+                value={value}
+                size={80}
+                thickness={4}
+                sx={{
+                    color: color,
+                    position: 'absolute',
+                    left: 0,
+                }}
+            />
+            <Typography className={styles.circleLabel}>{`${value}%`}</Typography>
         </Box>
-        <CustomPieChart data={comparisonDataWithColors} />
-      </Box>
-    </Box>
-  );
+        <Typography className={styles.metricLabel}>{label}</Typography>
+    </div>
+);
+
+const CoverageSummary: React.FC<CoverageSummaryProps> = ({
+                                                             fileCoverage = 10,
+                                                             methodCoverage = 10,
+                                                             linesOfCode = 20,
+                                                         }) => {
+    return (
+        <div className={styles.container}>
+            <MetricCircle value={fileCoverage} color="#4caf50" label="File coverage" />
+            <MetricCircle value={methodCoverage} color="#f44336" label="Method coverage" />
+            <div className={styles.linesContainer}>
+                <div className={styles.lines}>
+                    <span className={styles.line} />
+                    <span className={styles.line} />
+                    <span className={styles.line} />
+                </div>
+                <Typography className={styles.linesCount}>{linesOfCode}</Typography>
+                <Typography className={styles.metricLabel}>Lines of code</Typography>
+            </div>
+        </div>
+    );
 };
 
 export default CoverageSummary;
