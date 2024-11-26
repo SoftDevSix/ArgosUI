@@ -1,32 +1,32 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 2rem;
-    padding: 1.5rem;
-    background-color: #1a1b26;
-    border-radius: 0.5rem;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 2rem;
+  padding: 1.5rem;
+  background-color: #1a1b26;
+  border-radius: 0.5rem;
+  justify-content: center;
 }
 
 .linesContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .linesCount {
-    color: white;
+  color: white;
 }
 
 .iconAndCount {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .metricLabel {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    text-align: center;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  text-align: center;
 }
