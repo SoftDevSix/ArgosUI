@@ -30,4 +30,5 @@ export const COLORS = {
   YELLOW: "#ffd700",
   ORANGE: "#ff9800",
   RED: "#ff5722",
+  GREY_BG: "#313647"
 };

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import theme from "./utils/theme";
 import Header from "./components/Header";
+import ProjectCoveragePage from "./pages/ProjectCoverage";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,10 @@ const App: React.FC = () => {
         <Container>
           <Routes>
             <Route path={PageNames.HOME} Component={Home} />
+            <Route
+              path={PageNames.PROJECT_COVERAGE}
+              Component={ProjectCoveragePage}
+            />
             <Route path={PageNames.ERROR_404} Component={Error} />
           </Routes>
         </Container>

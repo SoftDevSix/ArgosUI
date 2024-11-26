@@ -99,6 +99,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: 40,
+          backgroundColor: COLORS.GREY_BG,
+          borderRadius: 10,
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
               borderColor: COLORS.PRIMARY_DEFAULT,
