@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, IconButton, Typography, Box } from "@mui/material";
+import { IconButton, Typography, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CustomButton from "../../Form/CustomButton";
 
 const ProjectUploader = () => {
   const [folderPath, setFolderPath] = useState<string | null>(null);
@@ -12,7 +13,7 @@ const ProjectUploader = () => {
     }
   }, []);
 
-  const handleFolderUpload = async (
+  const handleFolderSelection = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const files = event.target.files;
@@ -39,15 +40,15 @@ const ProjectUploader = () => {
         {folderPath ? `/${folderPath}` : "No folder selected"}
       </Typography>
 
-      <Button variant="contained" color="info" component="label">
+      <CustomButton component={"label"} color="info" disabled={!!folderPath}>
         Upload the project
         <input
           ref={fileInputRef}
           type="file"
           hidden
-          onChange={handleFolderUpload}
+          onChange={handleFolderSelection}
         />
-      </Button>
+      </CustomButton>
 
       {folderPath && (
         <IconButton

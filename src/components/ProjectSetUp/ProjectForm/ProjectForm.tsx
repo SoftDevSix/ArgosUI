@@ -1,5 +1,5 @@
 import React from "react";
-import CustomTextField from "../../Inputs/CustomTextField";
+import CustomTextField from "../../Form/CustomTextField";
 import { ProjectInfoData } from "../../../types/interfaces";
 import ProjectUploader from "../ProjectUploader";
 
@@ -16,15 +16,15 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
     {
       key: "projectName",
       label: "Project Name",
-      placeholder: "Eg: Argos",
+      placeholder: "Argos",
     },
     {
       key: "projectDescription",
       label: "Project Description",
-      placeholder: "Eg: Argos",
+      placeholder: "Code reviewing tool",
       multiline: true,
       mt: 4,
-      minRows: 4
+      minRows: 4,
     },
   ];
 
@@ -47,7 +47,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
           minRows={field.minRows}
         />
       ))}
-      <ProjectUploader/>
+      <ProjectUploader />
     </div>
   );
 };

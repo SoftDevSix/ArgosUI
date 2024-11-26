@@ -26,7 +26,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   fullWidth = true,
   multiline = false,
   mt = 0,
-  minRows = 1
+  minRows = 1,
 }) => {
   return (
     <Box mt={mt}>
