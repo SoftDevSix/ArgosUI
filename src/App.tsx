@@ -10,14 +10,13 @@ import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider, useHeader } from "./components/Header/HeaderContext";
 
 const App: React.FC = () => {
-
   const { showHeader } = useHeader();
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-      {showHeader && <Header />}
+        {showHeader && <Header />}
         <Container>
           <Routes>
             <Route path={PageNames.HOME} Component={Home} />
