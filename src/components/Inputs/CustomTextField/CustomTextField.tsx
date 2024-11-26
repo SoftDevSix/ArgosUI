@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, TextField, Typography } from "@mui/material";
-import styles from "./customTextField.module.css";
 
 interface CustomTextFieldProps {
   value: string;
@@ -11,6 +10,7 @@ interface CustomTextFieldProps {
   disabled?: boolean;
   fullWidth?: boolean;
   multiline?: boolean;
+  mt?: number;
 }
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
@@ -18,14 +18,15 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   setValue,
   label,
   placeholder,
-  required = false,
+  required = true,
   disabled = false,
   fullWidth = true,
-  multiline = false
+  multiline = false,
+  mt = 0,
 }) => {
   return (
-    <Box>
-      <Typography variant="h6" gutterBottom className={styles.labelTextField}>
+    <Box mt={mt}>
+      <Typography variant="subtitle1" gutterBottom>
         {label}
       </Typography>
       <TextField

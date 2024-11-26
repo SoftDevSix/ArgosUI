@@ -67,6 +67,11 @@ const theme = createTheme({
       fontWeight: FONT_WEIGHTS.REGULAR,
       fontSize: FONT_SIZES.BODY1,
     },
+    subtitle1: {
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.BOLD,
+      fontSize: FONT_SIZES.SUBTITLE1,
+    },
   },
   components: {
     MuiContainer: {
