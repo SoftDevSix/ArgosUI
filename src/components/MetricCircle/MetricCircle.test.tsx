@@ -8,7 +8,7 @@ describe("MetricCircle component", () => {
     return render(
       <MetricCircle
         value={75}
-        color={COLORS.GREEN}
+        color="GREEN"
         label="Test Label"
         circleSize={120}
         {...props}
