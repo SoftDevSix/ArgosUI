@@ -7,7 +7,7 @@ type CodeViewerProps = {
   fileName: string;
 };
 
-const SourceCode: React.FC<CodeViewerProps> = ({ fileName }) => {
+const SourceCode: React.FC<CodeViewerProps> = () => {
   const lines = useFetchMock();
 
   return (
