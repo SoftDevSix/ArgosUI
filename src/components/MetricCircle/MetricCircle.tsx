@@ -5,7 +5,7 @@ import { COLORS } from "../../utils/styleConstants.ts";
 
 interface MetricCircleProps {
   value: number;
-  color: string;
+  color: keyof typeof COLORS;
   label: string;
   circleSize: number;
 }

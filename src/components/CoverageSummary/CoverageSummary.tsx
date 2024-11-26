@@ -20,13 +20,13 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
     <div className={styles.container}>
       <MetricCircle
         value={fileCoverage}
-        color={COLORS.GREEN}
+        color="GREEN"
         label="File coverage"
         circleSize={110}
       />
       <MetricCircle
         value={methodCoverage}
-        color={COLORS.RED}
+        color="RED"
         label="Method coverage"
         circleSize={80}
       />
