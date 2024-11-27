@@ -10,7 +10,9 @@ const ProjectSetUp: React.FC = () => {
     projectDescription: "",
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_projectFiles, setProjectFiles] = useState<FileList | null>(null);
+  // TODO: Delete eslint disabled line when sending the projectFiles to the api
 
   return (
     <section>
