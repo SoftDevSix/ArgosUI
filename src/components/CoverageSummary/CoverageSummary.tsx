@@ -1,98 +1,53 @@
-import React, { useMemo } from "react";
-import { Box, Typography, Divider } from "@mui/material";
-
-import { COLORS } from "../../utils/styleConstants";
-import CustomPieChart from "../CustomPieChart";
-import CoverageDetails from "./CoverageDeatils/CoverageDetails.tsx";
-import CoverageFilesList from "./CoverageFilesList/CoverageFilesList.tsx";
+import React from "react";
+import { Typography } from "@mui/material";
+import styles from "./CoverageSummary.module.css";
+import MetricCircle from "../MetricCircle/MetricCircle.tsx";
+import NotesIcon from "@mui/icons-material/Notes";
+import { COLORS } from "../../utils/styleConstants.ts";
 
 interface CoverageSummaryProps {
-  baseBranchName: string;
-  summaryData: { value: number; label: string }[];
-  comparisonData: { value: number; label: string }[];
-  improvedFiles: string[];
-  decreasedFiles: string[];
-  coverageChange: number;
+  fileCoverage?: number;
+  methodCoverage?: number;
+  linesOfCode?: number;
 }
 
 const CoverageSummary: React.FC<CoverageSummaryProps> = ({
-  baseBranchName,
-  summaryData,
-  comparisonData,
-  improvedFiles,
-  decreasedFiles,
-  coverageChange,
+  fileCoverage = 10,
+  methodCoverage = 10,
+  linesOfCode = 20,
 }) => {
-  const colors = useMemo(
-    () => [COLORS.GREEN, COLORS.YELLOW, COLORS.ORANGE, COLORS.RED],
-    []
-  );
-
-  const summaryDataWithColors = useMemo(
-    () =>
-      summaryData.map((item, index) => ({
-        ...item,
-        color: colors[index],
-      })),
-    [summaryData, colors]
-  );
-
-  const comparisonDataWithColors = useMemo(
-    () =>
-      comparisonData.map((item, index) => ({
-        ...item,
-        color: colors[index],
-      })),
-    [comparisonData, colors]
-  );
-
   return (
-    <Box
-      sx={{
-        maxWidth: 800,
-        p: 2,
-        bgcolor: COLORS.PRIMARY_DEFAULT,
-        color: COLORS.NEUTRAL_WHITE,
-        borderRadius: 2,
-      }}
-    >
-      <Typography variant="h6" sx={{ color: COLORS.SECONDARY, mb: 2 }}>
-        Summary
-      </Typography>
-
-      <CoverageDetails
-        colors={colors}
-        summaryData={summaryData}
-        pieChartData={summaryDataWithColors}
+    <div className={styles.container}>
+      <MetricCircle
+        value={fileCoverage}
+        color="GREEN"
+        label="File coverage"
+        circleSize={110}
       />
-
-      <Divider />
-
-      <Typography variant="h6" sx={{ color: COLORS.SECONDARY, mb: 1 }}>
-        Comparison with Base Branch ({baseBranchName})
-      </Typography>
-
-      <Box sx={{ display: "flex", gap: 4 }}>
-        <Box>
-          <Typography sx={{ color: colors[0] }}>
-            Coverage Change: {coverageChange > 0 ? "+" : ""}
-            {coverageChange}%{" "}
-            {coverageChange > 0 ? "(Improved)" : "(Decreased)"}
+      <MetricCircle
+        value={methodCoverage}
+        color="GREEN"
+        label="Method coverage"
+        circleSize={80}
+      />
+      <div className={styles.linesContainer}>
+        <div className={styles.iconAndCount}>
+          <NotesIcon sx={{ fontSize: "48px", color: COLORS.YELLOW }} />
+          <Typography
+            className={styles.linesCount}
+            sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
+          >
+            {linesOfCode}
           </Typography>
-          <Typography sx={{ color: colors[1] }}>
-            Line Coverage: {comparisonData[1]?.value}%
-          </Typography>
-
-          <CoverageFilesList title="Files Improved" files={improvedFiles} />
-
-          <CoverageFilesList
-            title="Files Decreased Coverage"
-            files={decreasedFiles}
-          />
-        </Box>
-        <CustomPieChart data={comparisonDataWithColors} />
-      </Box>
-    </Box>
+        </div>
+        <Typography
+          className={styles.metricLabel}
+          sx={{ color: COLORS.SECONDARY_TEXT }}
+        >
+          Lines of code
+        </Typography>
+      </div>
+    </div>
   );
 };
 
