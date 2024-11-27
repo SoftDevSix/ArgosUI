@@ -2,6 +2,7 @@ import React, {
   createContext,
   Dispatch,
   SetStateAction,
+  useMemo,
   useState,
 } from "react";
 
@@ -20,8 +21,13 @@ export const HeaderProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [showHeader, setShowHeader] = useState(true);
 
+  const contextValue = useMemo(
+    () => ({ showHeader, setShowHeader }),
+    [showHeader, setShowHeader]
+  );
+
   return (
-    <HeaderContext.Provider value={{ showHeader, setShowHeader }}>
+    <HeaderContext.Provider value={contextValue}>
       {children}
     </HeaderContext.Provider>
   );
