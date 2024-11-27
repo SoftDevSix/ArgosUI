@@ -20,6 +20,7 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({ proyectFiles }) => {
       <div className={styles.FilesMenuOptions}>
         {proyectFiles.map((e) => (
           <FileMenuOption
+            key={e}
             fileName={e}
             isSelected={fileSelected === e}
             setSelected={setFileSelected}
