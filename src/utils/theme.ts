@@ -75,8 +75,8 @@ const theme = createTheme({
     caption: {
       color: COLORS.CAPTION,
       fontSize: FONT_SIZES.CAPTION,
-      display: "block"
-    }
+      display: "block",
+    },
   },
   components: {
     MuiContainer: {
