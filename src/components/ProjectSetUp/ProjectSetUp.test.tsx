@@ -1,7 +1,24 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import userEvent, { UserEvent } from "@testing-library/user-event";
 import ProjectSetUp from "./ProjectSetUp";
 import { expect, it, describe } from "vitest";
+
+const uploadFile = async (
+  user: UserEvent,
+  filePath: string,
+  fileContent = "dummy content"
+) => {
+  const fileInput = screen.getByLabelText(/upload the project/i);
+  const mockFile = new File([fileContent], filePath, {
+    type: "text/plain",
+  });
+
+  Object.defineProperty(mockFile, "webkitRelativePath", {
+    value: filePath,
+  });
+
+  await user.upload(fileInput, mockFile);
+};
 
 describe("ProjectSetUp Component", () => {
   it("renders the component with the initial UI", () => {
@@ -24,16 +41,7 @@ describe("ProjectSetUp Component", () => {
     const user = userEvent.setup();
     render(<ProjectSetUp />);
 
-    const fileInput = screen.getByLabelText(/upload the project/i);
-    const mockFile = new File(["dummy content"], "folder/file.txt", {
-      type: "text/plain",
-    });
-
-    Object.defineProperty(mockFile, "webkitRelativePath", {
-      value: "folder/file.txt",
-    });
-
-    await user.upload(fileInput, mockFile);
+    await uploadFile(user, "folder/file.txt");
 
     expect(await screen.findByText(/\/folder/i)).toBeInTheDocument();
   });
@@ -42,16 +50,7 @@ describe("ProjectSetUp Component", () => {
     const user = userEvent.setup();
     render(<ProjectSetUp />);
 
-    const fileInput = screen.getByLabelText(/upload the project/i);
-    const mockFile = new File(["dummy content"], "folder/file.txt", {
-      type: "text/plain",
-    });
-
-    Object.defineProperty(mockFile, "webkitRelativePath", {
-      value: "folder/file.txt",
-    });
-
-    await user.upload(fileInput, mockFile);
+    await uploadFile(user, "folder/file.txt");
 
     expect(
       await screen.findByRole("button", { name: /delete/i })
@@ -62,16 +61,7 @@ describe("ProjectSetUp Component", () => {
     const user = userEvent.setup();
     render(<ProjectSetUp />);
 
-    const fileInput = screen.getByLabelText(/upload the project/i);
-    const mockFile = new File(["dummy content"], "folder/file.txt", {
-      type: "text/plain",
-    });
-
-    Object.defineProperty(mockFile, "webkitRelativePath", {
-      value: "folder/file.txt",
-    });
-
-    await user.upload(fileInput, mockFile);
+    await uploadFile(user, "folder/file.txt");
 
     const deleteButton = await screen.findByRole("button", { name: /delete/i });
     await user.click(deleteButton);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProjectInfoData } from "../../types/interfaces";
 import Grid from "@mui/material/Grid2";
 import ProjectForm from "./ProjectForm";
@@ -10,9 +10,12 @@ const ProjectSetUp: React.FC = () => {
     projectDescription: "",
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_projectFiles, setProjectFiles] = useState<FileList | null>(null);
-  // Delete eslint disabled line when sending the projectFiles to the api
+  const [projectFiles, setProjectFiles] = useState<FileList | null>(null);
+
+  useEffect(() => {
+    console.log(projectFiles)
+    // Delete this effect when sending the project files to the api
+  }, [projectFiles])
 
   return (
     <section>

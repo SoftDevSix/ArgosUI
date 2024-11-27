@@ -54,6 +54,7 @@ const ProjectUploader: React.FC<ProjectUploaderProps> = ({
 
       <CustomButton component="label" color="info" disabled={!!folderPath}>
         Upload the project
+        <br />
         <input
           ref={fileInputRef}
           type="file"
