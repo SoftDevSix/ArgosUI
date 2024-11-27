@@ -1,31 +1,26 @@
 import React from "react";
 import styles from "./CodeLine.module.css";
+import { Typography } from "@mui/material";
 
 type CodeLineProps = {
-  line: string[];
+  line: string;
   withoutCoverage: boolean;
   lineNumber: number;
 };
 
 const CodeLine: React.FC<CodeLineProps> = ({
   line,
-  withoutCoverage,
+  withoutCoverage = false,
   lineNumber,
 }) => {
   return (
-    <div className={styles.line}>
+    <div>
       <span className={styles.lineNumber}>{lineNumber}</span>
-      <span
-        className={`${styles.code} ${
-          withoutCoverage ? styles.withoutCoverage : ""
-        }`}
-      >
-        {line.map((token, index) => (
-          <span key={index} className={styles.token}>
-            {token}{" "}
-          </span>
-        ))}
-      </span>
+      <div className={withoutCoverage ? styles.withoutCoverage : ""}>
+        <Typography fontSize={10} className={styles.code}>
+          {line}
+        </Typography>
+      </div>
     </div>
   );
 };

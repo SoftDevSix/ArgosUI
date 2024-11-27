@@ -1,17 +1,15 @@
 import React from "react";
 import CodeLine from "./CodeLine";
 import styles from "./SourceCode.module.css";
-import { useFetchMock } from "../../hooks/Mock/useFetchMock";
 
 type CodeViewerProps = {
   fileName: string;
+  lines: string[];
 };
 
-const SourceCode: React.FC<CodeViewerProps> = () => {
-  const lines = useFetchMock();
-
+const SourceCode: React.FC<CodeViewerProps> = ({ lines = [] }) => {
   return (
-    <div className={styles.viewerContainer}>
+    <div>
       <div className={styles.codeContainer}>
         {lines.map((line, index) => (
           <CodeLine

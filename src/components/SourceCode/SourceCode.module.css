@@ -1,7 +1,8 @@
 .viewerContainer {
+  width: 100%;
   background-color: transparent;
   padding: 5px;
-  border-radius: 8px;
+  border-radius: 3px;
   overflow: auto;
   max-height: 500px;
   border: 1px solid #ffffff;

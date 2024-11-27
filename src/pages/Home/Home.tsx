@@ -1,15 +1,11 @@
-import { Card } from "@mui/material";
+import { Typography } from "@mui/material";
 import React from "react";
-import style from "./Home.module.css";
-import SourceCode from "../../components/SourceCode/SourceCode";
 
 const Home: React.FC = () => {
   return (
-    <Card>
-      <div className={style.metricsContainer}>
-        <SourceCode fileName="File Example" />
-      </div>
-    </Card>
+    <div>
+      <Typography>Home Page</Typography>
+    </div>
   );
 };
 
