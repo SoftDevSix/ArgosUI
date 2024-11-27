@@ -54,7 +54,8 @@ const useFetch = <T>(url: string): UseFetchReturn<T> => {
             data: null,
             isLoading: false,
             hasError: true,
-            errorMessage: error instanceof Error ? error.message : "Unknown error",
+            errorMessage:
+              error instanceof Error ? error.message : "Unknown error",
           });
         }
       }
