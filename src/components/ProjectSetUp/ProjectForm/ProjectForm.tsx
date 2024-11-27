@@ -6,11 +6,13 @@ import ProjectUploader from "../ProjectUploader";
 interface ProjectFormProps {
   projectData: ProjectInfoData;
   setProjectData: React.Dispatch<React.SetStateAction<ProjectInfoData>>;
+  setProjectFiles: React.Dispatch<React.SetStateAction<FileList | null>>;
 }
 
 const ProjectForm: React.FC<ProjectFormProps> = ({
   projectData,
   setProjectData,
+  setProjectFiles,
 }) => {
   const fields = [
     {
@@ -47,7 +49,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
           minRows={field.minRows}
         />
       ))}
-      <ProjectUploader />
+      <ProjectUploader setProjectFiles={setProjectFiles} />
     </div>
   );
 };

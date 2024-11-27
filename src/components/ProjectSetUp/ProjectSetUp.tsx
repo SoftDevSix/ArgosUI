@@ -10,6 +10,8 @@ const ProjectSetUp: React.FC = () => {
     projectDescription: "",
   });
 
+  const [_projectFiles, setProjectFiles] = useState<FileList | null>(null);
+
   return (
     <section>
       <Typography variant="h1" mb={6}>
@@ -20,6 +22,7 @@ const ProjectSetUp: React.FC = () => {
           <ProjectForm
             projectData={projectData}
             setProjectData={setProjectData}
+            setProjectFiles={setProjectFiles}
           />
         </Grid>
         <Grid size={{ xs: 12, md: 12, lg: 6 }}></Grid>

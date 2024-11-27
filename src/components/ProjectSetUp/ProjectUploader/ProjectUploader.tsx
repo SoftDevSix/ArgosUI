@@ -3,7 +3,13 @@ import { IconButton, Typography, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomButton from "../../Form/CustomButton";
 
-const ProjectUploader = () => {
+interface ProjectUploaderProps {
+  setProjectFiles: React.Dispatch<React.SetStateAction<FileList | null>>;
+}
+
+const ProjectUploader: React.FC<ProjectUploaderProps> = ({
+  setProjectFiles,
+}) => {
   const [folderPath, setFolderPath] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -17,14 +23,20 @@ const ProjectUploader = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const files = event.target.files;
-    if (files) {
-      const folderName = files[0]?.webkitRelativePath.split("/")[0];
-      setFolderPath(folderName);
+    try {
+      if (files) {
+        setProjectFiles(files);
+        const folderName = files[0]?.webkitRelativePath.split("/")[0];
+        setFolderPath(folderName);
+      }
+    } catch (e) {
+      alert("Could not read the project, please try again. " + e);
     }
   };
 
   const handleDeleteProject = () => {
     setFolderPath(null);
+    setProjectFiles(null);
   };
 
   return (
@@ -40,7 +52,7 @@ const ProjectUploader = () => {
         {folderPath ? `/${folderPath}` : "No folder selected"}
       </Typography>
 
-      <CustomButton component={"label"} color="info" disabled={!!folderPath}>
+      <CustomButton component="label" color="info" disabled={!!folderPath}>
         Upload the project
         <input
           ref={fileInputRef}
@@ -55,6 +67,7 @@ const ProjectUploader = () => {
           style={{ backgroundColor: "#f00" }}
           color="error"
           onClick={handleDeleteProject}
+          aria-label="delete"
         >
           <DeleteIcon style={{ fontSize: 24, color: "#fff" }} />
         </IconButton>

@@ -43,6 +43,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
         fullWidth={fullWidth}
         multiline={multiline}
         minRows={minRows}
+        aria-label={name}
       />
     </Box>
   );

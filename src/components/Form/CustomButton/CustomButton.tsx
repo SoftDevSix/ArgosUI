@@ -15,6 +15,7 @@ interface CustomButtonProps {
   loading?: boolean;
   disabled?: boolean;
   component?: ElementType;
+  name?: string;
   children: ReactNode;
 }
 
@@ -26,14 +27,17 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   loading = false,
   disabled = false,
   component = "button",
+  name,
 }) => {
   return (
     <Button
       variant={variant}
       color={color}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || loading}
       component={component}
+      name={name}
+      aria-label={name}
     >
       {loading && <CircularProgress />}
       {children}
