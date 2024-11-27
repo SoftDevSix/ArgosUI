@@ -40,39 +40,44 @@ const ProjectUploader: React.FC<ProjectUploaderProps> = ({
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      alignItems="center"
-      justifyContent={"flex-end"}
-      gap={2}
-      mt={4}
-    >
-      <Typography variant="body1" flex={1} ml={1}>
-        {folderPath ? `/${folderPath}` : "No folder selected"}
+    <Box>
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent={"flex-end"}
+        gap={2}
+        mt={4}
+      >
+        <Typography variant="body1" flex={1} ml={1}>
+          {folderPath ? `/${folderPath}` : "No folder selected"}
+        </Typography>
+
+        <CustomButton component="label" color="info" disabled={!!folderPath}>
+          Upload the project
+          <br />
+          <input
+            ref={fileInputRef}
+            type="file"
+            hidden
+            onChange={handleFolderSelection}
+          />
+        </CustomButton>
+
+        {folderPath && (
+          <IconButton
+            style={{ backgroundColor: "#f00" }}
+            color="error"
+            onClick={handleDeleteProject}
+            aria-label="delete"
+          >
+            <DeleteIcon style={{ fontSize: 24, color: "#fff" }} />
+          </IconButton>
+        )}
+      </Box>
+      <Typography textAlign={"right"} variant="caption" mt={1}>
+        Select the directory that contains your entire project
       </Typography>
-
-      <CustomButton component="label" color="info" disabled={!!folderPath}>
-        Upload the project
-        <br />
-        <input
-          ref={fileInputRef}
-          type="file"
-          hidden
-          onChange={handleFolderSelection}
-        />
-      </CustomButton>
-
-      {folderPath && (
-        <IconButton
-          style={{ backgroundColor: "#f00" }}
-          color="error"
-          onClick={handleDeleteProject}
-          aria-label="delete"
-        >
-          <DeleteIcon style={{ fontSize: 24, color: "#fff" }} />
-        </IconButton>
-      )}
     </Box>
   );
 };

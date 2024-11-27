@@ -12,6 +12,7 @@ export const FONT_SIZES = {
   H4: "16px",
   BODY1: "16px",
   SUBTITLE1: "28px",
+  CAPTION: "14px"
 };
 
 export const COLORS = {
@@ -32,4 +33,5 @@ export const COLORS = {
   ORANGE: "#ff9800",
   RED: "#ff5722",
   GREY_BG: "#313647",
+  CAPTION: "#686D7E"
 };

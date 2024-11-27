@@ -72,6 +72,11 @@ const theme = createTheme({
       fontWeight: FONT_WEIGHTS.BOLD,
       fontSize: FONT_SIZES.SUBTITLE1,
     },
+    caption: {
+      color: COLORS.CAPTION,
+      fontSize: FONT_SIZES.CAPTION,
+      display: "block"
+    }
   },
   components: {
     MuiContainer: {
