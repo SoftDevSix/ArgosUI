@@ -1,4 +1,9 @@
-import React, { createContext, Dispatch, SetStateAction, useState } from "react";
+import React, {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 
 type HeaderContextType = {
   showHeader: boolean;
@@ -10,7 +15,9 @@ const HeaderContext = createContext<HeaderContextType>({
   setShowHeader: () => {},
 });
 
-export const HeaderProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const HeaderProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [showHeader, setShowHeader] = useState(true);
 
   return (
