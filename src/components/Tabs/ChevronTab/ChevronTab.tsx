@@ -11,22 +11,28 @@ interface ChevronTabProps {
 
 const ChevronTab: React.FC<ChevronTabProps> = ({ tabName, onClick }) => {
   return (
-    <div onClick={onClick}>
-      <Box display={"flex"} alignItems={"center"}>
-        <Typography className={styles.tabLabel} minWidth={100}>
-          {tabName}
-        </Typography>
-        <IconButton
-          style={{ backgroundColor: COLORS.PRIMARY_HOVER, borderRadius: 0 }}
-          color="error"
-          onClick={onClick}
-          aria-label="delete"
-        >
-          <ChevronRight style={{ fontSize: 26, color: "#fff" }} />
-        </IconButton>
-        <IconButton></IconButton>
-      </Box>
-    </div>
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+      width="100%" 
+      onClick={onClick}
+    >
+      <Typography
+        className={styles.tabLabel}
+        minWidth={100}
+        flexGrow={1} 
+      >
+        {tabName}
+      </Typography>
+      <IconButton
+        style={{ backgroundColor: COLORS.PRIMARY_HOVER, borderRadius: 0 }}
+        color="error"
+        aria-label="delete"
+      >
+        <ChevronRight style={{ fontSize: 26, color: "#fff" }} />
+      </IconButton>
+    </Box>
   );
 };
 

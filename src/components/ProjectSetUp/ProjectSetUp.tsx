@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ProjectInfoData } from "../../types/interfaces";
 import Grid from "@mui/material/Grid2";
 import ProjectForm from "./ProjectForm";
-import { Card, Typography } from "@mui/material";
-import ChevronTab from "../Tabs/ChevronTab/ChevronTab";
+import { Typography } from "@mui/material";
+import ProjectRules from "./ProjectRules";
 
 const ProjectSetUp: React.FC = () => {
   const [projectData, setProjectData] = useState<ProjectInfoData>({
@@ -32,9 +32,7 @@ const ProjectSetUp: React.FC = () => {
           />
         </Grid>
         <Grid size={{ xs: 12, md: 12, lg: 6 }}>
-          <Card>
-            <ChevronTab tabName="hla" onClick={() => {}} />
-          </Card>
+          <ProjectRules />
         </Grid>
       </Grid>
     </section>

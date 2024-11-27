@@ -1,0 +1,19 @@
+.tabContainer {
+  width: 320px;
+}
+
+.cardContent {
+  padding: 20px 40px;
+}
+
+@media (max-width: 480px) {
+  .tabContainer {
+    width: 240px;
+  }
+}
+
+@media (max-width: 320px) {
+  .tabContainer {
+    width: 200px;
+  }
+}
