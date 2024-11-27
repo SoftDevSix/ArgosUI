@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import { CodeRatingType } from "../../../types/types";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import { COLORS } from "../../../utils/styleConstants";
+import CenteredContainer from "../../CenteredContainer/CenteredContainer";
 
 interface CodeRatingProps {
   codeRating: CodeRatingType;
@@ -13,12 +14,12 @@ const CodeRating: React.FC<CodeRatingProps> = ({
   requiredRating,
 }) => {
   const backgroundColor = useMemo(
-    () => (codeRating >= requiredRating ? COLORS.SUCCESS : COLORS.ERROR),
+    () => (codeRating <= requiredRating ? COLORS.SUCCESS : COLORS.ERROR),
     [codeRating, requiredRating]
   );
 
   return (
-    <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
+    <CenteredContainer>
       <Avatar sx={{ width: 300, height: 300, backgroundColor }}>
         <Typography variant="h1">{codeRating}</Typography>
       </Avatar>
@@ -26,7 +27,7 @@ const CodeRating: React.FC<CodeRatingProps> = ({
         Code Rating
       </Typography>
       <Typography mt={1}>{`Rating Required: ${requiredRating}`}</Typography>
-    </Box>
+    </CenteredContainer>
   );
 };
 

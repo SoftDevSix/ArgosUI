@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { useMemo } from "react";
+import CenteredContainer from "../../CenteredContainer/CenteredContainer";
 
 interface ResultLabelProps {
   passed?: boolean;
@@ -7,20 +8,24 @@ interface ResultLabelProps {
 
 const ResultLabel: React.FC<ResultLabelProps> = ({ passed }) => {
   const passedLabel = useMemo(() => (passed ? "PASSED" : "FAILED"), [passed]);
-  const colorLabel = useMemo(() => (passed ? "primary" : "error"), [passed]);
+  const colorLabel = useMemo(() => (passed ? "success" : "error"), [passed]);
 
   return (
-    <Box>
-      <Typography variant="subtitle2">This Project</Typography>
-      <Box display={"flex"} alignItems={"flex-end"}>
-        <Typography variant="h1" component={"p"} color={colorLabel}>
-          {passedLabel}
+    <CenteredContainer>
+      <Box>
+        <Typography variant="subtitle2">
+          This Project
         </Typography>
-        <Typography ml={2} mb={1} variant="subtitle2">
-          with
-        </Typography>
+        <Box display={"flex"} alignItems={"flex-end"}>
+          <Typography variant="h1" component={"p"} color={colorLabel}>
+            {passedLabel}
+          </Typography>
+          <Typography ml={2} mb={1} variant="subtitle2">
+            with
+          </Typography>
+        </Box>
       </Box>
-    </Box>
+    </CenteredContainer>
   );
 };
 
