@@ -7,7 +7,8 @@ import Error from "./pages/Error";
 import theme from "./utils/theme";
 import Header from "./components/Header";
 import WelcomePage from "./pages/WelcomePage";
-import { HeaderProvider, useHeader } from "./components/Header/HeaderContext";
+import { HeaderProvider } from "./components/Header/HeaderContext";
+import { useHeader } from "./hooks/HeaderHooks";
 
 const App: React.FC = () => {
   const { showHeader } = useHeader();

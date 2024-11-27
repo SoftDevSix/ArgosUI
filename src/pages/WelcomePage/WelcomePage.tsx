@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./WelcomePage.module.css";
 import { PageNames } from "../../utils/pageNames";
-import { useHeader } from "../../components/Header/HeaderContext";
+import { useHeader } from "../../hooks/HeaderHooks";
 
 const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
