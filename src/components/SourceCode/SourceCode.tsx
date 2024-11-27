@@ -7,13 +7,13 @@ type CodeViewerProps = {
   lines: string[];
 };
 
-const SourceCode: React.FC<CodeViewerProps> = ({ lines = [] }) => {
+const SourceCode: React.FC<CodeViewerProps> = ({ lines = [], fileName }) => {
   return (
     <div>
       <div className={styles.codeContainer}>
         {lines.map((line, index) => (
           <CodeLine
-            key={index}
+            key={fileName + "_" + index}
             line={line}
             lineNumber={index + 1}
             withoutCoverage={index % 5 === 0}
