@@ -13,9 +13,9 @@ const ProjectSetUp: React.FC = () => {
   const [projectFiles, setProjectFiles] = useState<FileList | null>(null);
 
   useEffect(() => {
-    console.log(projectFiles)
+    console.log(projectFiles);
     // Delete this effect when sending the project files to the api
-  }, [projectFiles])
+  }, [projectFiles]);
 
   return (
     <section>
