@@ -3,6 +3,7 @@
   --primary-action: #1d212f;
   --primary-hover: #12141d;
   --secondary: #d8b4fe;
+  --secondary-hover: #b470fc;
   --link: #93c5fd;
   --neutral-white: #fff;
   --neutral-black: #000;
@@ -60,4 +61,20 @@ p {
   font-family: var(--font-paragraph);
   font-size: var(--font-size-paragraph);
   font-weight: var(--font-weight-regular);
+}
+
+::-webkit-scrollbar {
+  width: 12px; 
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neutral-white); 
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-hover);
 }

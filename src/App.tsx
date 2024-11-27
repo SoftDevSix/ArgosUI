@@ -7,6 +7,7 @@ import Error from "./pages/Error";
 import theme from "./utils/theme";
 import Header from "./components/Header";
 import ProjectCoveragePage from "./pages/ProjectCoverage";
+import CoverageResults from "./pages/CoverageResults";
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,10 @@ const App: React.FC = () => {
             <Route
               path={PageNames.PROJECT_COVERAGE}
               Component={ProjectCoveragePage}
+            />
+            <Route
+              path={`${PageNames.COVERAGE_RESULTS}/:coverageId`}
+              Component={CoverageResults}
             />
             <Route path={PageNames.ERROR_404} Component={Error} />
           </Routes>
