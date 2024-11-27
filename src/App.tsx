@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider } from "./components/Header/HeaderContext";
 import { useHeader } from "./hooks/HeaderHooks";
+import ProjectCoveragePage from "./pages/ProjectCoverage";
 
 const App: React.FC = () => {
   const { showHeader } = useHeader();
@@ -20,6 +21,10 @@ const App: React.FC = () => {
         <Container>
           <Routes>
             <Route path={PageNames.HOME} Component={WelcomePage} />
+            <Route
+              path={PageNames.PROJECT_COVERAGE}
+              Component={ProjectCoveragePage}
+            />
             <Route path={PageNames.ERROR_404} Component={Error} />
           </Routes>
         </Container>
