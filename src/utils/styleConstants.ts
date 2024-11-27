@@ -26,7 +26,7 @@ export const COLORS = {
   WARNING_DEFAULT: "#FEF08A",
   WARNING_HEAVY: "#FDBA74",
   WARNING_CRITICAL: "#D97706",
-  GREEN: "#4caf50",
+  GREEN: "#34C759",
   YELLOW: "#ffd700",
   ORANGE: "#ff9800",
   RED: "#ff5722",

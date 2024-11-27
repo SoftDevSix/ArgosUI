@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "@mui/material";
 import styles from "./CoverageSummary.module.css";
 import MetricCircle from "../MetricCircle/MetricCircle.tsx";
-import { GrTextAlignLeft } from "react-icons/gr";
+import NotesIcon from "@mui/icons-material/Notes";
 import { COLORS } from "../../utils/styleConstants.ts";
 
 interface CoverageSummaryProps {
@@ -26,13 +26,13 @@ const CoverageSummary: React.FC<CoverageSummaryProps> = ({
       />
       <MetricCircle
         value={methodCoverage}
-        color="RED"
+        color="GREEN"
         label="Method coverage"
         circleSize={80}
       />
       <div className={styles.linesContainer}>
         <div className={styles.iconAndCount}>
-          <GrTextAlignLeft size="44px" color={COLORS.YELLOW} />
+          <NotesIcon sx={{ fontSize: "48px", color: COLORS.YELLOW }} />
           <Typography
             className={styles.linesCount}
             sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
