@@ -1,0 +1,1 @@
+export type CodeRatingType = "A" | "B" | "C" | "D"

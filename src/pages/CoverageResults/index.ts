@@ -1,3 +1,3 @@
-import CoverageResults from "./CoveragResults";
+import CoverageResults from "./CoverageResults";
 
 export default CoverageResults;

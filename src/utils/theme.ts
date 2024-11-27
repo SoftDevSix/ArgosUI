@@ -75,7 +75,7 @@ const theme = createTheme({
     subtitle2: {
       fontFamily: FONT_FAMILY,
       fontWeight: FONT_WEIGHTS.REGULAR,
-      fontSize: FONT_SIZES.SUBTITLE1,
+      fontSize: FONT_SIZES.SUBTITLE2,
     },
     caption: {
       color: COLORS.CAPTION,

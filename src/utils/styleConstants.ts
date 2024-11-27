@@ -11,7 +11,8 @@ export const FONT_SIZES = {
   H3: "18.72px",
   H4: "16px",
   BODY1: "16px",
-  SUBTITLE1: "28px",
+  SUBTITLE1: "32px",
+  SUBTITLE2: "28px",
   CAPTION: "14px",
 };
 
