@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { CodeRatingType } from "../../../types/types";
 import { Avatar, Typography } from "@mui/material";
 import { COLORS } from "../../../utils/styleConstants";
-import CenteredContainer from "../../CenteredContainer/CenteredContainer";
+import CenteredContainer from "../../CenteredContainer";
 
 interface CodeRatingProps {
   codeRating: CodeRatingType;
@@ -20,7 +20,7 @@ const CodeRating: React.FC<CodeRatingProps> = ({
 
   return (
     <CenteredContainer>
-      <Avatar sx={{ width: 300, height: 300, backgroundColor }}>
+      <Avatar sx={{ width: 300, height: 300, backgroundColor }} aria-label="code-rating-avatar">
         <Typography variant="h1">{codeRating}</Typography>
       </Avatar>
       <Typography mt={2} variant="subtitle1" color="secondary">

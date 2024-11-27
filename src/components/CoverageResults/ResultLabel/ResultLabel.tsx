@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { useMemo } from "react";
-import CenteredContainer from "../../CenteredContainer/CenteredContainer";
+import CenteredContainer from "../../CenteredContainer";
 
 interface ResultLabelProps {
   passed?: boolean;

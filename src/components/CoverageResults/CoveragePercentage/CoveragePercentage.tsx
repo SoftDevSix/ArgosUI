@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import CenteredContainer from "../../CenteredContainer/CenteredContainer";
 import { CircularProgress, Typography } from "@mui/material";
+import CenteredContainer from "../../CenteredContainer";
 
 interface CoveragePercentageProps {
   currentPercentage: number;
@@ -26,6 +26,7 @@ const CoveragePercentage: React.FC<CoveragePercentageProps> = ({
         color={colorProgress}
         variant="determinate"
         value={currentPercentage}
+        aria-label="coverage-percentage"
       />
       <Typography mt={2} variant="subtitle1" color="secondary">
         {`${currentPercentageRounded}% - Coverage`}
