@@ -23,36 +23,38 @@ const NavDrawer: React.FC<NavDrawerProps> = ({ projectName = "" }) => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <>
       {!isLargeScreen && (
         <IconButton
           color="inherit"
           aria-label="open drawer"
           edge="start"
           onClick={handleDrawerToggle}
-          sx={{ ml: 1 }}
+          sx={{ ml: 1, mt: 2, position: "fixed" }}
         >
           <MenuIcon />
         </IconButton>
       )}
-      <Drawer
-        sx={{
-          width: DRAWER_WIDTH,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
+      <Box>
+        <CssBaseline />
+        <Drawer
+          sx={{
             width: DRAWER_WIDTH,
-            boxSizing: "border-box",
-          },
-        }}
-        variant={isLargeScreen ? "permanent" : "temporary"}
-        open={isLargeScreen || mobileOpen}
-        onClose={handleDrawerToggle}
-        anchor="left"
-      >
-        <DrawerContent projectName={projectName} />
-      </Drawer>
-    </Box>
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: DRAWER_WIDTH,
+              boxSizing: "border-box",
+            },
+          }}
+          variant={isLargeScreen ? "permanent" : "temporary"}
+          open={isLargeScreen || mobileOpen}
+          onClose={handleDrawerToggle}
+          anchor="left"
+        >
+          <DrawerContent projectName={projectName} />
+        </Drawer>
+      </Box>
+    </>
   );
 };
 

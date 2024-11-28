@@ -8,6 +8,7 @@ import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider } from "./components/Header/HeaderContext";
 import ProjectSetupPage from "./pages/ProjectSetup";
 import NavDrawer from "./components/NavDrawer";
+import FileCoverage from "./pages/FileCoverage";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path={PageNames.HOME} Component={WelcomePage} />
           <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
+          <Route path={PageNames.FILE_COVERAGE} Component={FileCoverage} />
           <Route path={PageNames.ERROR_404} Component={Error} />
         </Routes>
       </Box>
