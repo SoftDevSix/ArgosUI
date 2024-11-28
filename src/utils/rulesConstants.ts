@@ -1,7 +1,6 @@
-import { RulesConfig } from "../types/rulesInterfaces";
-import { CodeRating, RulesTypes } from "../types/types";
+import { CodeRatingType, RulesTypes, Rules } from "../types/types";
 
-export const ruleDefaults: Record<RulesTypes, RulesConfig> = {
+export const ruleDefaults: Record<RulesTypes, Rules> = {
   rules: {
     projectCoverageEnabled: true,
     projectCoverageThreshold: 0,
@@ -12,4 +11,4 @@ export const ruleDefaults: Record<RulesTypes, RulesConfig> = {
 
 export const rulesTypes: RulesTypes[] = ["rules"];
 
-export const codeRatings: CodeRating[] = ["A", "B", "C", "D"];
+export const codeRatings: CodeRatingType[] = ["A", "B", "C", "D"];

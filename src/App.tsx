@@ -4,6 +4,7 @@ import { PageNames } from "./utils/pageNames";
 import { CssBaseline, ThemeProvider, Box } from "@mui/material";
 import Error from "./pages/Error";
 import theme from "./utils/theme";
+import CoverageResults from "./pages/CoverageResults";
 import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider } from "./components/Header/HeaderContext";
 import { UploadedKeysProvider } from "./context/UploadedKeysContext";
@@ -28,6 +29,10 @@ const App: React.FC = () => {
             <Route
               path={PageNames.PROJECT_SETUP}
               Component={ProjectSetupPage}
+            />
+            <Route
+              path={PageNames.COVERAGE_RESULTS}
+              Component={CoverageResults}
             />
             <Route path={PageNames.ERROR_404} Component={Error} />
           </Routes>

@@ -4,4 +4,4 @@ export type RulesTypes = "rules";
 
 export type Rules = RulesConfig;
 
-export type CodeRating = "A" | "B" | "C" | "D";
+export type CodeRatingType = "A" | "B" | "C" | "D";

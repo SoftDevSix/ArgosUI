@@ -1,5 +1,5 @@
 import React from "react";
-import { CodeRating, Rules, RulesTypes } from "../../../../types/types";
+import { CodeRatingType, Rules, RulesTypes } from "../../../../types/types";
 import {
   Box,
   ToggleButton,
@@ -22,7 +22,7 @@ const CodeRatingRules: React.FC<CodeRatingRulesProps> = ({
   setRulesConfig,
   handleSwitchChange,
 }) => {
-  const handleCodeRatingChange = (newRating: CodeRating | null) => {
+  const handleCodeRatingChange = (newRating: CodeRatingType | null) => {
     if (newRating) {
       setRulesConfig((prev) => ({
         ...prev,

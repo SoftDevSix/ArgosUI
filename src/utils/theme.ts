@@ -75,6 +75,12 @@ const theme = createTheme({
       fontWeight: FONT_WEIGHTS.BOLD,
       fontSize: FONT_SIZES.SUBTITLE1,
     },
+    subtitle2: {
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.REGULAR,
+      fontSize: FONT_SIZES.SUBTITLE2,
+      display: "block",
+    },
     caption: {
       color: COLORS.CAPTION,
       fontSize: FONT_SIZES.CAPTION,

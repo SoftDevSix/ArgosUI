@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import CodeRatingRules from "./CodeRatingRules";
-import { CodeRating, Rules, RulesTypes } from "../../../../types/types";
+import { CodeRatingType, Rules, RulesTypes } from "../../../../types/types";
 
 const mockRulesConfig: Record<RulesTypes, Rules> = {
   rules: {
@@ -38,7 +38,7 @@ describe("CodeRatingRules Component", () => {
         rulesConfig={{
           rules: {
             codeRatingEnabled: false,
-            codeRating: "A" as CodeRating,
+            codeRating: "A" as CodeRatingType,
             projectCoverageEnabled: false,
             projectCoverageThreshold: 0,
           },
@@ -97,7 +97,7 @@ describe("CodeRatingRules Component", () => {
         rulesConfig={{
           rules: {
             codeRatingEnabled: false,
-            codeRating: "A" as CodeRating,
+            codeRating: "A" as CodeRatingType,
             projectCoverageEnabled: false,
             projectCoverageThreshold: 0,
           },
