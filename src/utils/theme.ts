@@ -67,6 +67,16 @@ const theme = createTheme({
       fontWeight: FONT_WEIGHTS.REGULAR,
       fontSize: FONT_SIZES.BODY1,
     },
+    subtitle1: {
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.BOLD,
+      fontSize: FONT_SIZES.SUBTITLE1,
+    },
+    caption: {
+      color: COLORS.CAPTION,
+      fontSize: FONT_SIZES.CAPTION,
+      display: "block",
+    },
   },
   components: {
     MuiContainer: {
@@ -88,17 +98,31 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          fontSize: 16,
           paddingLeft: "10px",
           paddingRight: "10px",
-          borderRadius: "4px",
+          borderRadius: "0px",
+          borderBottomRightRadius: "10px",
+          borderTopLeftRadius: "10px",
           textTransform: "capitalize",
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "0px",
+          borderBottomRightRadius: "10px",
+          borderTopLeftRadius: "10px",
         },
       },
     },
     MuiTextField: {
       styleOverrides: {
         root: {
-          fontSize: 40,
+          fontSize: 48,
+          backgroundColor: COLORS.GREY_BG,
+          borderRadius: 10,
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
               borderColor: COLORS.PRIMARY_DEFAULT,
