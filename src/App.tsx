@@ -6,6 +6,7 @@ import Error from "./pages/Error";
 import theme from "./utils/theme";
 import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider } from "./components/Header/HeaderContext";
+import { UploadedKeysProvider } from "./context/UploadedKeysContext";
 import ProjectSetupPage from "./pages/ProjectSetup";
 import NavDrawer from "./components/NavDrawer";
 
@@ -19,14 +20,19 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: "flex" }}>
-        {showSidebar && <NavDrawer projectName="Harcoded Text" />}
-        <Routes>
-          <Route path={PageNames.HOME} Component={WelcomePage} />
-          <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
-          <Route path={PageNames.ERROR_404} Component={Error} />
-        </Routes>
-      </Box>
+      <UploadedKeysProvider>
+        <Box sx={{ display: "flex" }}>
+          {showSidebar && <NavDrawer projectName="Harcoded Text" />}
+          <Routes>
+            <Route path={PageNames.HOME} Component={WelcomePage} />
+            <Route
+              path={PageNames.PROJECT_SETUP}
+              Component={ProjectSetupPage}
+            />
+            <Route path={PageNames.ERROR_404} Component={Error} />
+          </Routes>
+        </Box>
+      </UploadedKeysProvider>
     </ThemeProvider>
   );
 };
