@@ -11,7 +11,6 @@ import ProjectSetupPage from "./pages/ProjectSetup";
 
 const App: React.FC = () => {
   const location = useLocation();
-  console.log(location);
 
   const showSidebar =
     location.pathname !== PageNames.HOME &&

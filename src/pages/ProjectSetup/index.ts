@@ -1,3 +1,3 @@
-import ProjectSetupPage from "./ProjectCoveragePage";
+import ProjectSetupPage from "./ProjectSetupPage";
 
 export default ProjectSetupPage;

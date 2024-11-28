@@ -13,6 +13,7 @@ import { Typography, IconButton, useMediaQuery, Theme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { COLORS } from "../../utils/styleConstants";
 
 const drawerWidth = 230;
 
@@ -65,7 +66,7 @@ export default function NavDrawer({ projectName = "" }) {
           alignItems: "center",
           justifyContent: "center",
           padding: "15px",
-          backgroundColor: "#12141D",
+          backgroundColor: COLORS.PRIMARY_HOVER,
         }}
       >
         <Typography fontWeight="bold" fontSize={32}>
@@ -87,10 +88,14 @@ export default function NavDrawer({ projectName = "" }) {
                 onClick={() => handleOptionClick(option)}
                 sx={{
                   backgroundColor:
-                    selectedOption === option.name ? "#12141D" : "transparent",
+                    selectedOption === option.name
+                      ? COLORS.PRIMARY_HOVER
+                      : "transparent",
                   "&:hover": {
                     backgroundColor:
-                      selectedOption === option.name ? "#12141D" : "#1a1b25",
+                      selectedOption === option.name
+                        ? COLORS.PRIMARY_HOVER
+                        : "#1a1b25",
                   },
                 }}
               >
@@ -108,21 +113,18 @@ export default function NavDrawer({ projectName = "" }) {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "red",
-          color: "white",
+          borderTop: `1px solid ${COLORS.NEUTRAL_WHITE}`,
+          color: COLORS.NEUTRAL_WHITE,
         }}
       >
         <ListItemButton
           data-testid="exit-button"
           onClick={handleLogout}
           sx={{
-            backgroundColor: "red",
-            "&:hover": {
-              backgroundColor: "red",
-            },
+            "&:hover": {},
           }}
         >
-          <ListItemIcon sx={{ color: "white" }}>
+          <ListItemIcon sx={{ color: COLORS.ERROR }}>
             <ExitToAppIcon />
           </ListItemIcon>
           <ListItemText primary="Exit" />
