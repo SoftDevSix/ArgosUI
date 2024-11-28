@@ -25,7 +25,10 @@ const App: React.FC = () => {
           {showSidebar && <NavDrawer projectName="Harcoded Text" />}
           <Routes>
             <Route path={PageNames.HOME} Component={WelcomePage} />
-            <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
+            <Route
+              path={PageNames.PROJECT_SETUP}
+              Component={ProjectSetupPage}
+            />
             <Route path={PageNames.ERROR_404} Component={Error} />
           </Routes>
         </Box>
