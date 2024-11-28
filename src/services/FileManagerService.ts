@@ -16,10 +16,13 @@ const uploadDirectory = async (localDir: string) => {
 
     const data = await response.json();
     localStorage.setItem("uploadedKeys", JSON.stringify(data));
-    console.log("local storage saved keys:", data);
     return data;
-  } catch (error) {
-    console.error("Error while uploading directory:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      alert(`Error while uploading directory: ${error.message}`);
+    } else {
+      alert("An unknown error occurred while uploading the directory.");
+    }
     return null;
   }
 };
