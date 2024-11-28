@@ -31,7 +31,7 @@ const App: React.FC = () => {
               Component={ProjectSetupPage}
             />
             <Route
-              path={`${PageNames.COVERAGE_RESULTS}/:coverageId`}
+              path={PageNames.COVERAGE_RESULTS}
               Component={CoverageResults}
             />
             <Route path={PageNames.ERROR_404} Component={Error} />
