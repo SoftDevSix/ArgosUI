@@ -18,14 +18,14 @@ const App: React.FC = () => {
       <CssBaseline />
       <BrowserRouter>
         {showHeader && <Header />}
-          <Routes>
-            <Route path={PageNames.HOME} Component={WelcomePage} />
-            <Route
-              path={PageNames.PROJECT_COVERAGE}
-              Component={ProjectCoveragePage}
-            />
-            <Route path={PageNames.ERROR_404} Component={Error} />
-          </Routes>
+        <Routes>
+          <Route path={PageNames.HOME} Component={WelcomePage} />
+          <Route
+            path={PageNames.PROJECT_COVERAGE}
+            Component={ProjectCoveragePage}
+          />
+          <Route path={PageNames.ERROR_404} Component={Error} />
+        </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );
