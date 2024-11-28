@@ -23,7 +23,7 @@ const ProjectSetUp: React.FC = () => {
       <Typography variant="h1" mb={6}>
         Project & Rules Setup
       </Typography>
-      <Grid container>
+      <Grid container spacing={4}>
         <Grid size={{ xs: 12, md: 12, lg: 6 }}>
           <ProjectForm
             projectData={projectData}

@@ -67,6 +67,9 @@ const theme = createTheme({
       fontWeight: FONT_WEIGHTS.REGULAR,
       fontSize: FONT_SIZES.BODY1,
     },
+    body2: {
+      color: COLORS.BODY_2,
+    },
     subtitle1: {
       fontFamily: FONT_FAMILY,
       fontWeight: FONT_WEIGHTS.BOLD,
@@ -92,6 +95,13 @@ const theme = createTheme({
         root: {
           backgroundColor: COLORS.PRIMARY_DEFAULT,
           borderRadius: "16px",
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: "20px 40px",
         },
       },
     },
@@ -150,7 +160,7 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: "#000",
+          color: COLORS.NEUTRAL_WHITE,
           fontSize: "17px",
           "&.Mui-focused": {
             color: COLORS.SECONDARY,
@@ -211,6 +221,86 @@ const theme = createTheme({
         root: {
           backgroundColor: COLORS.NEUTRAL_WHITE,
           margin: "16px 0",
+        },
+      },
+    },
+    MuiSwitch: {
+      styleOverrides: {
+        root: {
+          width: 56,
+          height: 32,
+          padding: 0,
+          display: "flex",
+        },
+        thumb: {
+          width: 24,
+          height: 24,
+          marginLeft: 2,
+          marginRight: 4,
+          marginTop: 1.2,
+        },
+        switchBase: {
+          padding: 2,
+          "&:not(.Mui-checked)": {
+            color: COLORS.PRIMARY_DEFAULT,
+          },
+          "&.Mui-checked": {
+            transform: "translateX(24px)",
+            color: COLORS.PASS_BUTTON,
+            "& + .MuiSwitch-track": {
+              backgroundColor: COLORS.PRIMARY_HOVER,
+              opacity: 1,
+            },
+          },
+        },
+        track: {
+          borderRadius: 32 / 2,
+          opacity: 1,
+          color: COLORS.PRIMARY_DEFAULT,
+          backgroundColor: COLORS.PRIMARY_HOVER,
+        },
+      },
+    },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        root: {
+          backgroundColor: COLORS.PRIMARY_DEFAULT,
+        },
+      },
+    },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          paddingTop: 1,
+          paddingBottom: 1,
+          paddingLeft: 26,
+          paddingRight: 26,
+          fontSize: 20,
+          backgroundColor: COLORS.PRIMARY_HOVER,
+          color: COLORS.NEUTRAL_WHITE,
+          borderRadius: "8px",
+          transition: "background-color 0.3s ease",
+          borderWidth: "1px",
+          "&:not(:first-of-type)": {
+            borderLeftColor: COLORS.GREY_BG,
+          },
+          "&:not(:last-of-type)": {
+            borderRight: "none",
+          },
+          "&:hover": {
+            backgroundColor: "#3C3C4C",
+          },
+          "&.Mui-disabled": {
+            color: "#6C6C7A",
+            backgroundColor: "#2C2C3C",
+          },
+          "&.Mui-selected": {
+            color: COLORS.NEUTRAL_BLACK,
+            backgroundColor: COLORS.PASS_BUTTON,
+            "&:hover": {
+              backgroundColor: COLORS.SUCCESS,
+            },
+          },
         },
       },
     },

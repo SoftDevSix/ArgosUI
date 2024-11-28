@@ -33,5 +33,7 @@ export const COLORS = {
   ORANGE: "#ff9800",
   RED: "#ff5722",
   GREY_BG: "#313647",
+  BODY_2: "#BBBBBB",
   CAPTION: "#686D7E",
+  PASS_BUTTON: "#75DE9B"
 };
