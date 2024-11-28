@@ -1,16 +1,16 @@
-import React, { ReactNode } from 'react'
-import { Box } from '@mui/material'
+import React, { ReactNode } from "react";
+import { Box } from "@mui/material";
 
 interface CenteredContainerProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
 const CenteredContainer: React.FC<CenteredContainerProps> = ({ children }) => {
   return (
     <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
-        {children}
+      {children}
     </Box>
-  )
-}
+  );
+};
 
-export default CenteredContainer
+export default CenteredContainer;

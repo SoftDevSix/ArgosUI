@@ -31,7 +31,9 @@ describe("CodeRating", () => {
     screen.debug(avatar);
 
     const computedStyle = window.getComputedStyle(avatar);
-    expect(rgbToHex(computedStyle.backgroundColor)).toBe(COLORS.ERROR.toLowerCase());
+    expect(rgbToHex(computedStyle.backgroundColor)).toBe(
+      COLORS.ERROR.toLowerCase()
+    );
   });
 
   it("uses the correct background color when codeRating > requiredRating", () => {
@@ -41,7 +43,9 @@ describe("CodeRating", () => {
     screen.debug(avatar);
 
     const computedStyle = window.getComputedStyle(avatar);
-    expect(rgbToHex(computedStyle.backgroundColor)).toBe(COLORS.SUCCESS.toLowerCase());
+    expect(rgbToHex(computedStyle.backgroundColor)).toBe(
+      COLORS.SUCCESS.toLowerCase()
+    );
   });
 
   it("renders the typography elements correctly", () => {

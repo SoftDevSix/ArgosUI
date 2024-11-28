@@ -20,7 +20,10 @@ const CodeRating: React.FC<CodeRatingProps> = ({
 
   return (
     <CenteredContainer>
-      <Avatar sx={{ width: 300, height: 300, backgroundColor }} aria-label="code-rating-avatar">
+      <Avatar
+        sx={{ width: 300, height: 300, backgroundColor }}
+        aria-label="code-rating-avatar"
+      >
         <Typography variant="h1">{codeRating}</Typography>
       </Avatar>
       <Typography mt={2} variant="subtitle1" color="secondary">

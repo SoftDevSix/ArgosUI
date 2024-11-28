@@ -8,7 +8,7 @@
   --neutral-white: #fff;
   --neutral-black: #000;
   --error: #fca5a5;
-  --success: #34BF49;
+  --success: #34bf49;
   --warning-default: #fef08a;
   --warning-heavy: #fdba74;
   --warning-critical: #d97706;
@@ -64,15 +64,15 @@ p {
 }
 
 ::-webkit-scrollbar {
-  width: 12px; 
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--neutral-white); 
+  background: var(--neutral-white);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--secondary); 
+  background: var(--secondary);
 }
 
 ::-webkit-scrollbar-thumb:hover {

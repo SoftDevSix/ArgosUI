@@ -40,7 +40,9 @@ describe("CoveragePercentage", () => {
     const progress = screen.getByRole("progressbar");
 
     const computedStyle = window.getComputedStyle(progress);
-    expect(rgbToHex(computedStyle.color)).toBe(COLORS.ERROR_VARIANT.toLowerCase());
+    expect(rgbToHex(computedStyle.color)).toBe(
+      COLORS.ERROR_VARIANT.toLowerCase()
+    );
   });
 
   it("rounds percentages to two decimal places", () => {

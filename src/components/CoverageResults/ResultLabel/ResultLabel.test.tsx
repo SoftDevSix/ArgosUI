@@ -16,7 +16,7 @@ describe("ResultLabel Component", () => {
     expect(secondaryText).toBeInTheDocument();
 
     const style = getComputedStyle(mainLabel);
-    expect(rgbToHex(style.color)).toBe(COLORS.SUCCESS_VARIANT.toLowerCase()); 
+    expect(rgbToHex(style.color)).toBe(COLORS.SUCCESS_VARIANT.toLowerCase());
   });
 
   it('renders "FAILED" label with error color when passed is false', () => {
@@ -30,7 +30,7 @@ describe("ResultLabel Component", () => {
     expect(secondaryText).toBeInTheDocument();
 
     const style = getComputedStyle(mainLabel);
-    expect(rgbToHex(style.color)).toBe(COLORS.ERROR_VARIANT.toLowerCase()); 
+    expect(rgbToHex(style.color)).toBe(COLORS.ERROR_VARIANT.toLowerCase());
   });
 
   it('defaults to "FAILED" label with error color when passed is undefined', () => {

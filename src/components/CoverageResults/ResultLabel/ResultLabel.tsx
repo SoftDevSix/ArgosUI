@@ -13,9 +13,7 @@ const ResultLabel: React.FC<ResultLabelProps> = ({ passed }) => {
   return (
     <CenteredContainer>
       <Box>
-        <Typography variant="subtitle2">
-          This Project
-        </Typography>
+        <Typography variant="subtitle2">This Project</Typography>
         <Box display={"flex"} alignItems={"flex-end"}>
           <Typography variant="h1" component={"p"} color={colorLabel}>
             {passedLabel}

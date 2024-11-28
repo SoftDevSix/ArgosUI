@@ -3,6 +3,7 @@ import { ProjectInfoData } from "../../types/interfaces";
 import Grid from "@mui/material/Grid2";
 import ProjectForm from "./ProjectForm";
 import { Typography } from "@mui/material";
+import ProjectRules from "./ProjectRules";
 
 const ProjectSetUp: React.FC = () => {
   const [projectData, setProjectData] = useState<ProjectInfoData>({
@@ -22,7 +23,7 @@ const ProjectSetUp: React.FC = () => {
       <Typography variant="h1" mb={6}>
         Project & Rules Setup
       </Typography>
-      <Grid container>
+      <Grid container spacing={4}>
         <Grid size={{ xs: 12, md: 12, lg: 6 }}>
           <ProjectForm
             projectData={projectData}
@@ -30,7 +31,9 @@ const ProjectSetUp: React.FC = () => {
             setProjectFiles={setProjectFiles}
           />
         </Grid>
-        <Grid size={{ xs: 12, md: 12, lg: 6 }}></Grid>
+        <Grid size={{ xs: 12, md: 12, lg: 6 }}>
+          <ProjectRules />
+        </Grid>
       </Grid>
     </section>
   );
