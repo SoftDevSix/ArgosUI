@@ -6,22 +6,22 @@ interface FetchState<T> {
   error: string | null;
 }
 
-const useFetch = <T,>(url: string | null): FetchState<T> => {
+const useFetch = <T>(url: string | null): FetchState<T> => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      if(!url) return;
+      if (!url) return;
       try {
-        setError(null)
-        setLoading(true)
+        setError(null);
+        setLoading(true);
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
-        const result = await response.text(); 
+        const result = await response.text();
         setData(result as T);
       } catch (err) {
         setError((err as Error).message);

@@ -29,7 +29,7 @@ const SourceCode: React.FC<CodeViewerProps> = ({ filePath }) => {
         `${API_BASE_URL}/api/file?projectId=${Object.values(uploadedKeys).join("")}&filePath=${filePath}`
       );
     }
-  }, [uploadedKeys]);
+  }, [uploadedKeys, filePath]);
 
   return (
     <Box
@@ -43,7 +43,7 @@ const SourceCode: React.FC<CodeViewerProps> = ({ filePath }) => {
         <Box>
           <CircularProgress size={50} />
         </Box>
-      ) : !!error ? (
+      ) : error ? (
         <Box>
           <Typography color="error">
             Error getting the file. Try again reloading the page

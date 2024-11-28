@@ -5,6 +5,8 @@ import SourceCode from "../../components/SourceCode";
 import { splitUntilSecondSlash } from "../../utils/methods";
 import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import { UPLOADED_KEY } from "../../utils/constants";
+import Splash from "../../components/Splash";
+import ErrorAdvice from "../../components/ErrorAdvice";
 
 const API_BASE_URL = import.meta.env.VITE_FILE_MANAGER_API_BASE_URL;
 
@@ -19,7 +21,7 @@ const FileCoverage: React.FC = () => {
     localStorage.setItem(UPLOADED_KEY, JSON.stringify(projectId));
     setUploadedKeys({ projectId });
     // This effect will be deleted when finishing the integration with the project uploader
-  }, []);
+  }, [setUploadedKeys]);
 
   useEffect(() => {
     if (uploadedKeys && Object.values(uploadedKeys).length > 0) {
@@ -36,12 +38,12 @@ const FileCoverage: React.FC = () => {
     }
   }, [data]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error...</p>;
+  if (loading) return <Splash splashMessage="Getting file info..." />;
+  if (error) return <ErrorAdvice />;
 
   return (
     <Container component={"section"}>
-      {!!selectedFilePath ? (
+      {selectedFilePath ? (
         <Box>
           <Typography variant="subtitle1">{selectedFilePath}</Typography>
           <SourceCode filePath={selectedFilePath} />

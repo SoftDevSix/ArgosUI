@@ -1,6 +1,6 @@
 .lineWrapper {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   padding: 0 10px;
   position: relative;
@@ -31,5 +31,10 @@
   margin-left: 10px;
 }
 .withoutCoverage {
-  background-color: rgba(255, 78, 78, 0.1); /* Slightly red background for uncovered lines */
+  background-color: rgba(
+    255,
+    78,
+    78,
+    0.1
+  ); /* Slightly red background for uncovered lines */
 }

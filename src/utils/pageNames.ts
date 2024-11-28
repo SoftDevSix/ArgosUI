@@ -3,5 +3,5 @@ export enum PageNames {
   ERROR_404 = "*",
   COVERAGE_RESULTS = "coverage",
   PROJECT_SETUP = "project-setup",
-  FILE_COVERAGE = "file"
+  FILE_COVERAGE = "file",
 }
