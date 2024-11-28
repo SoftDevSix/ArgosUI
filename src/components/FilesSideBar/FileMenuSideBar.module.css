@@ -1,0 +1,22 @@
+.FileMenuSideBar {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  width: 200px;
+  align-items: center;
+  height: 100vh;
+  border-left: 1px solid white;
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.FilesMenuOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 95%;
+}
+
+.FilesMenuBarTitle {
+  margin: 50px 0px 50px 0px;
+}
