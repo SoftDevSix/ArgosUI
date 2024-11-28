@@ -6,21 +6,21 @@ import Error from "./pages/Error";
 import theme from "./utils/theme";
 import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider } from "./components/Header/HeaderContext";
-import PermanentDrawerLeft from "./components/NavDrawer/NavDrawer";
 import ProjectSetupPage from "./pages/ProjectSetup";
+import NavDrawer from "./components/NavDrawer";
 
 const App: React.FC = () => {
   const location = useLocation();
 
-  const showSidebar =
-    location.pathname !== PageNames.HOME &&
-    location.pathname !== "/" + PageNames.PROJECT_SETUP;
+  const showSidebar = ![PageNames.HOME, `/${PageNames.PROJECT_SETUP}`].includes(
+    location.pathname
+  );
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ display: "flex" }}>
-        {showSidebar && <PermanentDrawerLeft projectName="Harcoded Text" />}
+        {showSidebar && <NavDrawer projectName="Harcoded Text" />}
         <Routes>
           <Route path={PageNames.HOME} Component={WelcomePage} />
           <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />

@@ -2,136 +2,25 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import PieChartIcon from "@mui/icons-material/PieChart";
-import { Typography, IconButton, useMediaQuery, Theme } from "@mui/material";
+import { IconButton, useMediaQuery, Theme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { COLORS } from "../../utils/styleConstants";
+import DrawerContent from "./DrawerContent";
 
-const drawerWidth = 230;
+const DRAWER_WIDTH = 230;
 
-interface MenuOption {
-  name: string;
-  icon: React.ReactNode;
-  path: string;
+interface NavDrawerProps {
+  projectName: string;
 }
 
-const menuOptionList: MenuOption[] = [
-  {
-    name: "Project Coverage",
-    icon: <PieChartIcon />,
-    path: "/project-coverage",
-  },
-  {
-    name: "File Coverage",
-    icon: <PieChartIcon />,
-    path: "/file-coverage",
-  },
-];
-
-export default function NavDrawer({ projectName = "" }) {
+const NavDrawer: React.FC<NavDrawerProps> = ({ projectName = "" }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [selectedOption, setSelectedOption] =
-    useState<string>("Project Coverage");
   const isLargeScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.up("md")
   );
-  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const handleOptionClick = (option: MenuOption) => {
-    setSelectedOption(option.name);
-    navigate(option.path);
-  };
-
-  const handleLogout = () => {
-    navigate("/");
-  };
-
-  const drawerContent = (
-    <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "15px",
-          backgroundColor: COLORS.PRIMARY_HOVER,
-        }}
-      >
-        <Typography fontWeight="bold" fontSize={32}>
-          Argos
-        </Typography>
-      </Box>
-      <Toolbar />
-      <Typography data-testid="project-name" fontSize={24} align="center">
-        {projectName}
-      </Typography>
-      <Toolbar />
-
-      <Box sx={{ flexGrow: 1 }}>
-        <List>
-          {menuOptionList.map((option) => (
-            <ListItem key={option.name} disablePadding>
-              <ListItemButton
-                data-testid={`menu-option-${option.name}`}
-                onClick={() => handleOptionClick(option)}
-                sx={{
-                  backgroundColor:
-                    selectedOption === option.name
-                      ? COLORS.PRIMARY_HOVER
-                      : "transparent",
-                  "&:hover": {
-                    backgroundColor:
-                      selectedOption === option.name
-                        ? COLORS.PRIMARY_HOVER
-                        : "#1a1b25",
-                  },
-                }}
-              >
-                <ListItemIcon>{option.icon}</ListItemIcon>
-                <ListItemText primary={option.name} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-
-      <Box
-        sx={{
-          padding: 0,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          borderTop: `1px solid ${COLORS.NEUTRAL_WHITE}`,
-          color: COLORS.NEUTRAL_WHITE,
-        }}
-      >
-        <ListItemButton
-          data-testid="exit-button"
-          onClick={handleLogout}
-          sx={{
-            "&:hover": {},
-          }}
-        >
-          <ListItemIcon sx={{ color: COLORS.ERROR }}>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText primary="Exit" />
-        </ListItemButton>
-      </Box>
-    </Box>
-  );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -149,10 +38,10 @@ export default function NavDrawer({ projectName = "" }) {
       )}
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: DRAWER_WIDTH,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: drawerWidth,
+            width: DRAWER_WIDTH,
             boxSizing: "border-box",
           },
         }}
@@ -161,8 +50,10 @@ export default function NavDrawer({ projectName = "" }) {
         onClose={handleDrawerToggle}
         anchor="left"
       >
-        {drawerContent}
+        <DrawerContent projectName={projectName} />
       </Drawer>
     </Box>
   );
-}
+};
+
+export default NavDrawer;
