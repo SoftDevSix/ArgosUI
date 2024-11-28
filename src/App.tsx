@@ -1,32 +1,42 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { PageNames } from "./utils/pageNames";
-import { Container, CssBaseline, ThemeProvider } from "@mui/material";
-import Home from "./pages/Home";
+import { CssBaseline, ThemeProvider, Box } from "@mui/material";
 import Error from "./pages/Error";
 import theme from "./utils/theme";
-import Header from "./components/Header";
-import ProjectCoveragePage from "./pages/ProjectCoverage";
+import WelcomePage from "./pages/WelcomePage";
+import { HeaderProvider } from "./components/Header/HeaderContext";
+import ProjectSetupPage from "./pages/ProjectSetup";
+import NavDrawer from "./components/NavDrawer";
 
 const App: React.FC = () => {
+  const location = useLocation();
+
+  const showSidebar = ![PageNames.HOME, `/${PageNames.PROJECT_SETUP}`].includes(
+    location.pathname
+  );
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Header />
-        <Container>
-          <Routes>
-            <Route path={PageNames.HOME} Component={Home} />
-            <Route
-              path={PageNames.PROJECT_COVERAGE}
-              Component={ProjectCoveragePage}
-            />
-            <Route path={PageNames.ERROR_404} Component={Error} />
-          </Routes>
-        </Container>
-      </BrowserRouter>
+      <Box sx={{ display: "flex" }}>
+        {showSidebar && <NavDrawer projectName="Harcoded Text" />}
+        <Routes>
+          <Route path={PageNames.HOME} Component={WelcomePage} />
+          <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
+          <Route path={PageNames.ERROR_404} Component={Error} />
+        </Routes>
+      </Box>
     </ThemeProvider>
   );
 };
 
-export default App;
+export const WrappedApp: React.FC = () => (
+  <HeaderProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </HeaderProvider>
+);
+
+export default WrappedApp;
