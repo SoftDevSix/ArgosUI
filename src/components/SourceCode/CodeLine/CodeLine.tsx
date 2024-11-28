@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import hljs from "highlight.js/lib/core";
 import java from "highlight.js/lib/languages/java";
-import "highlight.js/styles/atom-one-dark.css"; // Example dark theme
+import "highlight.js/styles/atom-one-dark.css"; 
 import styles from "./CodeLine.module.css";
 import { Typography } from "@mui/material";
 
-// Register Java language for Highlight.js
 hljs.registerLanguage("java", java);
 
 type CodeLineProps = {

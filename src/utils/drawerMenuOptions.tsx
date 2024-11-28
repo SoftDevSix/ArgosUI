@@ -1,15 +1,16 @@
 import { MenuOption } from "../types/interfaces";
 import PieChartIcon from "@mui/icons-material/PieChart";
+import { PageNames } from "./pageNames";
 
 export const menuOptionList: MenuOption[] = [
   {
     name: "Project Coverage",
     icon: <PieChartIcon />,
-    path: "/project-coverage",
+    path: `/${PageNames.COVERAGE_RESULTS}`,
   },
   {
     name: "File Coverage",
     icon: <PieChartIcon />,
-    path: "/file-coverage",
+    path: `/${PageNames.FILE_COVERAGE}`,
   },
 ];

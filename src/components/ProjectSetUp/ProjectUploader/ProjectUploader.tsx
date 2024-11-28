@@ -69,7 +69,7 @@ const ProjectUploader: React.FC<ProjectUploaderProps> = ({
             style={{ backgroundColor: "#f00" }}
             color="error"
             onClick={handleDeleteProject}
-            aria-label="delete"
+            aria-label="delete-uploaded-project"
           >
             <DeleteIcon style={{ fontSize: 24, color: "#fff" }} />
           </IconButton>

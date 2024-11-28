@@ -75,6 +75,12 @@ const theme = createTheme({
       fontWeight: FONT_WEIGHTS.BOLD,
       fontSize: FONT_SIZES.SUBTITLE1,
     },
+    subtitle2: {
+      fontFamily: FONT_FAMILY,
+      fontWeight: FONT_WEIGHTS.REGULAR,
+      fontSize: FONT_SIZES.SUBTITLE2,
+      display: "block",
+    },
     caption: {
       color: COLORS.CAPTION,
       fontSize: FONT_SIZES.CAPTION,
@@ -288,11 +294,11 @@ const theme = createTheme({
             borderRight: "none",
           },
           "&:hover": {
-            backgroundColor: "#3C3C4C",
+            backgroundColor: COLORS.PRIMARY_DEFAULT,
           },
           "&.Mui-disabled": {
             color: "#6C6C7A",
-            backgroundColor: "#2C2C3C",
+            backgroundColor: COLORS.GREY_DISABLED,
           },
           "&.Mui-selected": {
             color: COLORS.NEUTRAL_BLACK,

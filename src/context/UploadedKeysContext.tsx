@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { UPLOADED_KEY } from "../utils/constants";
 
 type UploadedKeysContextType = {
   uploadedKeys: Record<string, string>;
@@ -15,14 +16,14 @@ export const UploadedKeysProvider: React.FC<{ children: React.ReactNode }> = ({
   const [uploadedKeys, setUploadedKeys] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const storedKeys = localStorage.getItem("uploadedKeys");
+    const storedKeys = localStorage.getItem(UPLOADED_KEY);
     if (storedKeys) {
       setUploadedKeys(JSON.parse(storedKeys));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("uploadedKeys", JSON.stringify(uploadedKeys));
+    localStorage.setItem(UPLOADED_KEY, JSON.stringify(uploadedKeys));
   }, [uploadedKeys]);
 
   return (

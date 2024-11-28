@@ -1,5 +1,5 @@
-import React from "react";
-import CodeLine from "./CodeLine/CodeLine";
+import React, { useEffect, useState } from "react";
+import CodeLine from "./CodeLine";
 import styles from "./SourceCode.module.css";
 import useFetch from "../../hooks/useFetch";
 import {
@@ -10,19 +10,35 @@ import {
   Typography,
 } from "@mui/material";
 import { COLORS } from "../../utils/styleConstants";
+import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
+import { API_BASE_URL } from "../../utils/constants";
 
 type CodeViewerProps = {
   filePath: string;
 };
 
 const SourceCode: React.FC<CodeViewerProps> = ({ filePath }) => {
-  const projectId = "e011bad2-0b57-4ed3-a278-29b255d25621";
+  const { uploadedKeys } = useUploadedKeys();
 
-  const url = `http://localhost:8080/api/file?projectId=${projectId}&filePath=${filePath}`;
-  const { data, loading, error } = useFetch<string>(url);
+  const [apiUrl, setApiUrl] = useState<string | null>(null);
+  const { data, loading, error } = useFetch<string>(apiUrl);
+
+  useEffect(() => {
+    if (uploadedKeys && Object.values(uploadedKeys).length > 0) {
+      setApiUrl(
+        `${API_BASE_URL}/api/file?projectId=${Object.values(uploadedKeys).join("")}&filePath=${filePath}`
+      );
+    }
+  }, [uploadedKeys]);
 
   return (
-    <Box display={"flex"} width={"100%"} mt={4} alignItems={"center"} justifyContent={"center"}>
+    <Box
+      display={"flex"}
+      width={"100%"}
+      mt={4}
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
       {loading ? (
         <Box>
           <CircularProgress size={50} />

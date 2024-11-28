@@ -53,7 +53,7 @@ describe("ProjectSetUp Component", () => {
     await uploadFile(user, "folder/file.txt");
 
     expect(
-      await screen.findByRole("button", { name: /delete/i })
+      screen.getByLabelText("delete-uploaded-project")
     ).toBeInTheDocument();
   });
 
@@ -63,7 +63,7 @@ describe("ProjectSetUp Component", () => {
 
     await uploadFile(user, "folder/file.txt");
 
-    const deleteButton = await screen.findByRole("button", { name: /delete/i });
+    const deleteButton = screen.getByLabelText("delete-uploaded-project");
     await user.click(deleteButton);
 
     expect(screen.getByText(/no folder selected/i)).toBeInTheDocument();
