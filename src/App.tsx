@@ -6,8 +6,6 @@ import Error from "./pages/Error";
 import theme from "./utils/theme";
 import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider } from "./components/Header/HeaderContext";
-import { useHeader } from "./hooks/HeaderHooks";
-import ProjectCoveragePage from "./pages/ProjectCoverage";
 import { UploadedKeysProvider } from "./context/UploadedKeysContext";
 import ProjectSetupPage from "./pages/ProjectSetup";
 import NavDrawer from "./components/NavDrawer";
