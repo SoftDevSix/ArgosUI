@@ -1,128 +1,47 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import CoverageSummary from "./CoverageSummary";
 import { COLORS } from "../../utils/styleConstants";
 
-vi.mock("./CoverageDeatils/CoverageDetails", () => ({
-  default: vi.fn(() => (
-    <div data-testid="coverage-details">Mocked CoverageDetails</div>
-  )),
-}));
-
-vi.mock("./CoverageFilesList/CoverageFilesList", () => ({
-  default: vi.fn(({ title, files }: { title: string; files: string[] }) => (
-    <div data-testid="coverage-files-list">
-      <span>{title}</span>
-      <ul>
-        {files.map((file: string) => (
-          <li key={file}>{file}</li>
-        ))}
-      </ul>
-    </div>
-  )),
-}));
-
-vi.mock("../CustomPieChart", () => ({
-  default: vi.fn(() => (
-    <div data-testid="custom-pie-chart">Mocked CustomPieChart</div>
-  )),
-}));
-
 describe("CoverageSummary component", () => {
-  const mockSummaryData = [
-    { value: 80, label: "Overall Coverage" },
-    { value: 75, label: "Line Coverage" },
-    { value: 70, label: "Method Coverage" },
-    { value: 65, label: "Class Coverage" },
-  ];
-
-  const mockComparisonData = [
-    { value: 78, label: "Overall Coverage" },
-    { value: 73, label: "Line Coverage" },
-    { value: 68, label: "Method Coverage" },
-    { value: 62, label: "Class Coverage" },
-  ];
-
-  const improvedFiles = ["FileA.java", "FileB.java"];
-  const decreasedFiles = ["FileC.java"];
-  const baseBranchName = "develop";
-  const coverageChange = 5;
-
-  const renderComponent = () => {
+  const renderComponent = (props = {}) => {
     return render(
       <CoverageSummary
-        baseBranchName={baseBranchName}
-        summaryData={mockSummaryData}
-        comparisonData={mockComparisonData}
-        improvedFiles={improvedFiles}
-        decreasedFiles={decreasedFiles}
-        coverageChange={coverageChange}
+        fileCoverage={80}
+        methodCoverage={70}
+        linesOfCode={500}
+        {...props}
       />
     );
   };
 
-  it("should render CoverageDetails with correct props", () => {
+  it("should render MetricCircle for file coverage", () => {
     renderComponent();
-    const coverageDetails = screen.getByTestId("coverage-details");
-    expect(coverageDetails).toBeInTheDocument();
+    const fileCoverageCircle = screen.getByText("File coverage");
+    expect(fileCoverageCircle).toBeInTheDocument();
+    const fileCoverageValue = screen.getByText("80%");
+    expect(fileCoverageValue).toBeInTheDocument();
   });
 
-  it("should render CoverageFilesList for improved files", () => {
+  it("should render MetricCircle for method coverage", () => {
     renderComponent();
-    const improvedFilesList = screen.getByText("Files Improved");
-    expect(improvedFilesList).toBeInTheDocument();
-    improvedFiles.forEach((file) => {
-      expect(screen.getByText(file)).toBeInTheDocument();
-    });
+    const methodCoverageCircle = screen.getByText("Method coverage");
+    expect(methodCoverageCircle).toBeInTheDocument();
+    const methodCoverageValue = screen.getByText("70%");
+    expect(methodCoverageValue).toBeInTheDocument();
   });
 
-  it("should render CoverageFilesList for decreased files", () => {
+  it("should display the lines of code with correct style", () => {
     renderComponent();
-    const decreasedFilesList = screen.getByText("Files Decreased Coverage");
-    expect(decreasedFilesList).toBeInTheDocument();
-    decreasedFiles.forEach((file) => {
-      expect(screen.getByText(file)).toBeInTheDocument();
-    });
+    const linesOfCode = screen.getByText("500");
+    expect(linesOfCode).toBeInTheDocument();
+    expect(linesOfCode).toHaveStyle("font-weight: 700; font-size: 1.5rem;");
   });
 
-  it("should display the comparison with the base branch", () => {
+  it("should display the label 'Lines of code'", () => {
     renderComponent();
-    const comparisonText = screen.getByText(
-      `Comparison with Base Branch (${baseBranchName})`
-    );
-    expect(comparisonText).toBeInTheDocument();
-  });
-
-  it("should display the coverage change correctly", () => {
-    renderComponent();
-    const coverageChangeText = screen.getByText(
-      `Coverage Change: +${coverageChange}% (Improved)`
-    );
-    expect(coverageChangeText).toBeInTheDocument();
-    expect(coverageChangeText).toHaveStyle(`color: ${COLORS.GREEN}`);
-  });
-
-  it("should render CustomPieChart with correct props", () => {
-    renderComponent();
-    const customPieChart = screen.getByTestId("custom-pie-chart");
-    expect(customPieChart).toBeInTheDocument();
-  });
-
-  it("should handle negative coverage change", () => {
-    render(
-      <CoverageSummary
-        baseBranchName={baseBranchName}
-        summaryData={mockSummaryData}
-        comparisonData={mockComparisonData}
-        improvedFiles={improvedFiles}
-        decreasedFiles={decreasedFiles}
-        coverageChange={-5}
-      />
-    );
-    const coverageChangeText = screen.getByText(
-      `Coverage Change: -5% (Decreased)`
-    );
-    expect(coverageChangeText).toBeInTheDocument();
-    expect(coverageChangeText).toHaveStyle(`color: ${COLORS.GREEN}`);
+    const linesOfCodeLabel = screen.getByText("Lines of code");
+    expect(linesOfCodeLabel).toBeInTheDocument();
+    expect(linesOfCodeLabel).toHaveStyle(`color: ${COLORS.SECONDARY_TEXT}`);
   });
 });
