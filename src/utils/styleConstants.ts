@@ -39,5 +39,6 @@ export const COLORS = {
   BODY_2: "#BBBBBB",
   CAPTION: "#686D7E",
   PASS_BUTTON: "#75DE9B",
+  GREY_DISABLED: "#2C2C3C",
   SECONDARY_TEXT: "#6c7693",
 };

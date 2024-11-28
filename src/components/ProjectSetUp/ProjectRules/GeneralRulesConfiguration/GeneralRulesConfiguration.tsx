@@ -1,136 +1,51 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Switch,
-  TextField,
-  ToggleButton,
-  ToggleButtonGroup,
-  Card,
-  CardContent,
-} from "@mui/material";
-import { RulesConfig } from "../../../../types/rulesInterfaces";
-import { codeRatings } from "../../../../utils/rulesConstants";
-import { CodeRatingType } from "../../../../types/types";
+import React from "react";
+import { Box, Card, CardContent, IconButton } from "@mui/material";
+import { ChevronLeft } from "@mui/icons-material";
+import { Rules, RulesTypes } from "../../../../types/types";
+import ProjectCoverageRules from "../ProjectCoverageRules";
+import CodeRatingRules from "../CodeRatingRules";
 
-const GeneralRulesConfiguration: React.FC = () => {
-  const [config, setConfig] = useState<RulesConfig>({
-    projectCoverageEnabled: false,
-    projectCoverageThreshold: 50,
-    codeRatingEnabled: false,
-    codeRating: "B",
-  });
+interface GeneralRulesConfigurationProps {
+  rulesConfig: Record<RulesTypes, Rules>;
+  setRulesConfig: React.Dispatch<
+    React.SetStateAction<Record<RulesTypes, Rules>>
+  >;
+  handleGoBack: () => void;
+}
 
-  const handleSwitchChange = (field: keyof RulesConfig, value: boolean) => {
-    setConfig((prev) => ({
+const GeneralRulesConfiguration: React.FC<GeneralRulesConfigurationProps> = ({
+  rulesConfig,
+  setRulesConfig,
+  handleGoBack,
+}) => {
+  const handleSwitchChange = (field: keyof Rules, value: boolean) => {
+    setRulesConfig((prev) => ({
       ...prev,
-      [field]: value,
+      rules: {
+        ...prev.rules,
+        [field]: value,
+      },
     }));
-  };
-
-  const handleThresholdChange = (value: number) => {
-    if (value < 0 || value > 100) return;
-    setConfig((prev) => ({
-      ...prev,
-      projectCoverageThreshold: value,
-    }));
-  };
-
-  const handleCodeRatingChange = (newRating: CodeRatingType | null) => {
-    if (newRating) {
-      setConfig((prev) => ({
-        ...prev,
-        codeRating: newRating,
-      }));
-    }
   };
 
   return (
     <Card>
       <CardContent>
-        <Box sx={{ marginBottom: 3 }}>
-          <Typography variant="subtitle1" gutterBottom>
-            Project Coverage
-          </Typography>
-          <Switch
-            checked={config.projectCoverageEnabled}
-            onChange={(e) =>
-              handleSwitchChange("projectCoverageEnabled", e.target.checked)
-            }
-            color="primary"
+        <IconButton onClick={handleGoBack} aria-label="general-rules-back">
+          <ChevronLeft />
+        </IconButton>
+        <Box paddingX={2}>
+          <ProjectCoverageRules
+            rulesConfig={rulesConfig}
+            setRulesConfig={setRulesConfig}
+            handleSwitchChange={handleSwitchChange}
           />
 
-          <Typography variant="body2" mt={1} mr={1}>
-            Minimum required
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: 1,
-              padding: "4px 0",
-              borderRadius: 1,
-            }}
-          >
-            <TextField
-              variant="outlined"
-              size="small"
-              type="number"
-              disabled={!config.projectCoverageEnabled}
-              value={config.projectCoverageThreshold}
-              onChange={(e) =>
-                handleThresholdChange(parseInt(e.target.value, 10))
-              }
-              sx={{
-                width: 80,
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: config.projectCoverageEnabled
-                      ? "#80E27E"
-                      : "#4C4C5A",
-                  },
-                },
-              }}
-            />
-            <Typography variant="body1" sx={{ marginLeft: 1 }}>
-              %
-            </Typography>
-          </Box>
-        </Box>
-
-        <Box>
-          <Typography variant="subtitle1" gutterBottom>
-            Code Rating
-          </Typography>
-          <Switch
-            checked={config.codeRatingEnabled}
-            onChange={(e) =>
-              handleSwitchChange("codeRatingEnabled", e.target.checked)
-            }
-            color="primary"
+          <CodeRatingRules
+            rulesConfig={rulesConfig}
+            setRulesConfig={setRulesConfig}
+            handleSwitchChange={handleSwitchChange}
           />
-          <Typography variant="body2" mt={2} mb={1}>
-            Minimum required
-          </Typography>
-          <ToggleButtonGroup value={config.codeRating}>
-            {codeRatings.map((rating) => (
-              <ToggleButton
-                key={rating}
-                value={rating}
-                disabled={!config.codeRatingEnabled}
-                onClick={() => handleCodeRatingChange(rating)}
-                sx={{
-                  color: config.codeRatingEnabled ? "#fff" : "#A9A9A9",
-                  "&.Mui-selected": {
-                    backgroundColor: "#80E27E",
-                    color: "#1C1C28",
-                  },
-                }}
-              >
-                {rating}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
         </Box>
       </CardContent>
     </Card>

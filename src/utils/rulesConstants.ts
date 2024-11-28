@@ -1,4 +1,4 @@
-import { CodeRatingType, Rules, RulesTypes } from "../types/types";
+import { CodeRatingType, RulesTypes, Rules } from "../types/types";
 
 export const ruleDefaults: Record<RulesTypes, Rules> = {
   rules: {
@@ -7,51 +7,8 @@ export const ruleDefaults: Record<RulesTypes, Rules> = {
     codeRatingEnabled: true,
     codeRating: "D",
   },
-  coverage: {
-    coverageReviewRequired: false,
-    minCoveragePercentage: false,
-    rejectIfLower: false,
-    coverageThreshold: 80,
-  },
-  "best analysis": {
-    noHardcodedValues: false,
-  },
-  "code smells": {
-    excessiveParameters: false,
-    magicNumbers: false,
-    methodTooLong: 100,
-    noDuplicatedCode: false,
-    maxMethodLength: 50,
-    maxParameters: 5,
-  },
-  "code complexity": {
-    cyclomaticComplexityLimit: false,
-    maxMethodCountInClass: false,
-    nestingDepthLimit: false,
-    maxCyclomaticComplexity: 10,
-    maxMethodsInClass: 10,
-    maxNestingDepth: 3,
-  },
-  "coding standards": {
-    camelCaseNaming: true,
-    pascalCaseForClasses: true,
-    bracesOnSameLine: false,
-  },
-  "code quality": {
-    maxLineLength: false,
-    noUnusedImports: false,
-    maxLineLengthLimit: 120,
-  },
 };
 
-export const rulesTypes: RulesTypes[] = [
-  "rules",
-  "coverage",
-  "best analysis",
-  "code smells",
-  "code complexity",
-  "code quality",
-  "coding standards",
-];
+export const rulesTypes: RulesTypes[] = ["rules"];
 
 export const codeRatings: CodeRatingType[] = ["A", "B", "C", "D"];
