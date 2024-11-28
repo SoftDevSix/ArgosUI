@@ -15,14 +15,10 @@ const ChevronTab: React.FC<ChevronTabProps> = ({ tabName, onClick }) => {
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      width="100%" 
+      width="100%"
       onClick={onClick}
     >
-      <Typography
-        className={styles.tabLabel}
-        minWidth={100}
-        flexGrow={1} 
-      >
+      <Typography className={styles.tabLabel} minWidth={100} flexGrow={1}>
         {tabName}
       </Typography>
       <IconButton

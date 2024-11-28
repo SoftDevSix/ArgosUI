@@ -1,10 +1,10 @@
 .tabLabel {
-    background-color: var(--primary-action);
-    font-size: 28px;
-    text-transform: capitalize;
-    padding: 9px 20px;
+  background-color: var(--primary-action);
+  font-size: 32px;
+  text-transform: capitalize;
+  padding: 9px 20px;
 }
 
-.tabLabel:hover{
-    cursor: pointer;
+.tabLabel:hover {
+  cursor: pointer;
 }
