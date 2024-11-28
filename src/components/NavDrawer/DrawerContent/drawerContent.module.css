@@ -1,0 +1,16 @@
+.drawerTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: var(--primary-hover);
+}
+
+.drawerExitContainer {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--neutral-white);
+  color: var(--neutral-white);
+}

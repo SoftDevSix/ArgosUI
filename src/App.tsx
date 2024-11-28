@@ -1,42 +1,46 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { PageNames } from "./utils/pageNames";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider, Box } from "@mui/material";
 import Error from "./pages/Error";
 import theme from "./utils/theme";
-import Header from "./components/Header";
 import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider } from "./components/Header/HeaderContext";
 import { useHeader } from "./hooks/HeaderHooks";
 import ProjectCoveragePage from "./pages/ProjectCoverage";
 import { UploadedKeysProvider } from "./context/UploadedKeysContext";
+import ProjectSetupPage from "./pages/ProjectSetup";
+import NavDrawer from "./components/NavDrawer";
 
 const App: React.FC = () => {
-  const { showHeader } = useHeader();
+  const location = useLocation();
+
+  const showSidebar = ![PageNames.HOME, `/${PageNames.PROJECT_SETUP}`].includes(
+    location.pathname
+  );
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <UploadedKeysProvider>
-          {showHeader && <Header />}
+      <UploadedKeysProvider>
+        <Box sx={{ display: "flex" }}>
+          {showSidebar && <NavDrawer projectName="Harcoded Text" />}
           <Routes>
             <Route path={PageNames.HOME} Component={WelcomePage} />
-            <Route
-              path={PageNames.PROJECT_COVERAGE}
-              Component={ProjectCoveragePage}
-            />
+            <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
             <Route path={PageNames.ERROR_404} Component={Error} />
           </Routes>
-        </UploadedKeysProvider>
-      </BrowserRouter>
+        </Box>
+      </UploadedKeysProvider>
     </ThemeProvider>
   );
 };
 
 export const WrappedApp: React.FC = () => (
   <HeaderProvider>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </HeaderProvider>
 );
 
