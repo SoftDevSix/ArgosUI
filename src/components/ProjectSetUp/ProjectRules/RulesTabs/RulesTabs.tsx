@@ -14,10 +14,7 @@ const RulesTabs: React.FC<RulesTabsProps> = ({ setRuleTab }) => (
     <CardContent>
       {rulesTypes.map((rule) => (
         <Box className={styles.tabContainer} key={rule} mt={1}>
-          <ChevronTab
-            tabName={`${rule}`}
-            onClick={() => setRuleTab(rule)}
-          />
+          <ChevronTab tabName={`${rule}`} onClick={() => setRuleTab(rule)} />
         </Box>
       ))}
     </CardContent>

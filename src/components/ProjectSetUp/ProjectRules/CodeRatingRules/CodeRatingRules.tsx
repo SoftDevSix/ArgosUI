@@ -1,6 +1,5 @@
 import React from "react";
 import { CodeRating, Rules, RulesTypes } from "../../../../types/types";
-import { RulesConfig } from "../../../../types/rulesInterfaces";
 import {
   Box,
   ToggleButton,
@@ -11,7 +10,7 @@ import { codeRatings } from "../../../../utils/rulesConstants";
 import CustomSwitch from "../../../Form/CustomSwitch";
 
 interface CodeRatingRulesProps {
-  rulesConfig: Record<RulesTypes, RulesConfig>;
+  rulesConfig: Record<RulesTypes, Rules>;
   setRulesConfig: React.Dispatch<
     React.SetStateAction<Record<RulesTypes, Rules>>
   >;

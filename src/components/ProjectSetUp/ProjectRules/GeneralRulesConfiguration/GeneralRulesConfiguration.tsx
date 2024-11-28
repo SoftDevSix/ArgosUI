@@ -1,13 +1,12 @@
 import React from "react";
 import { Box, Card, CardContent, IconButton } from "@mui/material";
 import { ChevronLeft } from "@mui/icons-material";
-import { RulesConfig } from "../../../../types/rulesInterfaces";
 import { Rules, RulesTypes } from "../../../../types/types";
 import ProjectCoverageRules from "../ProjectCoverageRules";
 import CodeRatingRules from "../CodeRatingRules";
 
 interface GeneralRulesConfigurationProps {
-  rulesConfig: Record<RulesTypes, RulesConfig>;
+  rulesConfig: Record<RulesTypes, Rules>;
   setRulesConfig: React.Dispatch<
     React.SetStateAction<Record<RulesTypes, Rules>>
   >;
@@ -32,7 +31,7 @@ const GeneralRulesConfiguration: React.FC<GeneralRulesConfigurationProps> = ({
   return (
     <Card>
       <CardContent>
-        <IconButton onClick={handleGoBack}>
+        <IconButton onClick={handleGoBack} aria-label="general-rules-back">
           <ChevronLeft />
         </IconButton>
         <Box paddingX={2}>

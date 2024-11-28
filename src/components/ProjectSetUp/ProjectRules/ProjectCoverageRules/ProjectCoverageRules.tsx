@@ -1,13 +1,12 @@
 import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Rules, RulesTypes } from "../../../../types/types";
-import { RulesConfig } from "../../../../types/rulesInterfaces";
 import { COLORS } from "../../../../utils/styleConstants";
 import styles from "./projectCoverageRules.module.css";
 import CustomSwitch from "../../../Form/CustomSwitch";
 
 interface ProjectCoverageRulesConfig {
-  rulesConfig: Record<RulesTypes, RulesConfig>;
+  rulesConfig: Record<RulesTypes, Rules>;
   setRulesConfig: React.Dispatch<
     React.SetStateAction<Record<RulesTypes, Rules>>
   >;
