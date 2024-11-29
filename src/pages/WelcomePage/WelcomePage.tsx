@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUploadedKeys } from "../../context/UploadedKeysContext";
+import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import styles from "./WelcomePage.module.css";
 import { PageNames } from "../../utils/pageNames";
 import Splash from "../../components/Splash";
 
 const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
-  const { hasUploadedKeys, checkedKeys } = useUploadedKeys();
+  const { hasUploadedKeys } = useUploadedKeys();
   const [loading, setLoading] = useState(false);
 
   const handleAnalyzeClick = () => {
@@ -21,7 +21,7 @@ const WelcomePage: React.FC = () => {
     }, 1000);
   };
 
-  if (loading || !checkedKeys) {
+  if (loading) {
     return <Splash splashMessage="Checking project data..." />;
   }
 

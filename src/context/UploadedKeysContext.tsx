@@ -1,11 +1,10 @@
-import React, { createContext, useEffect, useState, useContext } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { UPLOADED_KEY } from "../utils/constants";
 
 type UploadedKeysContextType = {
-  uploadedKeys: Record<string, string>;
-  setUploadedKeys: (keys: Record<string, string>) => void;
+  uploadedKeys: string;
+  setUploadedKeys: (keys: string) => void;
   hasUploadedKeys: boolean;
-  checkedKeys: boolean;
 };
 
 const UploadedKeysContext = createContext<UploadedKeysContextType | undefined>(
@@ -15,39 +14,36 @@ const UploadedKeysContext = createContext<UploadedKeysContextType | undefined>(
 export const UploadedKeysProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [uploadedKeys, setUploadedKeys] = useState<Record<string, string>>({});
-  const [hasUploadedKeys, setHasUploadedKeys] = useState(false);
-  const [checkedKeys, setCheckedKeys] = useState(false);
+  const [uploadedKeys, setUploadedKeys] = useState<string>("");
+  const [hasUploadedKeys, setHasUploadedKeys] = useState<boolean>(false);
 
   useEffect(() => {
     const storedKeys = localStorage.getItem(UPLOADED_KEY);
-    if (storedKeys) {
-      setUploadedKeys(JSON.parse(storedKeys));
+    if (storedKeys && storedKeys !== "") {
+      console.log("Stored keys found:", storedKeys);
+      setUploadedKeys(storedKeys);
       setHasUploadedKeys(true);
+    } else {
+      console.log("No stored keys in localStorage.");
+      setHasUploadedKeys(false);
     }
-    setCheckedKeys(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(UPLOADED_KEY, JSON.stringify(uploadedKeys));
-    setHasUploadedKeys(Object.keys(uploadedKeys).length > 0);
+    if (uploadedKeys.length > 0) {
+      localStorage.setItem(UPLOADED_KEY, uploadedKeys);
+    } else {
+      localStorage.removeItem(UPLOADED_KEY);
+    }
   }, [uploadedKeys]);
 
   return (
     <UploadedKeysContext.Provider
-      value={{ uploadedKeys, setUploadedKeys, hasUploadedKeys, checkedKeys }}
+      value={{ uploadedKeys, setUploadedKeys, hasUploadedKeys }}
     >
       {children}
     </UploadedKeysContext.Provider>
   );
-};
-
-export const useUploadedKeys = () => {
-  const context = useContext(UploadedKeysContext);
-  if (!context) {
-    throw new Error("useUploadedKeys must be used inside UploadedKeysProvider");
-  }
-  return context;
 };
 
 export default UploadedKeysContext;

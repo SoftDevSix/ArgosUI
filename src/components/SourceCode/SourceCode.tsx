@@ -11,13 +11,17 @@ import {
 } from "@mui/material";
 import { COLORS } from "../../utils/styleConstants";
 import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
-import { API_BASE_URL } from "../../utils/constants";
+import { FILE_MANAGER_API_BASE_URL } from "../../utils/constants";
 
 type CodeViewerProps = {
   filePath: string;
+  uncoveredLines: number[];
 };
 
-const SourceCode: React.FC<CodeViewerProps> = ({ filePath }) => {
+const SourceCode: React.FC<CodeViewerProps> = ({
+  filePath,
+  uncoveredLines,
+}) => {
   const { uploadedKeys } = useUploadedKeys();
 
   const [apiUrl, setApiUrl] = useState<string | null>(null);
@@ -26,10 +30,26 @@ const SourceCode: React.FC<CodeViewerProps> = ({ filePath }) => {
   useEffect(() => {
     if (uploadedKeys && Object.values(uploadedKeys).length > 0) {
       setApiUrl(
-        `${API_BASE_URL}/api/file?projectId=${Object.values(uploadedKeys).join("")}&filePath=${filePath}`
+        `${FILE_MANAGER_API_BASE_URL}/api/file?projectId=${Object.values(uploadedKeys).join("")}&filePath=${filePath}`
       );
     }
   }, [uploadedKeys, filePath]);
+
+  if (loading)
+    return (
+      <Box>
+        <CircularProgress size={50} />
+      </Box>
+    );
+
+  if (error)
+    return (
+      <Box>
+        <Typography color="error">
+          Error getting the file. Try again reloading the page
+        </Typography>
+      </Box>
+    );
 
   return (
     <Box
@@ -39,26 +59,18 @@ const SourceCode: React.FC<CodeViewerProps> = ({ filePath }) => {
       alignItems={"center"}
       justifyContent={"center"}
     >
-      {loading ? (
-        <Box>
-          <CircularProgress size={50} />
-        </Box>
-      ) : error ? (
-        <Box>
-          <Typography color="error">
-            Error getting the file. Try again reloading the page
-          </Typography>
-        </Box>
-      ) : data ? (
-        <Card>
-          <CardContent style={{ backgroundColor: COLORS.PRIMARY_HOVER }}>
+      {data ? (
+        <Card style={{ width: "100%" }}>
+          <CardContent
+            style={{ backgroundColor: COLORS.PRIMARY_HOVER, width: "100%" }}
+          >
             <div className={styles.codeContainer}>
               {data.split("\n").map((line, index) => (
                 <CodeLine
                   key={filePath + "_" + index}
                   line={line}
                   lineNumber={index + 1}
-                  withoutCoverage={index % 5 === 0}
+                  withoutCoverage={uncoveredLines.includes(index + 1)}
                 />
               ))}
             </div>

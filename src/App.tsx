@@ -7,10 +7,8 @@ import theme from "./utils/theme";
 import CoverageResults from "./pages/CoverageResults";
 import WelcomePage from "./pages/WelcomePage";
 import { HeaderProvider } from "./components/Header/HeaderContext";
-import {
-  UploadedKeysProvider,
-  useUploadedKeys,
-} from "./context/UploadedKeysContext";
+import { UploadedKeysProvider } from "./context/UploadedKeysContext";
+import { useUploadedKeys } from "./hooks/UseUploadedKeys";
 import ProjectSetupPage from "./pages/ProjectSetup";
 import NavDrawer from "./components/NavDrawer";
 import FileCoverage from "./pages/FileCoverage";
@@ -18,65 +16,68 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const App: React.FC = () => {
   const location = useLocation();
-  const { hasUploadedKeys, checkedKeys } = useUploadedKeys();
+  const { hasUploadedKeys } = useUploadedKeys();
 
   const showSidebar = ![PageNames.HOME, `/${PageNames.PROJECT_SETUP}`].includes(
     location.pathname
   );
 
+  if (hasUploadedKeys === null) {
+    return <div>Loading... Verifying keys</div>;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <UploadedKeysProvider>
-        <Box sx={{ display: "flex" }}>
-          {showSidebar && <NavDrawer projectName="Hardcoded Text" />}
-          <Routes>
-            <Route path={PageNames.HOME} Component={WelcomePage} />
-            <Route
-              path={PageNames.PROJECT_SETUP}
-              Component={() => (
-                <ProtectedRoute
-                  allowAccess={!hasUploadedKeys}
-                  redirectTo={PageNames.COVERAGE_RESULTS}
-                  Component={ProjectSetupPage}
-                />
-              )}
-            />
-            <Route
-              path={PageNames.FILE_COVERAGE}
-              Component={() => (
-                <ProtectedRoute
-                  allowAccess={hasUploadedKeys}
-                  redirectTo={PageNames.HOME}
-                  Component={FileCoverage}
-                />
-              )}
-            />
-            <Route
-              path={PageNames.COVERAGE_RESULTS}
-              Component={() => (
-                <ProtectedRoute
-                  allowAccess={hasUploadedKeys}
-                  redirectTo={PageNames.HOME}
-                  Component={CoverageResults}
-                />
-              )}
-            />
-            <Route path={PageNames.ERROR_404} Component={Error} />
-          </Routes>
-          ;
-        </Box>
-      </UploadedKeysProvider>
+      <Box sx={{ display: "flex" }}>
+        {showSidebar && <NavDrawer projectName="Hardcoded Text" />}
+        <Routes>
+          <Route path={PageNames.HOME} Component={WelcomePage} />
+          <Route
+            path={PageNames.PROJECT_SETUP}
+            Component={() => (
+              <ProtectedRoute
+                allowAccess={!hasUploadedKeys}
+                redirectTo={PageNames.COVERAGE_RESULTS}
+                Component={ProjectSetupPage}
+              />
+            )}
+          />
+          <Route
+            path={PageNames.FILE_COVERAGE}
+            Component={() => (
+              <ProtectedRoute
+                allowAccess={hasUploadedKeys}
+                redirectTo={PageNames.HOME}
+                Component={FileCoverage}
+              />
+            )}
+          />
+          <Route
+            path={PageNames.COVERAGE_RESULTS}
+            Component={() => (
+              <ProtectedRoute
+                allowAccess={hasUploadedKeys}
+                redirectTo={PageNames.HOME}
+                Component={CoverageResults}
+              />
+            )}
+          />
+          <Route path={PageNames.ERROR_404} Component={Error} />
+        </Routes>
+      </Box>
     </ThemeProvider>
   );
 };
 
 export const WrappedApp: React.FC = () => (
   <HeaderProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <UploadedKeysProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UploadedKeysProvider>
   </HeaderProvider>
 );
 
-export default App;
+export default WrappedApp;
