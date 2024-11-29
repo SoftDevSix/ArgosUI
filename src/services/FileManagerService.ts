@@ -15,7 +15,6 @@ const uploadDirectory = async (localDir: string) => {
     }
 
     const data = await response.json();
-    console.log(data);
     localStorage.setItem(UPLOADED_KEY, JSON.stringify(data));
     return data;
   } catch (error: unknown) {
