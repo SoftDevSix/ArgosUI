@@ -16,9 +16,8 @@ const CoverageResults: React.FC = () => {
 
   const [apiUrl, setApiUrl] = useState<string | null>(null);
   const { data, loading, error } = useFetch<string>(apiUrl);
-  const [coverageData, setCoverageData] = useState<ProjectCoverageInterface | null>(
-    null
-  );
+  const [coverageData, setCoverageData] =
+    useState<ProjectCoverageInterface | null>(null);
 
   useEffect(() => {
     if (uploadedKeys && uploadedKeys.length > 0) {

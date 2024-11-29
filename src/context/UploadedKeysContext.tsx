@@ -18,13 +18,13 @@ export const UploadedKeysProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const storedKeys = localStorage.getItem(UPLOADED_KEY);
     if (storedKeys) {
-      console.log(storedKeys)
+      console.log(storedKeys);
       setUploadedKeys(storedKeys);
     }
   }, []);
 
   useEffect(() => {
-    if(uploadedKeys.length > 0)
+    if (uploadedKeys.length > 0)
       localStorage.setItem(UPLOADED_KEY, uploadedKeys);
   }, [uploadedKeys]);
 
