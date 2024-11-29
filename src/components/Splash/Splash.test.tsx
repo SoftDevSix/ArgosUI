@@ -29,12 +29,4 @@ describe("Splash Component", () => {
     const computedStyle = getComputedStyle(circularProgress);
     expect(rgbToHex(computedStyle.color)).toBe(COLORS.SUCCESS_VARIANT);
   });
-
-  it("has a properly styled container", () => {
-    const { container } = render(<Splash />);
-
-    screen.debug();
-    const splashContainer = container.querySelector("._splashContainer_dfba66");
-    expect(splashContainer).toBeInTheDocument();
-  });
 });

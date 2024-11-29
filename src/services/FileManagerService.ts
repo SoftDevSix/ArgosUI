@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.FILE_MANAGER_API_BASE_URL;
+import { API_BASE_URL, UPLOADED_KEY } from "../utils/constants";
 
 const uploadDirectory = async (localDir: string) => {
   try {
@@ -15,7 +15,8 @@ const uploadDirectory = async (localDir: string) => {
     }
 
     const data = await response.json();
-    localStorage.setItem("uploadedKeys", JSON.stringify(data));
+    console.log(data);
+    localStorage.setItem(UPLOADED_KEY, JSON.stringify(data));
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) {

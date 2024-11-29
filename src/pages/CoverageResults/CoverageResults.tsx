@@ -9,7 +9,7 @@ import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 
 const CoverageResults: React.FC = () => {
   const { uploadedKeys } = useUploadedKeys();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setLoading(true);

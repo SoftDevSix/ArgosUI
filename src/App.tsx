@@ -10,6 +10,7 @@ import { HeaderProvider } from "./components/Header/HeaderContext";
 import { UploadedKeysProvider } from "./context/UploadedKeysContext";
 import ProjectSetupPage from "./pages/ProjectSetup";
 import NavDrawer from "./components/NavDrawer";
+import FileCoverage from "./pages/FileCoverage";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -30,6 +31,7 @@ const App: React.FC = () => {
               path={PageNames.PROJECT_SETUP}
               Component={ProjectSetupPage}
             />
+            <Route path={PageNames.FILE_COVERAGE} Component={FileCoverage} />
             <Route
               path={PageNames.COVERAGE_RESULTS}
               Component={CoverageResults}
