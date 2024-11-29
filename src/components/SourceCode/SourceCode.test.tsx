@@ -7,7 +7,7 @@ describe("SourceCode Component", () => {
   it("renders all lines with correct line numbers", () => {
     render(
       <UploadedKeysProvider>
-        <SourceCode filePath="" />
+        <SourceCode filePath="" uncoveredLines={[]} />
       </UploadedKeysProvider>
     );
   });
@@ -15,7 +15,7 @@ describe("SourceCode Component", () => {
   it("handles an empty lines array without crashing", () => {
     render(
       <UploadedKeysProvider>
-        <SourceCode filePath="" />
+        <SourceCode filePath="" uncoveredLines={[]} />
       </UploadedKeysProvider>
     );
     expect(screen.queryByText(/.+/)).not.toBeInTheDocument();

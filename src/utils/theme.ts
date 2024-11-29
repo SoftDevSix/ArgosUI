@@ -93,6 +93,7 @@ const theme = createTheme({
         root: {
           overflowX: "hidden",
           paddingTop: "64px",
+          paddingBottom: "64px",
         },
       },
     },

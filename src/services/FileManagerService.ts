@@ -1,8 +1,8 @@
-import { API_BASE_URL, UPLOADED_KEY } from "../utils/constants";
+import { FILE_MANAGER_API_BASE_URL, UPLOADED_KEY } from "../utils/constants";
 
 const uploadDirectory = async (localDir: string) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/upload`, {
+    const response = await fetch(`${FILE_MANAGER_API_BASE_URL}/api/upload`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
