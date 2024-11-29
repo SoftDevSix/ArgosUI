@@ -1,25 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUploadedKeys } from "../../context/UploadedKeysContext";
 import styles from "./WelcomePage.module.css";
 import { PageNames } from "../../utils/pageNames";
-import { useHeader } from "../../hooks/HeaderHooks";
+import Splash from "../../components/Splash";
 
 const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
-  const { setShowHeader } = useHeader();
-
-  useEffect(() => {
-    setShowHeader(false);
-    return () => setShowHeader(true);
-  }, [setShowHeader]);
+  const { hasUploadedKeys, checkedKeys } = useUploadedKeys();
+  const [loading, setLoading] = useState(false);
 
   const handleAnalyzeClick = () => {
-    navigate(PageNames.HOME);
+    setLoading(true);
+    setTimeout(() => {
+      if (hasUploadedKeys) {
+        navigate(PageNames.COVERAGE_RESULTS);
+      } else {
+        navigate(PageNames.PROJECT_SETUP);
+      }
+    }, 1000);
   };
+
+  if (loading || !checkedKeys) {
+    return <Splash splashMessage="Checking project data..." />;
+  }
+
   return (
     <div className={styles.container}>
       <img
-        src="src\assets\images\welcome-background.png"
+        src="src/assets/images/welcome-background.png"
         alt="Welcome background"
         style={{
           position: "absolute",
