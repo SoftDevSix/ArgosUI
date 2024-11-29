@@ -18,6 +18,8 @@ const useFetch = <T>(url: string | null): FetchState<T> => {
         setError(null);
         setLoading(true);
         const response = await fetch(url);
+        console.log(url)
+        console.log(response)
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }

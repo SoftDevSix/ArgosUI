@@ -1,3 +1,3 @@
-import FileCoverage from "./FileCoverage";
+import FileCoverageInterface from "./FileCoverage";
 
-export default FileCoverage;
+export default FileCoverageInterface;

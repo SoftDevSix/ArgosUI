@@ -4,22 +4,29 @@ import useFetch from "../../hooks/useFetch";
 import SourceCode from "../../components/SourceCode";
 import { splitUntilSecondSlash } from "../../utils/methods";
 import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
-import { FILE_MANAGER_API_BASE_URL, UPLOADED_KEY } from "../../utils/constants";
+import {
+  COVERAGE_API_BASE_URL,
+  FILE_MANAGER_API_BASE_URL,
+} from "../../utils/constants";
 import Splash from "../../components/Splash";
 import ErrorAdvice from "../../components/ErrorAdvice";
+import CoverageSummary from "../../components/CoverageSummary";
+import { FileCoverageInterface } from "../../types/interfaces";
 
 const FileCoverage: React.FC = () => {
-  const { uploadedKeys, setUploadedKeys } = useUploadedKeys();
+  const { uploadedKeys } = useUploadedKeys();
   const [selectedFilePath, setSelectedFilePath] = useState<string | null>(null);
   const [apiUrl, setApiUrl] = useState<string | null>(null);
-  const { data, loading, error } = useFetch<string>(apiUrl);
+  const [apiFileUrl, setApiFileUrl] = useState<string | null>(null);
+  const [filecoverageData, setFileCoverageData] =
+    useState<FileCoverageInterface | null>(null);
 
-  useEffect(() => {
-    const projectId = "e011bad2-0b57-4ed3-a278-29b255d25621";
-    localStorage.setItem(UPLOADED_KEY, projectId);
-    setUploadedKeys(projectId);
-    // This effect will be deleted when finishing the integration with the project uploader
-  }, [setUploadedKeys]);
+  const { data, loading, error } = useFetch<string>(apiUrl);
+  const {
+    data: dataFile,
+    loading: loadingFile,
+    error: errorFile,
+  } = useFetch<string>(apiFileUrl);
 
   useEffect(() => {
     if (uploadedKeys && uploadedKeys.length > 0) {
@@ -32,19 +39,45 @@ const FileCoverage: React.FC = () => {
   useEffect(() => {
     if (data) {
       const dataJson = JSON.parse(data);
-      setSelectedFilePath(splitUntilSecondSlash(dataJson[0]));
+      setSelectedFilePath(splitUntilSecondSlash(dataJson[2]));
     }
   }, [data]);
 
-  if (loading) return <Splash splashMessage="Getting file info..." />;
-  if (error) return <ErrorAdvice />;
+  useEffect(() => {
+    if (selectedFilePath) {
+      setApiFileUrl(
+        `${COVERAGE_API_BASE_URL}/coverage/file?path=${selectedFilePath}`
+      );
+    }
+  }, [selectedFilePath]);
+
+  useEffect(() => {
+    if (dataFile) {
+      const dataJson = JSON.parse(dataFile) as FileCoverageInterface;
+      setFileCoverageData(dataJson);
+    }
+  }, [dataFile]);
+
+  if (loading || loadingFile)
+    return <Splash splashMessage="Getting file info..." />;
+  if (error || errorFile) return <ErrorAdvice />;
 
   return (
     <Container component={"section"}>
-      {selectedFilePath ? (
+      {selectedFilePath && filecoverageData ? (
         <Box>
           <Typography variant="subtitle1">{selectedFilePath}</Typography>
-          <SourceCode filePath={selectedFilePath} />
+          <Box>
+            <CoverageSummary
+              fileCoverage={filecoverageData.coveragePercentage}
+              methodCoverage={filecoverageData.methodCoverage}
+              linesOfCode={filecoverageData.linesCode}
+            />
+          </Box>
+          <SourceCode
+            filePath={selectedFilePath}
+            uncoveredLines={filecoverageData?.uncoveredLines}
+          />
         </Box>
       ) : (
         <Typography

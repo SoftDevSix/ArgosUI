@@ -15,9 +15,13 @@ import { FILE_MANAGER_API_BASE_URL } from "../../utils/constants";
 
 type CodeViewerProps = {
   filePath: string;
+  uncoveredLines: number[];
 };
 
-const SourceCode: React.FC<CodeViewerProps> = ({ filePath }) => {
+const SourceCode: React.FC<CodeViewerProps> = ({
+  filePath,
+  uncoveredLines,
+}) => {
   const { uploadedKeys } = useUploadedKeys();
 
   const [apiUrl, setApiUrl] = useState<string | null>(null);
@@ -56,15 +60,17 @@ const SourceCode: React.FC<CodeViewerProps> = ({ filePath }) => {
       justifyContent={"center"}
     >
       {data ? (
-        <Card>
-          <CardContent style={{ backgroundColor: COLORS.PRIMARY_HOVER }}>
+        <Card style={{ width: "100%" }}>
+          <CardContent
+            style={{ backgroundColor: COLORS.PRIMARY_HOVER, width: "100%" }}
+          >
             <div className={styles.codeContainer}>
               {data.split("\n").map((line, index) => (
                 <CodeLine
                   key={filePath + "_" + index}
                   line={line}
                   lineNumber={index + 1}
-                  withoutCoverage={index % 5 === 0}
+                  withoutCoverage={uncoveredLines.includes(index + 1)}
                 />
               ))}
             </div>

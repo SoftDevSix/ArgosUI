@@ -10,7 +10,7 @@ import { HeaderProvider } from "./components/Header/HeaderContext";
 import { UploadedKeysProvider } from "./context/UploadedKeysContext";
 import ProjectSetupPage from "./pages/ProjectSetup";
 import NavDrawer from "./components/NavDrawer";
-import FileCoverage from "./pages/FileCoverage";
+import FileCoverage from "./pages/FileCoverage/FileCoverage";
 
 const App: React.FC = () => {
   const location = useLocation();

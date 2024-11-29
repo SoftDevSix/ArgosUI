@@ -11,7 +11,7 @@ export interface MenuOption {
   path: string;
 }
 
-export interface ProjectCoverage {
+export interface ProjectCoverageInterface {
   projectStatus: "PASSED" | "FAILED"; 
   coverage: {
     actualCoverage: number;
@@ -23,10 +23,11 @@ export interface ProjectCoverage {
   };
 }
 
-export interface FileCoverage {
+export interface FileCoverageInterface {
   fileName: string;
   pathFile: string;
   linesCode: number;
   methodCoverage: number;
   coveragePercentage: number;
+  uncoveredLines: number[];
 }

@@ -8,7 +8,7 @@ import CoveragePercentage from "../../components/CoverageResults/CoveragePercent
 import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import useFetch from "../../hooks/useFetch";
 import { COVERAGE_API_BASE_URL } from "../../utils/constants";
-import { ProjectCoverage } from "../../types/interfaces";
+import { ProjectCoverageInterface } from "../../types/interfaces";
 import ErrorAdvice from "../../components/ErrorAdvice";
 
 const CoverageResults: React.FC = () => {
@@ -16,19 +16,19 @@ const CoverageResults: React.FC = () => {
 
   const [apiUrl, setApiUrl] = useState<string | null>(null);
   const { data, loading, error } = useFetch<string>(apiUrl);
-  const [coverageData, setCoverageData] = useState<ProjectCoverage | null>(
+  const [coverageData, setCoverageData] = useState<ProjectCoverageInterface | null>(
     null
   );
 
   useEffect(() => {
     if (uploadedKeys && uploadedKeys.length > 0) {
-      setApiUrl(`${COVERAGE_API_BASE_URL}/coverage/${uploadedKeys}`);
+      setApiUrl(`${COVERAGE_API_BASE_URL}/coverage/project/${uploadedKeys}`);
     }
   }, [uploadedKeys]);
 
   useEffect(() => {
     if (data) {
-      const dataJson = JSON.parse(data) as ProjectCoverage;
+      const dataJson = JSON.parse(data) as ProjectCoverageInterface;
       setCoverageData(dataJson);
     }
   }, [data]);
