@@ -12,6 +12,7 @@ import Splash from "../../components/Splash";
 import ErrorAdvice from "../../components/ErrorAdvice";
 import CoverageSummary from "../../components/CoverageSummary";
 import { FileCoverageInterface } from "../../types/interfaces";
+import FileMenuSideBar from "../../components/FilesSideBar/FileMenuSideBar";
 
 const FileCoverage: React.FC = () => {
   const { uploadedKeys } = useUploadedKeys();
@@ -63,33 +64,36 @@ const FileCoverage: React.FC = () => {
   if (error || errorFile) return <ErrorAdvice />;
 
   return (
-    <Container component={"section"}>
-      {selectedFilePath && filecoverageData ? (
-        <Box>
-          <Typography variant="subtitle1">{selectedFilePath}</Typography>
+    <Box display={"flex"}>
+      <FileMenuSideBar proyectFiles={[]} basePath="" />
+      <Container component={"section"}>
+        {selectedFilePath && filecoverageData ? (
           <Box>
-            <CoverageSummary
-              fileCoverage={filecoverageData.coveragePercentage}
-              methodCoverage={filecoverageData.methodCoverage}
-              linesOfCode={filecoverageData.linesCode}
+            <Typography variant="subtitle1">{selectedFilePath}</Typography>
+            <Box>
+              <CoverageSummary
+                fileCoverage={filecoverageData.coveragePercentage}
+                methodCoverage={filecoverageData.methodCoverage}
+                linesOfCode={filecoverageData.linesCode}
+              />
+            </Box>
+            <SourceCode
+              filePath={selectedFilePath}
+              uncoveredLines={filecoverageData?.uncoveredLines}
             />
           </Box>
-          <SourceCode
-            filePath={selectedFilePath}
-            uncoveredLines={filecoverageData?.uncoveredLines}
-          />
-        </Box>
-      ) : (
-        <Typography
-          variant="subtitle1"
-          color="warning"
-          mt={4}
-          textAlign={"center"}
-        >
-          SELECT A FILE TO PREVIEW IT
-        </Typography>
-      )}
-    </Container>
+        ) : (
+          <Typography
+            variant="subtitle1"
+            color="warning"
+            mt={4}
+            textAlign={"center"}
+          >
+            SELECT A FILE TO PREVIEW IT
+          </Typography>
+        )}
+      </Container>
+    </Box>
   );
 };
 

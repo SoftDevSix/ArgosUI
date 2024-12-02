@@ -1,14 +1,22 @@
 import { Typography } from "@mui/material";
-import FileMenuOption from "./FileMenuOption/FileMenuOption";
+import DirectoryOption from "./FileMenuOption/DirectoryOption";
 import styles from "./FileMenuSideBar.module.css";
 import { useState } from "react";
+import organizeFiles, { FileNode } from "./FileNode";
+import FileOption from "./FileMenuOption/FileOption";
 
 interface FileMenuSideBarProps {
   proyectFiles: string[];
+  basePath: string;
 }
 
-const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({ proyectFiles }) => {
+const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
+  proyectFiles,
+  basePath,
+}) => {
   const [fileSelected, setFileSelected] = useState<string>(proyectFiles[0]);
+
+  const nodes: FileNode[] = organizeFiles(proyectFiles, basePath);
 
   return (
     <div className={styles.FileMenuSideBar}>
@@ -18,14 +26,21 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({ proyectFiles }) => {
         </Typography>
       </div>
       <div className={styles.FilesMenuOptions}>
-        {proyectFiles.map((e) => (
-          <FileMenuOption
-            key={e}
-            fileName={e}
-            isSelected={fileSelected === e}
-            setSelected={setFileSelected}
-          />
-        ))}
+        {nodes.map((e) =>
+          e.type === "directory" ? (
+            <DirectoryOption
+              node={e}
+              fileSelected={fileSelected}
+              setFileSelected={setFileSelected}
+            />
+          ) : (
+            <FileOption
+              isSelected={fileSelected === e.name}
+              node={e}
+              setSelected={() => setFileSelected(e.name)}
+            />
+          )
+        )}
       </div>
     </div>
   );
