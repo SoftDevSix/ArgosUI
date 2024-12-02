@@ -1,4 +1,4 @@
-import React, { ElementType, ReactNode } from "react";
+import React, { CSSProperties, ElementType, ReactNode } from "react";
 import { Button, CircularProgress } from "@mui/material";
 
 interface CustomButtonProps {
@@ -17,6 +17,9 @@ interface CustomButtonProps {
   component?: ElementType;
   name?: string;
   children: ReactNode;
+  size?: "small" | "large" | "medium";
+  style?: CSSProperties;
+  className?: string;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -28,9 +31,14 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   disabled = false,
   component = "button",
   name,
+  size = "medium",
+  style,
+  className = "",
 }) => {
   return (
     <Button
+      className={className}
+      style={style}
       variant={variant}
       color={color}
       onClick={onClick}
@@ -38,6 +46,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       component={component}
       name={name}
       aria-label={name}
+      size={size}
     >
       {loading && <CircularProgress />}
       {children}

@@ -49,9 +49,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
           minRows={field.minRows}
         />
       ))}
-      <ProjectUploader
-        setFormData={setFormData}
-      />
+      <ProjectUploader setFormData={setFormData} />
     </div>
   );
 };

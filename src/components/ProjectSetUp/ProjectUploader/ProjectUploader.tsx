@@ -49,7 +49,7 @@ const ProjectUploader: React.FC<ProjectUploaderProps> = ({ setFormData }) => {
         mt={4}
       >
         <Typography variant="body1" flex={1} ml={1}>
-          {folderPath ? `/${folderPath}` : "No folder selected"}
+          {folderPath ? `/${folderPath}` : "No zip file selected"}
         </Typography>
 
         <CustomButton component="label" color="info" disabled={!!folderPath}>
@@ -75,7 +75,7 @@ const ProjectUploader: React.FC<ProjectUploaderProps> = ({ setFormData }) => {
         )}
       </Box>
       <Typography textAlign={"right"} variant="caption" mt={1}>
-        Select the directory that contains your entire project
+        Select the zip that contains your entire project
       </Typography>
     </Box>
   );

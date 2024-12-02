@@ -21,7 +21,7 @@ const theme = createTheme({
       main: COLORS.LINK,
     },
     success: {
-      main: COLORS.SUCCESS,
+      main: COLORS.PASS_BUTTON,
     },
     error: {
       main: COLORS.ERROR,
