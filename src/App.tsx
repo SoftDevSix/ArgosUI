@@ -6,7 +6,6 @@ import Error from "./pages/Error";
 import theme from "./utils/theme";
 import CoverageResults from "./pages/CoverageResults";
 import WelcomePage from "./pages/WelcomePage";
-import { HeaderProvider } from "./components/Header/HeaderContext";
 import { UploadedKeysProvider } from "./context/UploadedKeysContext";
 import { useUploadedKeys } from "./hooks/UseUploadedKeys";
 import ProjectSetupPage from "./pages/ProjectSetup";
@@ -46,13 +45,11 @@ const App: React.FC = () => {
 };
 
 export const WrappedApp: React.FC = () => (
-  <HeaderProvider>
-    <UploadedKeysProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </UploadedKeysProvider>
-  </HeaderProvider>
+  <UploadedKeysProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </UploadedKeysProvider>
 );
 
 export default WrappedApp;
