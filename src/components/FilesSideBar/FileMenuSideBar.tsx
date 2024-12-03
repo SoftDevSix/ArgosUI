@@ -12,6 +12,7 @@ import DirectoryOption from "./FileMenuOption/DirectoryOption";
 import FileOption from "./FileMenuOption/FileOption";
 import styles from "./FileMenuSideBar.module.css";
 import organizeFiles, { FileNode } from "./FileNode";
+import { splitUntilSecondSlash } from "../../utils/methods";
 
 const DRAWER_WIDTH = 300;
 
@@ -36,7 +37,7 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
 
   function onFileSelected(value: string, path: string): void {
     setFileSelected(value);
-    setSelectedFilePath(path);
+    setSelectedFilePath(splitUntilSecondSlash(path));
   }
 
   const handleDrawerToggle = () => {
@@ -103,7 +104,7 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
             width: DRAWER_WIDTH,
             boxSizing: "border-box",
             position: isLargeScreen ? "relative" : "fixed",
-            backgroundColor: "transparent",
+            backgroundColor: "#1D212F",
             borderRight: "1px solid white",
           },
         }}
