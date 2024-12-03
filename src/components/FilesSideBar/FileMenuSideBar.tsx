@@ -18,7 +18,7 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
 }) => {
   const [fileSelected, setFileSelected] = useState<string>(projectFiles[0]);
 
-  const nodes: FileNode[] = organizeFiles(projectFiles, basePath);
+  const nodes: FileNode[] = organizeFiles(projectFiles.splice(1), basePath);
 
   function onFileSelected(value : string, path : string) : void {
     setFileSelected(value);
