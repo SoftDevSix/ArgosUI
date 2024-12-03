@@ -64,11 +64,11 @@ const FileCoverage: React.FC = () => {
   if (error || errorFile) return <ErrorAdvice />;
 
   return (
-    <Box display={"flex"}>
+    <Box display={"flex"} width={'100%'}>
       <FileMenuSideBar proyectFiles={[]} basePath="" />
       <Container component={"section"}>
         {selectedFilePath && filecoverageData ? (
-          <Box>
+          <Box flex={1}>
             <Typography variant="subtitle1">{selectedFilePath}</Typography>
             <Box>
               <CoverageSummary
