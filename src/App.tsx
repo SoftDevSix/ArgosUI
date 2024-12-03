@@ -14,7 +14,6 @@ import NavDrawer from "./components/NavDrawer";
 import FileCoverage from "./pages/FileCoverage";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Splash from "./components/Splash";
-import AppTestPage from "./pages/AppTestPage";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -34,7 +33,7 @@ const App: React.FC = () => {
       <Box sx={{ display: "flex" }}>
         {showSidebar && <NavDrawer projectName="Hardcoded Text" />}
         <Routes>
-          <Route path={PageNames.HOME} Component={AppTestPage} />
+          <Route path={PageNames.HOME} Component={WelcomePage} />
           <Route
             path={PageNames.PROJECT_SETUP}
             Component={() => (
