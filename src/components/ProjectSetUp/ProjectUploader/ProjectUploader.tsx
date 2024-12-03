@@ -1,42 +1,41 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { IconButton, Typography, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomButton from "../../Form/CustomButton";
 
 interface ProjectUploaderProps {
-  setProjectFiles: React.Dispatch<React.SetStateAction<FileList | null>>;
+  setFormData: React.Dispatch<React.SetStateAction<FormData | null>>;
 }
 
-const ProjectUploader: React.FC<ProjectUploaderProps> = ({
-  setProjectFiles,
-}) => {
+const ProjectUploader: React.FC<ProjectUploaderProps> = ({ setFormData }) => {
   const [folderPath, setFolderPath] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (fileInputRef.current) {
-      fileInputRef.current.setAttribute("webkitdirectory", "");
-    }
-  }, []);
 
   const handleFolderSelection = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const files = event.target.files;
     try {
-      if (files) {
-        setProjectFiles(files);
-        const folderName = files[0]?.webkitRelativePath.split("/")[0];
-        setFolderPath(folderName);
+      if (files && files.length > 0) {
+        const zipFile = files[0];
+        if (zipFile.type !== "application/zip") {
+          alert("Please upload a valid ZIP file.");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", zipFile);
+        setFormData(formData);
+
+        const zipFileName = zipFile.name;
+        setFolderPath(zipFileName);
       }
     } catch (e) {
-      alert("Could not read the project, please try again. " + e);
+      alert("Could not read the ZIP file, please try again. " + e);
     }
   };
 
   const handleDeleteProject = () => {
     setFolderPath(null);
-    setProjectFiles(null);
   };
 
   return (
@@ -50,16 +49,16 @@ const ProjectUploader: React.FC<ProjectUploaderProps> = ({
         mt={4}
       >
         <Typography variant="body1" flex={1} ml={1}>
-          {folderPath ? `/${folderPath}` : "No folder selected"}
+          {folderPath ? `/${folderPath}` : "No zip file selected"}
         </Typography>
 
         <CustomButton component="label" color="info" disabled={!!folderPath}>
           Upload the project
           <br />
           <input
-            ref={fileInputRef}
             type="file"
             hidden
+            accept=".zip"
             onChange={handleFolderSelection}
           />
         </CustomButton>
@@ -76,7 +75,7 @@ const ProjectUploader: React.FC<ProjectUploaderProps> = ({
         )}
       </Box>
       <Typography textAlign={"right"} variant="caption" mt={1}>
-        Select the directory that contains your entire project
+        Select the zip that contains your entire project
       </Typography>
     </Box>
   );

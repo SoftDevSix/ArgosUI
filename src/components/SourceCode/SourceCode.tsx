@@ -30,7 +30,7 @@ const SourceCode: React.FC<CodeViewerProps> = ({
   useEffect(() => {
     if (uploadedKeys && Object.values(uploadedKeys).length > 0) {
       setApiUrl(
-        `${FILE_MANAGER_API_BASE_URL}/api/file?projectId=${Object.values(uploadedKeys).join("")}&filePath=${filePath}`
+        `${FILE_MANAGER_API_BASE_URL}/fileManager/file?projectId=${Object.values(uploadedKeys).join("")}&filePath=${filePath}`
       );
     }
   }, [uploadedKeys, filePath]);

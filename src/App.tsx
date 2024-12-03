@@ -13,6 +13,7 @@ import ProjectSetupPage from "./pages/ProjectSetup";
 import NavDrawer from "./components/NavDrawer";
 import FileCoverage from "./pages/FileCoverage";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Splash from "./components/Splash";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const App: React.FC = () => {
   );
 
   if (hasUploadedKeys === null) {
-    return <div>Loading... Verifying keys</div>;
+    return <Splash />;
   }
 
   return (

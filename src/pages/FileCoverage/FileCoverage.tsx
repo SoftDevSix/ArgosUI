@@ -32,7 +32,7 @@ const FileCoverage: React.FC = () => {
   useEffect(() => {
     if (uploadedKeys && uploadedKeys.length > 0) {
       setApiUrl(
-        `${FILE_MANAGER_API_BASE_URL}/api/files?projectId=${uploadedKeys}`
+        `${FILE_MANAGER_API_BASE_URL}/fileManager/files?projectId=${uploadedKeys}`
       );
     }
   }, [uploadedKeys]);
@@ -40,7 +40,7 @@ const FileCoverage: React.FC = () => {
   useEffect(() => {
     if (data) {
       const dataJson = JSON.parse(data);
-      setSelectedFilePath(splitUntilSecondSlash(dataJson[2]));
+      setSelectedFilePath(splitUntilSecondSlash(dataJson[20]));
     }
   }, [data]);
 
