@@ -65,7 +65,7 @@ const FileCoverage: React.FC = () => {
 
   return (
     <Box display={"flex"} width={'100%'}>
-      <FileMenuSideBar proyectFiles={[]} basePath="" />
+      {data && <FileMenuSideBar projectFiles={JSON.parse(data)} basePath={'projects/' + uploadedKeys} setSelectedFilePath={setSelectedFilePath}/>}
       <Container component={"section"}>
         {selectedFilePath && filecoverageData ? (
           <Box flex={1}>

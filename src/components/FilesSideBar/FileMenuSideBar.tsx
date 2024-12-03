@@ -6,17 +6,24 @@ import organizeFiles, { FileNode } from "./FileNode";
 import FileOption from "./FileMenuOption/FileOption";
 
 interface FileMenuSideBarProps {
-  proyectFiles: string[];
+  projectFiles: string[];
   basePath: string;
+  setSelectedFilePath: (e:string) => void
 }
 
 const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
-  proyectFiles,
+  projectFiles: projectFiles,
   basePath,
+  setSelectedFilePath
 }) => {
-  const [fileSelected, setFileSelected] = useState<string>(proyectFiles[0]);
+  const [fileSelected, setFileSelected] = useState<string>(projectFiles[0]);
 
-  const nodes: FileNode[] = organizeFiles(proyectFiles, basePath);
+  const nodes: FileNode[] = organizeFiles(projectFiles, basePath);
+
+  function onFileSelected(value : string, path : string) : void {
+    setFileSelected(value);
+    setSelectedFilePath(path);
+  }
 
   return (
     <div className={styles.FileMenuSideBar}>
@@ -31,13 +38,13 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
             <DirectoryOption
               node={e}
               fileSelected={fileSelected}
-              setFileSelected={setFileSelected}
+              setFileSelected={onFileSelected}
             />
           ) : (
             <FileOption
               isSelected={fileSelected === e.name}
               node={e}
-              setSelected={() => setFileSelected(e.name)}
+              setSelected={() => onFileSelected(e.name, e.filePath)}
             />
           )
         )}

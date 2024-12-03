@@ -13,7 +13,7 @@ import FolderIcon from "@mui/icons-material/Folder";
 interface DirectoryOptionProps {
   node: FileNode;
   fileSelected: string;
-  setFileSelected: (data: string) => void;
+  setFileSelected: (data: string, path:string) => void;
 }
 
 const DirectoryOption: React.FC<DirectoryOptionProps> = ({
@@ -70,7 +70,7 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
                 key={e.name}
                 isSelected={fileSelected === e.name}
                 node={e}
-                setSelected={() => setFileSelected(e.name)}
+                setSelected={() => setFileSelected(e.name, e.filePath)}
               />
             )
           )}
