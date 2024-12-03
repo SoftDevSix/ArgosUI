@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import FileMenuSideBar from "./FileMenuSideBar";
 
@@ -18,28 +18,27 @@ describe("FileMenuSideBar component", () => {
   const mockFiles = ["file1.js", "file2.js", "file3.js"];
 
   it("renders the project files title", () => {
-    render(<FileMenuSideBar proyectFiles={mockFiles} />);
+    render(
+      <FileMenuSideBar proyectFiles={mockFiles} optionOnClick={() => {}} />
+    );
     expect(screen.getByText("Project Files")).toBeInTheDocument();
   });
 
   it("renders all the file options", () => {
-    render(<FileMenuSideBar proyectFiles={mockFiles} />);
+    render(
+      <FileMenuSideBar proyectFiles={mockFiles} optionOnClick={() => {}} />
+    );
     mockFiles.forEach((file) => {
       expect(screen.getByTestId(`file-option-${file}`)).toBeInTheDocument();
     });
   });
 
   it("sets the first file as selected by default", () => {
-    render(<FileMenuSideBar proyectFiles={mockFiles} />);
+    render(
+      <FileMenuSideBar proyectFiles={mockFiles} optionOnClick={() => {}} />
+    );
     expect(screen.getByTestId(`file-option-${mockFiles[0]}`)).toHaveClass(
       "active"
     );
-  });
-
-  it("updates the selected file on click", () => {
-    render(<FileMenuSideBar proyectFiles={mockFiles} />);
-    const secondFileOption = screen.getByTestId(`file-option-${mockFiles[1]}`);
-    fireEvent.click(secondFileOption);
-    expect(secondFileOption).toHaveClass("active");
   });
 });

@@ -12,6 +12,7 @@ import Splash from "../../components/Splash";
 import ErrorAdvice from "../../components/ErrorAdvice";
 import CoverageSummary from "../../components/CoverageSummary";
 import { FileCoverageInterface } from "../../types/interfaces";
+import FileMenuSideBar from "../../components/FilesSideBar/FileMenuSideBar";
 
 const FileCoverage: React.FC = () => {
   const { uploadedKeys } = useUploadedKeys();
@@ -31,7 +32,7 @@ const FileCoverage: React.FC = () => {
   useEffect(() => {
     if (uploadedKeys && uploadedKeys.length > 0) {
       setApiUrl(
-        `${FILE_MANAGER_API_BASE_URL}/api/files?projectId=${uploadedKeys}`
+        `${FILE_MANAGER_API_BASE_URL}/fileManager/files?projectId=${uploadedKeys}`
       );
     }
   }, [uploadedKeys]);
@@ -39,7 +40,7 @@ const FileCoverage: React.FC = () => {
   useEffect(() => {
     if (data) {
       const dataJson = JSON.parse(data);
-      setSelectedFilePath(splitUntilSecondSlash(dataJson[2]));
+      setSelectedFilePath(splitUntilSecondSlash(dataJson[20]));
     }
   }, [data]);
 
@@ -63,33 +64,44 @@ const FileCoverage: React.FC = () => {
   if (error || errorFile) return <ErrorAdvice />;
 
   return (
-    <Container component={"section"}>
-      {selectedFilePath && filecoverageData ? (
-        <Box>
-          <Typography variant="subtitle1">{selectedFilePath}</Typography>
-          <Box>
-            <CoverageSummary
-              fileCoverage={filecoverageData.coveragePercentage}
-              methodCoverage={filecoverageData.methodCoverage}
-              linesOfCode={filecoverageData.linesCode}
+    <Box display={"flex"} width={"100%"}>
+      <Container component={"section"}>
+        {selectedFilePath && filecoverageData ? (
+          <Box flex={1} width={"100%"}>
+            <Typography variant="subtitle1">{selectedFilePath}</Typography>
+            <Box>
+              <CoverageSummary
+                fileCoverage={filecoverageData.coveragePercentage}
+                methodCoverage={filecoverageData.methodCoverage}
+                linesOfCode={filecoverageData.linesCode}
+              />
+            </Box>
+            <SourceCode
+              filePath={selectedFilePath}
+              uncoveredLines={filecoverageData?.uncoveredLines}
             />
           </Box>
-          <SourceCode
-            filePath={selectedFilePath}
-            uncoveredLines={filecoverageData?.uncoveredLines}
+        ) : (
+          <Typography
+            variant="subtitle1"
+            color="warning"
+            mt={4}
+            textAlign={"center"}
+          >
+            SELECT A FILE TO PREVIEW IT
+          </Typography>
+        )}
+      </Container>
+
+      {data && (
+        <Box maxWidth={350} width={300} maxHeight={"100vh"}>
+          <FileMenuSideBar
+            proyectFiles={JSON.parse(data)}
+            optionOnClick={setSelectedFilePath}
           />
         </Box>
-      ) : (
-        <Typography
-          variant="subtitle1"
-          color="warning"
-          mt={4}
-          textAlign={"center"}
-        >
-          SELECT A FILE TO PREVIEW IT
-        </Typography>
       )}
-    </Container>
+    </Box>
   );
 };
 

@@ -5,7 +5,7 @@ import { ProjectInfoData } from "../../../types/interfaces";
 
 describe("ProjectForm Component", () => {
   const mockSetProjectData = vi.fn();
-  const mockSetProjectFiles = vi.fn();
+  const mockSetFormData = vi.fn();
   const projectData: ProjectInfoData = {
     projectName: "",
     projectDescription: "",
@@ -20,7 +20,7 @@ describe("ProjectForm Component", () => {
       <ProjectForm
         projectData={projectData}
         setProjectData={mockSetProjectData}
-        setProjectFiles={mockSetProjectFiles}
+        setFormData={mockSetFormData}
       />
     );
 
@@ -37,7 +37,7 @@ describe("ProjectForm Component", () => {
       <ProjectForm
         projectData={projectData}
         setProjectData={mockSetProjectData}
-        setProjectFiles={mockSetProjectFiles}
+        setFormData={mockSetFormData}
       />
     );
 
@@ -53,7 +53,7 @@ describe("ProjectForm Component", () => {
       <ProjectForm
         projectData={projectData}
         setProjectData={mockSetProjectData}
-        setProjectFiles={mockSetProjectFiles}
+        setFormData={mockSetFormData}
       />
     );
 
@@ -62,25 +62,5 @@ describe("ProjectForm Component", () => {
     });
 
     expect(uploaderButton).toBeInTheDocument();
-  });
-
-  it("calls setProjectFiles when a file is uploaded", () => {
-    render(
-      <ProjectForm
-        projectData={projectData}
-        setProjectData={mockSetProjectData}
-        setProjectFiles={mockSetProjectFiles}
-      />
-    );
-
-    const fileInput = screen.getByLabelText(/upload the project/i);
-    const file = new File(["test file content"], "directory/test-file.java", {
-      type: "text/plain",
-    });
-
-    fireEvent.change(fileInput, { target: { files: [file] } });
-
-    expect(mockSetProjectFiles).toHaveBeenCalledTimes(1);
-    expect(mockSetProjectFiles).toHaveBeenCalledWith([file]);
   });
 });

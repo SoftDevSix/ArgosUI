@@ -20,11 +20,9 @@ export const UploadedKeysProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const storedKeys = localStorage.getItem(UPLOADED_KEY);
     if (storedKeys && storedKeys !== "") {
-      console.log("Stored keys found:", storedKeys);
       setUploadedKeys(storedKeys);
       setHasUploadedKeys(true);
     } else {
-      console.log("No stored keys in localStorage.");
       setHasUploadedKeys(false);
     }
   }, []);

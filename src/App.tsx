@@ -11,6 +11,7 @@ import { useUploadedKeys } from "./hooks/UseUploadedKeys";
 import ProjectSetupPage from "./pages/ProjectSetup";
 import FileCoverage from "./pages/FileCoverage";
 import Header from "./components/Header";
+import Splash from "./components/Splash";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -21,7 +22,7 @@ const App: React.FC = () => {
   );
 
   if (hasUploadedKeys === null) {
-    return <div>Loading... Verifying keys</div>;
+    return <Splash />;
   }
 
   return (
