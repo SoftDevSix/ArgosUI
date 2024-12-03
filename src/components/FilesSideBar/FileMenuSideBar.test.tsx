@@ -203,6 +203,19 @@ describe("DirectoryOption", () => {
   });
 });
 
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual("@mui/material");
+  return {
+    ...actual,
+    useMediaQuery: vi.fn(() => true), 
+  };
+});
+
+vi.mock("@mui/material/Drawer", () => ({
+  default: vi.fn(({ children }) => <div>{children}</div>),
+}));
+
+
 describe("FileMenuSideBar", () => {
   it("renders the project files sidebar with a title", () => {
     const mockSetSelectedFilePath = vi.fn();
@@ -223,18 +236,14 @@ describe("FileMenuSideBar", () => {
     );
 
     expect(screen.getByText("Project Files")).toBeInTheDocument();
-
     expect(screen.getByText("Directory1")).toBeInTheDocument();
     expect(screen.getByText("File2.java")).toBeInTheDocument();
   });
 
-  it("calls setSelectedFilePath when a file is selected", () => {
+  it("calls setSelectedFilePath when a file is selected", async () => {
     const mockSetSelectedFilePath = vi.fn();
 
-    const projectFiles = [
-      "/base/path",
-      "/base/path/File1.java",
-    ];
+    const projectFiles = ["/base/path", "/base/path/File1.java"];
 
     render(
       <FileMenuSideBar
@@ -245,7 +254,8 @@ describe("FileMenuSideBar", () => {
     );
 
     const fileButton = screen.getByText("File1.java");
-    fireEvent.click(fileButton);
+    await userEvent.click(fileButton);
 
+  
   });
 });
