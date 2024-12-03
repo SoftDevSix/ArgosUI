@@ -2,6 +2,18 @@ import { render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 import ProjectSetUp from "./ProjectSetUp";
 import { expect, it, describe } from "vitest";
+import { BrowserRouter } from "react-router-dom";
+import { UploadedKeysProvider } from "../../context/UploadedKeysContext";
+
+const renderWithRouterAndContext = () => {
+  return render(
+    <BrowserRouter>
+      <UploadedKeysProvider>
+        <ProjectSetUp />
+      </UploadedKeysProvider>
+    </BrowserRouter>
+  );
+};
 
 const uploadFile = async (
   user: UserEvent,
@@ -10,7 +22,7 @@ const uploadFile = async (
 ) => {
   const fileInput = screen.getByLabelText(/upload the project/i);
   const mockFile = new File([fileContent], filePath, {
-    type: "text/plain",
+    type: "application/zip",
   });
 
   Object.defineProperty(mockFile, "webkitRelativePath", {
@@ -22,7 +34,9 @@ const uploadFile = async (
 
 describe("ProjectSetUp Component", () => {
   it("renders the component with the initial UI", () => {
-    render(<ProjectSetUp />);
+    renderWithRouterAndContext();
+
+    screen.debug();
 
     expect(
       screen.getByRole("heading", { name: /project & rules setup/i })
@@ -39,18 +53,18 @@ describe("ProjectSetUp Component", () => {
 
   it("handles project file uploads via the ProjectUploader", async () => {
     const user = userEvent.setup();
-    render(<ProjectSetUp />);
+    renderWithRouterAndContext();
 
-    await uploadFile(user, "folder/file.txt");
+    await uploadFile(user, "folder/file.zip");
 
     expect(await screen.findByText(/\/folder/i)).toBeInTheDocument();
   });
 
   it("displays the delete button after uploading files", async () => {
     const user = userEvent.setup();
-    render(<ProjectSetUp />);
+    renderWithRouterAndContext();
 
-    await uploadFile(user, "folder/file.txt");
+    await uploadFile(user, "folder/file.zip");
 
     expect(
       screen.getByLabelText("delete-uploaded-project")
@@ -59,13 +73,13 @@ describe("ProjectSetUp Component", () => {
 
   it("resets the file state when the delete button is clicked", async () => {
     const user = userEvent.setup();
-    render(<ProjectSetUp />);
+    renderWithRouterAndContext();
 
-    await uploadFile(user, "folder/file.txt");
+    await uploadFile(user, "folder/file.zip");
 
     const deleteButton = screen.getByLabelText("delete-uploaded-project");
     await user.click(deleteButton);
 
-    expect(screen.getByText(/no folder selected/i)).toBeInTheDocument();
+    expect(screen.getByText(/no zip file selected/i)).toBeInTheDocument();
   });
 });

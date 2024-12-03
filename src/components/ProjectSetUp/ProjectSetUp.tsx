@@ -1,22 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ProjectInfoData } from "../../types/interfaces";
 import Grid from "@mui/material/Grid2";
 import ProjectForm from "./ProjectForm";
 import { Typography } from "@mui/material";
 import ProjectRules from "./ProjectRules";
+import CustomButton from "../Form/CustomButton";
+import { useNavigate } from "react-router-dom";
+import { PageNames } from "../../utils/pageNames";
+import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
+import Splash from "../Splash";
+import { COLORS } from "../../utils/styleConstants";
+import uploadZipProject from "../../services/FileManagerService";
 
 const ProjectSetUp: React.FC = () => {
+  const navigate = useNavigate();
+  const { setUploadedKeys } = useUploadedKeys();
   const [projectData, setProjectData] = useState<ProjectInfoData>({
     projectName: "",
     projectDescription: "",
   });
 
-  const [projectFiles, setProjectFiles] = useState<FileList | null>(null);
+  const [formData, setFormData] = useState<FormData | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log(projectFiles);
-    // Delete this effect when sending the project files to the api
-  }, [projectFiles]);
+  const handleSubmit = async () => {
+    if (!formData) {
+      alert("No zip selected");
+      return;
+    }
+
+    setLoading(true);
+    const projectId = await uploadZipProject(formData, setUploadedKeys);
+    setLoading(false);
+
+    if (projectId) {
+      navigate(`/${PageNames.COVERAGE_RESULTS}`);
+    } else {
+      alert("Failed to upload project.");
+    }
+  };
+
+  if (loading) return <Splash splashMessage="Analyzing" />;
 
   return (
     <section>
@@ -28,11 +52,26 @@ const ProjectSetUp: React.FC = () => {
           <ProjectForm
             projectData={projectData}
             setProjectData={setProjectData}
-            setProjectFiles={setProjectFiles}
+            setFormData={setFormData}
           />
         </Grid>
         <Grid size={{ xs: 12, md: 12, lg: 6 }}>
           <ProjectRules />
+        </Grid>
+        <Grid size={{ xs: 12 }} display={"flex"} justifyContent={"flex-end"}>
+          <CustomButton
+            onClick={handleSubmit}
+            loading={loading}
+            style={{
+              backgroundColor: COLORS.PASS_BUTTON,
+              fontSize: "24px",
+              fontWeight: "bold",
+              color: COLORS.NEUTRAL_BLACK,
+              padding: "12px 40px",
+            }}
+          >
+            Continue
+          </CustomButton>
         </Grid>
       </Grid>
     </section>

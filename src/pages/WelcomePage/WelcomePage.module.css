@@ -21,7 +21,7 @@
 .title {
   position: relative;
   z-index: 2;
-  font-size: 3rem;
+  font-size: 100px;
   color: white;
   text-align: center;
   margin: 0;
@@ -30,23 +30,17 @@
 .subtitle {
   position: relative;
   z-index: 2;
-  font-size: 1.5rem;
+  font-size: 50px;
   color: white;
   text-align: center;
-  margin: 1rem 0;
 }
 
 .button {
+  margin-top: 40px !important;
   position: relative;
   z-index: 2;
-  font-size: 1rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 24px !important;
+  padding: 12px 40px !important;
 }
 
 .button:hover {

@@ -4,6 +4,8 @@ import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import styles from "./WelcomePage.module.css";
 import { PageNames } from "../../utils/pageNames";
 import Splash from "../../components/Splash";
+import CustomButton from "../../components/Form/CustomButton";
+import { COLORS } from "../../utils/styleConstants";
 
 const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -43,9 +45,16 @@ const WelcomePage: React.FC = () => {
       <div className={styles.overlay}></div>
       <h1 className={styles.title}>Argos</h1>
       <p className={styles.subtitle}>The code quality tool for better code</p>
-      <button className={styles.button} onClick={handleAnalyzeClick}>
+      <CustomButton
+        onClick={handleAnalyzeClick}
+        className={styles.button}
+        style={{
+          backgroundColor: COLORS.PASS_BUTTON,
+          color: COLORS.NEUTRAL_BLACK,
+        }}
+      >
         Analyze your project
-      </button>
+      </CustomButton>
     </div>
   );
 };
