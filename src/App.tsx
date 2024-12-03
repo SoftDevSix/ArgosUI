@@ -10,9 +10,7 @@ import { HeaderProvider } from "./components/Header/HeaderContext";
 import { UploadedKeysProvider } from "./context/UploadedKeysContext";
 import { useUploadedKeys } from "./hooks/UseUploadedKeys";
 import ProjectSetupPage from "./pages/ProjectSetup";
-import NavDrawer from "./components/NavDrawer";
 import FileCoverage from "./pages/FileCoverage";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Header from "./components/Header";
 
 const App: React.FC = () => {
@@ -30,39 +28,15 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box display={'flex'} flexDirection={'column'}>
-        {<Header />}
+      <Box display={"flex"} flexDirection={"column"}>
+        {showSidebar && <Header />}
         <Routes>
           <Route path={PageNames.HOME} Component={WelcomePage} />
-          <Route
-            path={PageNames.PROJECT_SETUP}
-            Component={() => (
-              <ProtectedRoute
-                allowAccess={!hasUploadedKeys}
-                redirectTo={PageNames.COVERAGE_RESULTS}
-                Component={ProjectSetupPage}
-              />
-            )}
-          />
-          <Route
-            path={PageNames.FILE_COVERAGE}
-            Component={() => (
-              <ProtectedRoute
-                allowAccess={hasUploadedKeys}
-                redirectTo={PageNames.HOME}
-                Component={FileCoverage}
-              />
-            )}
-          />
+          <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
+          <Route path={PageNames.FILE_COVERAGE} Component={FileCoverage} />
           <Route
             path={PageNames.COVERAGE_RESULTS}
-            Component={() => (
-              <ProtectedRoute
-                allowAccess={hasUploadedKeys}
-                redirectTo={PageNames.HOME}
-                Component={CoverageResults}
-              />
-            )}
+            Component={CoverageResults}
           />
           <Route path={PageNames.ERROR_404} Component={Error} />
         </Routes>
