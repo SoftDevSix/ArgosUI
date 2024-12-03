@@ -13,6 +13,7 @@ import ProjectSetupPage from "./pages/ProjectSetup";
 import NavDrawer from "./components/NavDrawer";
 import FileCoverage from "./pages/FileCoverage";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Header from "./components/Header";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -29,8 +30,8 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: "flex" }}>
-        {showSidebar && <NavDrawer projectName="Hardcoded Text" />}
+      <Box display={'flex'} flexDirection={'column'}>
+        {<Header />}
         <Routes>
           <Route path={PageNames.HOME} Component={WelcomePage} />
           <Route
