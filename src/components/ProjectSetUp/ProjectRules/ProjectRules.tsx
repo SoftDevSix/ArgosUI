@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import RulesTabs from "./RulesTabs";
 import { Rules, RulesTypes } from "../../../types/types";
-import { ruleDefaults, rulesTypes } from "../../../utils/rulesConstants";
 import GeneralRulesConfiguration from "./GeneralRulesConfiguration";
 
-const ProjectRules: React.FC = () => {
-  const [ruleTab, setRuleTab] = useState<RulesTypes | null>(null);
+interface ProjectRulesProps {
+  rulesConfig: Record<RulesTypes, Rules>;
+  setRulesConfig: React.Dispatch<
+    React.SetStateAction<Record<RulesTypes, Rules>>
+  >;
+}
 
-  const [rulesConfig, setRulesConfig] = useState<Record<RulesTypes, Rules>>(
-    () =>
-      rulesTypes.reduce(
-        (acc, type) => {
-          acc[type] = { ...ruleDefaults[type] };
-          return acc;
-        },
-        {} as Record<RulesTypes, Rules>
-      )
-  );
+const ProjectRules: React.FC<ProjectRulesProps> = ({
+  rulesConfig,
+  setRulesConfig,
+}) => {
+  const [ruleTab, setRuleTab] = useState<RulesTypes | null>(null);
 
   const handleGoBack = () => setRuleTab(null);
 
