@@ -1,6 +1,6 @@
 export type FileNode = {
   name: string;
-  filePath: string; 
+  filePath: string;
   type: "directory" | "file";
   children?: FileNode[];
 };
@@ -12,7 +12,7 @@ export default function organizeFiles(
   const root: FileNode[] = [];
 
   filePaths.forEach((fullPath) => {
-    const relativePath = fullPath.replace(basePath, ""); 
+    const relativePath = fullPath.replace(basePath, "");
     const parts = relativePath.split("/");
     let currentLevel = root;
 
@@ -27,7 +27,7 @@ export default function organizeFiles(
       } else {
         const newNode: FileNode = {
           name: part,
-          filePath: fullPath, 
+          filePath: fullPath,
           type: isFile ? "file" : "directory",
           ...(isFile ? {} : { children: [] }),
         };

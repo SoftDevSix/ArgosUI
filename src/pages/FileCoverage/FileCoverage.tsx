@@ -64,8 +64,14 @@ const FileCoverage: React.FC = () => {
   if (error || errorFile) return <ErrorAdvice />;
 
   return (
-    <Box display={"flex"} width={'100%'}>
-      {data && <FileMenuSideBar projectFiles={JSON.parse(data)} basePath={'projects/' + uploadedKeys} setSelectedFilePath={setSelectedFilePath}/>}
+    <Box display={"flex"} width={"100%"}>
+      {data && (
+        <FileMenuSideBar
+          projectFiles={JSON.parse(data)}
+          basePath={"projects/" + uploadedKeys}
+          setSelectedFilePath={setSelectedFilePath}
+        />
+      )}
       <Container component={"section"}>
         {selectedFilePath && filecoverageData ? (
           <Box flex={1}>

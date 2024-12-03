@@ -157,8 +157,6 @@ describe("DirectoryOption", () => {
 
     expect(screen.getByText("TestDirectory")).toBeInTheDocument();
 
-    
-
     const header = screen.getByRole("button", { name: /testdirectory/i });
     fireEvent.click(header);
 
@@ -207,14 +205,13 @@ vi.mock("@mui/material", async () => {
   const actual = await vi.importActual("@mui/material");
   return {
     ...actual,
-    useMediaQuery: vi.fn(() => true), 
+    useMediaQuery: vi.fn(() => true),
   };
 });
 
 vi.mock("@mui/material/Drawer", () => ({
   default: vi.fn(({ children }) => <div>{children}</div>),
 }));
-
 
 describe("FileMenuSideBar", () => {
   it("renders the project files sidebar with a title", () => {
@@ -255,7 +252,5 @@ describe("FileMenuSideBar", () => {
 
     const fileButton = screen.getByText("File1.java");
     await userEvent.click(fileButton);
-
-  
   });
 });

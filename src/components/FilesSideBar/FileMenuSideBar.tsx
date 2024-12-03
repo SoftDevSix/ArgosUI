@@ -86,7 +86,7 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
             ml: 1,
             mt: 2,
             position: "fixed",
-            zIndex: 1201, 
+            zIndex: 1201,
           }}
         >
           <MenuIcon />
@@ -96,7 +96,7 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
         variant={isLargeScreen ? "permanent" : "temporary"}
         open={isLargeScreen || mobileOpen}
         onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }} 
+        ModalProps={{ keepMounted: true }}
         sx={{
           width: DRAWER_WIDTH,
           flexShrink: 0,
