@@ -13,7 +13,7 @@ export const ruleDefaults: Record<RulesTypes, Rules> = {
     rejectIfLower: false,
     coverageThreshold: 80,
   },
-  "best analysis": {
+  "best practices": {
     noHardcodedValues: false,
   },
   "code smells": {
@@ -45,9 +45,8 @@ export const ruleDefaults: Record<RulesTypes, Rules> = {
 };
 
 export const rulesTypes: RulesTypes[] = [
-  "rules",
   "coverage",
-  "best analysis",
+  "best practices",
   "code smells",
   "code complexity",
   "code quality",

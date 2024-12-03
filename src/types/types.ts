@@ -11,7 +11,7 @@ import {
 export type RulesTypes =
   | "rules"
   | "coverage"
-  | "best analysis"
+  | "best practices"
   | "code smells"
   | "code complexity"
   | "coding standards"
