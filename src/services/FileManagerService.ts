@@ -1,31 +1,43 @@
-import { FILE_MANAGER_API_BASE_URL, UPLOADED_KEY } from "../utils/constants";
+import {
+  COVERAGE_API_BASE_URL,
+  FILE_MANAGER_API_BASE_URL,
+  UPLOADED_KEY,
+} from "../utils/constants";
 
-const uploadDirectory = async (localDir: string) => {
+const uploadZipProject = async (
+  formData: FormData,
+  setUploadedKeys: (key: string) => void
+): Promise<string | null> => {
   try {
-    const response = await fetch(`${FILE_MANAGER_API_BASE_URL}/api/upload`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ localDir }),
-    });
+    const uploadResponse = await fetch(
+      `${FILE_MANAGER_API_BASE_URL}/fileManager/uploadZip`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
-    if (!response.ok) {
-      throw new Error(`Server error: ${response.status}`);
+    if (!uploadResponse.ok) {
+      const error = await uploadResponse.text();
+      throw new Error(`File upload failed: ${error}`);
     }
 
-    const data = await response.json();
-    console.log(data);
-    localStorage.setItem(UPLOADED_KEY, JSON.stringify(data));
-    return data;
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      alert(`Error while uploading directory: ${error.message}`);
-    } else {
-      alert("An unknown error occurred while uploading the directory.");
-    }
+    const result = await uploadResponse.json();
+
+    await fetch(
+      `${COVERAGE_API_BASE_URL}/coverage/create-notification/projectCreationNotification?id=${result.projectId.toString()}`,
+      {
+        method: "POST",
+      }
+    );
+
+    localStorage.setItem(UPLOADED_KEY, result.projectId.toString());
+    setUploadedKeys(result.projectId.toString());
+
+    return result.projectId.toString();
+  } catch {
     return null;
   }
 };
 
-export default uploadDirectory;
+export default uploadZipProject;

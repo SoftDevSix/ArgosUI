@@ -3,7 +3,7 @@ import ProjectUploader from "./ProjectUploader";
 import { vi, expect, it, describe } from "vitest";
 
 describe("ProjectUploader Component", () => {
-  const mockSetProjectFiles = vi.fn();
+  const mockSetFormData = vi.fn();
 
   afterEach(() => {
     vi.clearAllMocks();
@@ -16,7 +16,7 @@ describe("ProjectUploader Component", () => {
   ) => {
     const input = screen.getByLabelText(/upload the project/i);
     const file = new File([fileContent], fileName, {
-      type: "text/plain",
+      type: "application/zip",
     });
 
     Object.defineProperty(file, "webkitRelativePath", {
@@ -28,9 +28,9 @@ describe("ProjectUploader Component", () => {
   };
 
   it("renders the component with initial state", () => {
-    render(<ProjectUploader setProjectFiles={mockSetProjectFiles} />);
+    render(<ProjectUploader setFormData={mockSetFormData} />);
 
-    expect(screen.getByText(/no folder selected/i)).toBeInTheDocument();
+    expect(screen.getByText(/no zip file selected/i)).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /upload the project/i })
     ).toBeInTheDocument();
@@ -39,29 +39,27 @@ describe("ProjectUploader Component", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("allows selecting a folder and updates the state", async () => {
-    render(<ProjectUploader setProjectFiles={mockSetProjectFiles} />);
+  it("allows selecting a zip and updates the state", async () => {
+    render(<ProjectUploader setFormData={mockSetFormData} />);
 
-    const file = uploadFile("file1.txt", "folder/file1.txt");
+    const file = uploadFile("file1.zip", "folder/file1.zip");
 
-    expect(await screen.findByText(/\/folder/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /delete/i })).toBeInTheDocument();
 
-    expect(mockSetProjectFiles).toHaveBeenCalledTimes(1);
-    expect(mockSetProjectFiles).toHaveBeenCalledWith([file]);
+    expect(mockSetFormData).toHaveBeenCalledTimes(1);
+    const formData = new FormData();
+    formData.append("file", file);
+    expect(mockSetFormData).toHaveBeenCalledWith(formData);
   });
 
   it("handles deleting the selected folder", async () => {
-    render(<ProjectUploader setProjectFiles={mockSetProjectFiles} />);
+    render(<ProjectUploader setFormData={mockSetFormData} />);
 
-    uploadFile("file1.txt", "folder/file1.txt");
-
-    expect(await screen.findByText(/\/folder/i)).toBeInTheDocument();
+    uploadFile("file1.zip", "folder/file1.zip");
 
     const deleteButton = screen.getByRole("button", { name: /delete/i });
     fireEvent.click(deleteButton);
 
-    expect(screen.getByText(/no folder selected/i)).toBeInTheDocument();
-    expect(mockSetProjectFiles).toHaveBeenCalledWith(null);
+    expect(screen.getByText(/no zip file selected/i)).toBeInTheDocument();
   });
 });

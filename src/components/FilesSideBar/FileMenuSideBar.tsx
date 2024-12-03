@@ -2,12 +2,17 @@ import { Typography } from "@mui/material";
 import FileMenuOption from "./FileMenuOption/FileMenuOption";
 import styles from "./FileMenuSideBar.module.css";
 import { useState } from "react";
+import { splitUntilSecondSlash } from "../../utils/methods";
 
 interface FileMenuSideBarProps {
   proyectFiles: string[];
+  optionOnClick: (val: string) => void;
 }
 
-const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({ proyectFiles }) => {
+const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
+  proyectFiles,
+  optionOnClick,
+}) => {
   const [fileSelected, setFileSelected] = useState<string>(proyectFiles[0]);
 
   return (
@@ -21,9 +26,12 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({ proyectFiles }) => {
         {proyectFiles.map((e) => (
           <FileMenuOption
             key={e}
-            fileName={e}
-            isSelected={fileSelected === e}
-            setSelected={setFileSelected}
+            fileName={splitUntilSecondSlash(e)}
+            isSelected={fileSelected === splitUntilSecondSlash(e)}
+            setSelected={(val) => {
+              optionOnClick(val);
+              setFileSelected(val);
+            }}
           />
         ))}
       </div>
