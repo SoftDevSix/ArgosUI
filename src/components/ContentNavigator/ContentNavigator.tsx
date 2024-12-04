@@ -20,7 +20,10 @@ const ContentNavigator: React.FC<ContentNavigatorProps> = ({ sections }) => {
   return (
     <Box display="flex" height="100vh">
       <MainContent sections={sections} contentRefs={contentRefs} />
-      <Sidebar sections={sections.map(({ id, title }) => ({ id, title }))} onScrollToSection={scrollToSection} />
+      <Sidebar
+        sections={sections.map(({ id, title }) => ({ id, title }))}
+        onScrollToSection={scrollToSection}
+      />
     </Box>
   );
 };

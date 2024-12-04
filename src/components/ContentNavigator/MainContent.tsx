@@ -13,7 +13,9 @@ const MainContent: React.FC<MainContentProps> = ({ sections, contentRefs }) => {
         <Box
           key={section.id}
           id={section.id}
-          ref={(el: HTMLDivElement | null) => (contentRefs.current[section.id] = el)}
+          ref={(el: HTMLDivElement | null) =>
+            (contentRefs.current[section.id] = el)
+          }
           mb={4}
         >
           <Typography variant="h4" gutterBottom>

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import theme from "./utils/theme";
 import Header from "./components/Header";
+import OverviewPage from "./pages/Overview/Overview";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path={PageNames.HOME} Component={Home} />
             <Route path={PageNames.ERROR_404} Component={Error} />
+            <Route path="/overview" element={<OverviewPage />} />
           </Routes>
         </Container>
       </BrowserRouter>

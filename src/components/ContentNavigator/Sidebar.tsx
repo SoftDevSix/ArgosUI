@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 
 interface SidebarProps {
   sections: { id: string; title: string }[];
