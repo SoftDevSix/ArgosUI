@@ -38,7 +38,7 @@ const FileCoverage: React.FC = () => {
         `${FILE_MANAGER_API_BASE_URL}/fileManager/files?projectId=${uploadedKeys}`
       );
     } else if (!hasUploadedKeys) navigate(`/${PageNames.PROJECT_SETUP}`);
-  }, [uploadedKeys, hasUploadedKeys]);
+  }, [uploadedKeys, hasUploadedKeys, navigate]);
 
   useEffect(() => {
     if (data) {

@@ -12,7 +12,7 @@ export default defineConfig({
       provider: "v8", 
       reporter: ["text", "json", "html", "lcov"],
       include: ["src/**/*.ts", "src/**/*.tsx"],
-      exclude: ["src/**/index.ts", "src/types/**", "src/main.tsx", "src/vite-env.d.ts", "src/utils/theme.ts", "src/utils/pageNames.ts", "src/utils/rulesConstants.ts", "src/utils/styleConstants.ts", "src/App.tsx"], 
+      exclude: ["src/**/index.ts", "src/types/**", "src/main.tsx", "src/vite-env.d.ts", "src/utils/theme.ts", "src/utils/pageNames.ts", "src/utils/rulesConstants.ts", "src/utils/styleConstants.ts", "src/utils/drawerMenuOptions.ts", "src/App.tsx"], 
     },
   }
 });
