@@ -31,10 +31,12 @@ const uploadZipProject = async (
       }
     );
 
-    localStorage.setItem(UPLOADED_KEY, result.projectId.toString());
-    setUploadedKeys(result.projectId.toString());
+    const projectIdStr = result.projectId.toString();
 
-    return result.projectId.toString();
+    localStorage.setItem(UPLOADED_KEY, projectIdStr);
+    setUploadedKeys(projectIdStr);
+
+    return projectIdStr;
   } catch {
     return null;
   }

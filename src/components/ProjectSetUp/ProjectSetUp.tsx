@@ -55,7 +55,7 @@ const ProjectSetUp: React.FC = () => {
 
     setLoading(true);
     const projectId = await uploadZipProject(formData, setUploadedKeys);
-    let dataUploaded = false;
+    let dataUploaded = true;
     if (projectId) {
       dataUploaded = await uploadProjectDataRules(
         projectData,

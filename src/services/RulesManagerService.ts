@@ -9,7 +9,7 @@ const uploadProjectDataRules = async (
 ): Promise<boolean> => {
   try {
     const response = await fetch(
-      `${COVERAGE_API_BASE_URL}/project/${projectId}`,
+      `${COVERAGE_API_BASE_URL}/rules/${projectId}`,
       {
         method: "POST",
         headers: {

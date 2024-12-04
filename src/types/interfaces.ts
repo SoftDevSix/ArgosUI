@@ -13,13 +13,13 @@ export interface MenuOption {
 
 export interface ProjectCoverageInterface {
   projectStatus: "PASSED" | "FAILED";
-  coverage: {
-    actualCoverage: number;
+  coverageResult: {
+    totalCoverage: number;
     requiredCoverage: number;
   };
-  rating: {
+  codeAnalysisResult: {
     actualRating: CodeRatingType;
-    requiredCodeRating: CodeRatingType;
+    expectedRating: CodeRatingType;
   };
 }
 

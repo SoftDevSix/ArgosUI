@@ -40,14 +40,14 @@ const FileCoverage: React.FC = () => {
   useEffect(() => {
     if (data) {
       const dataJson = JSON.parse(data);
-      setSelectedFilePath(splitUntilSecondSlash(dataJson[20]));
+      setSelectedFilePath(splitUntilSecondSlash(dataJson[5]));
     }
   }, [data]);
 
   useEffect(() => {
     if (selectedFilePath) {
       setApiFileUrl(
-        `${COVERAGE_API_BASE_URL}/coverage/project/${uploadedKeys}/file?path=${selectedFilePath}`
+        `${COVERAGE_API_BASE_URL}/coverage/project/${uploadedKeys}/?filePath=/${selectedFilePath}`
       );
     }
   }, [selectedFilePath, uploadedKeys]);
@@ -59,38 +59,47 @@ const FileCoverage: React.FC = () => {
     }
   }, [dataFile]);
 
+  if (error) return <ErrorAdvice />;
   if (loading || loadingFile)
     return <Splash splashMessage="Getting file info..." />;
-  if (error || errorFile) return <ErrorAdvice />;
 
   return (
     <Box display={"flex"} width={"100%"}>
       <Container component={"section"}>
-        {selectedFilePath && fileCoverageData ? (
-          <Box flex={1} width={"100%"}>
-            <Typography variant="subtitle1">{selectedFilePath}</Typography>
-            <Box>
-              <CoverageSummary
-                fileCoverage={fileCoverageData.coveragePercentage}
-                methodCoverage={fileCoverageData.methodCoverage}
-                linesOfCode={fileCoverageData.linesCode}
-              />
-            </Box>
-            <SourceCode
-              filePath={selectedFilePath}
-              uncoveredLines={fileCoverageData?.uncoveredLines}
-            />
-          </Box>
-        ) : (
-          <Typography
-            variant="subtitle1"
-            color="warning"
-            mt={4}
-            textAlign={"center"}
-          >
-            SELECT A FILE TO PREVIEW IT
-          </Typography>
-        )}
+        <Box flex={1} width={"100%"}>
+          <Typography variant="subtitle1">{selectedFilePath}</Typography>
+          {errorFile ? (
+            <Typography
+              variant="subtitle1"
+              color="warning"
+              mt={4}
+              textAlign={"center"}
+            >
+              Could not get coverage of this file. Select another one.
+            </Typography>
+          ) : (
+            selectedFilePath &&
+            fileCoverageData && (
+              <>
+                <Box>
+                  <CoverageSummary
+                    fileCoverage={parseFloat(
+                      fileCoverageData.coveragePercentage.toFixed(2)
+                    )}
+                    methodCoverage={parseFloat(
+                      fileCoverageData.methodCoverage.toFixed(2)
+                    )}
+                    linesOfCode={fileCoverageData.linesCode}
+                  />
+                </Box>
+                <SourceCode
+                  filePath={selectedFilePath}
+                  uncoveredLines={fileCoverageData?.uncoveredLines}
+                />
+              </>
+            )
+          )}
+        </Box>
       </Container>
 
       {data && (
