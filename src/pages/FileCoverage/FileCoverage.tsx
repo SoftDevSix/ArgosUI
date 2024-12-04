@@ -12,9 +12,9 @@ import Splash from "../../components/Splash";
 import ErrorAdvice from "../../components/ErrorAdvice";
 import CoverageSummary from "../../components/CoverageSummary";
 import { FileCoverageInterface } from "../../types/interfaces";
-import FileMenuSideBar from "../../components/FilesSideBar/FileMenuSideBar";
 import { useNavigate } from "react-router-dom";
 import { PageNames } from "../../utils/pageNames";
+import FileMenuSideBar from "../../components/FilesSideBar";
 
 const FileCoverage: React.FC = () => {
   const navigate = useNavigate();
@@ -37,8 +37,8 @@ const FileCoverage: React.FC = () => {
       setApiUrl(
         `${FILE_MANAGER_API_BASE_URL}/fileManager/files?projectId=${uploadedKeys}`
       );
-    } else if(!hasUploadedKeys) navigate(`/${PageNames.PROJECT_SETUP}`)
-  }, [hasUploadedKeys]);
+    } else if (!hasUploadedKeys) navigate(`/${PageNames.PROJECT_SETUP}`);
+  }, [uploadedKeys, hasUploadedKeys]);
 
   useEffect(() => {
     if (data) {
@@ -47,7 +47,7 @@ const FileCoverage: React.FC = () => {
     }
   }, [data]);
 
-  console.log(apiUrl)
+  console.log(apiUrl);
 
   useEffect(() => {
     if (selectedFilePath) {

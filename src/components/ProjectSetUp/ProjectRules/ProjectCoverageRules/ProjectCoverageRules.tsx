@@ -47,6 +47,7 @@ const ProjectCoverageRules: React.FC<ProjectCoverageRulesConfig> = ({
           variant="outlined"
           size="small"
           type="number"
+          aria-label="threshold-input"
           disabled={!rulesConfig.rules.projectCoverageEnabled}
           value={rulesConfig.rules.projectCoverageThreshold}
           onChange={(e) => handleThresholdChange(parseInt(e.target.value, 10))}

@@ -43,7 +43,6 @@ describe("organizeFiles", () => {
 
     const result = organizeFiles(filePaths, basePath);
 
-    // Expected structure
     const expected: FileNode[] = [
       {
         name: "dir1",
@@ -252,5 +251,58 @@ describe("FileMenuSideBar", () => {
 
     const fileButton = screen.getByText("File1.java");
     await userEvent.click(fileButton);
+  });
+});
+
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual("@mui/material");
+  return {
+    ...actual,
+    useMediaQuery: vi.fn(),
+  };
+});
+
+describe("FileMenuSideBar - Responsive Behavior", () => {
+  it("shows the toggle button on small screens", () => {
+    render(
+      <FileMenuSideBar
+        projectFiles={["/base/path", "/base/path/File1.java"]}
+        basePath="/base/path"
+        setSelectedFilePath={vi.fn()}
+      />
+    );
+
+    expect(
+      screen.getByRole("button", { name: /open drawer/i })
+    ).toBeInTheDocument();
+  });
+
+  it("opens and closes the drawer on small screens when the toggle button is clicked", async () => {
+    render(
+      <FileMenuSideBar
+        projectFiles={["/base/path", "/base/path/File1.java"]}
+        basePath="/base/path"
+        setSelectedFilePath={vi.fn()}
+      />
+    );
+
+    const toggleButton = screen.getByRole("button", { name: /open drawer/i });
+
+    fireEvent.click(toggleButton);
+    expect(screen.getByText("Project Files")).toBeInTheDocument();
+
+    fireEvent.click(toggleButton);
+  });
+
+  it("always shows the drawer on large screens", () => {
+    render(
+      <FileMenuSideBar
+        projectFiles={["/base/path", "/base/path/File1.java"]}
+        basePath="/base/path"
+        setSelectedFilePath={vi.fn()}
+      />
+    );
+
+    expect(screen.getByText("Project Files")).toBeInTheDocument();
   });
 });

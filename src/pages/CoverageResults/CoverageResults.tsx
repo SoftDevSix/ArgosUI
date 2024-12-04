@@ -25,8 +25,8 @@ const CoverageResults: React.FC = () => {
   useEffect(() => {
     if (uploadedKeys && uploadedKeys.length > 0) {
       setApiUrl(`${COVERAGE_API_BASE_URL}/coverage/project/${uploadedKeys}`);
-    } else if(!hasUploadedKeys)  navigate(`/${PageNames.PROJECT_SETUP}`)
-  }, [uploadedKeys]);
+    } else if (!hasUploadedKeys) navigate(`/${PageNames.PROJECT_SETUP}`);
+  }, [uploadedKeys, hasUploadedKeys]);
 
   useEffect(() => {
     if (data) {
