@@ -6,6 +6,7 @@ vi.mock("./FileMenuOption/FileMenuOption", () => ({
   default: vi.fn(({ fileName, isSelected, setSelected }) => (
     <div
       data-testid={`file-option-${fileName}`}
+      role="button"
       className={isSelected ? "active" : "inactive"}
       onClick={() => setSelected(fileName)}
     >

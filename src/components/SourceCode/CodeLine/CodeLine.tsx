@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import hljs from "highlight.js/lib/core";
 import java from "highlight.js/lib/languages/java";
 import "highlight.js/styles/atom-one-dark.css";
 import styles from "./CodeLine.module.css";
-import { Typography } from "@mui/material";
+import { Alert, Button, IconButton, Typography } from "@mui/material";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
 hljs.registerLanguage("java", java);
 
@@ -19,6 +20,7 @@ const CodeLine: React.FC<CodeLineProps> = ({
   lineNumber,
 }) => {
   const lineRef = useRef<HTMLDivElement>(null);
+  const [showProblem, setShowProblem] = useState(false);
 
   useEffect(() => {
     if (lineRef.current) {
@@ -27,20 +29,49 @@ const CodeLine: React.FC<CodeLineProps> = ({
   }, [line]);
 
   return (
-    <div
-      className={`${styles.lineWrapper} ${withoutCoverage ? styles.withoutCoverage : ""}`}
-    >
-      <span className={styles.lineNumber}>{lineNumber}</span>
-      <div ref={lineRef} className={styles.code}>
-        <Typography
-          fontSize={10}
-          component="pre"
-          style={{ background: "none" }}
+    <>
+      {withoutCoverage && showProblem && (
+        <Alert
+          variant="filled"
+          severity="warning"
+          style={{ fontSize: 16 }}
+          onClick={() => setShowProblem(false)}
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => setShowProblem(false)}
+            >
+              HIDE
+            </Button>
+          }
         >
-          {line}
-        </Typography>
+          {`(Line ${lineNumber}): This line is not covered by tests.`}
+        </Alert>
+      )}
+      <div
+        className={`${styles.lineWrapper} ${withoutCoverage ? styles.withoutCoverage : ""}`}
+        onClick={() => setShowProblem(!showProblem)}
+      >
+        {withoutCoverage ? (
+          <IconButton onClick={() => setShowProblem(!showProblem)}>
+            <ReportProblemIcon fontSize="small" />
+          </IconButton>
+        ) : (
+          <div style={{ marginRight: 36 }} />
+        )}
+        <span className={styles.lineNumber}>{lineNumber}</span>
+        <div ref={lineRef} className={styles.code}>
+          <Typography
+            fontSize={10}
+            component="pre"
+            style={{ background: "none" }}
+          >
+            {line}
+          </Typography>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

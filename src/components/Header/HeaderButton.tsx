@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { ReactNode } from "react";
+import { COLORS } from "../../utils/styleConstants";
 
 interface HeaderButtonProps {
   text: string;
@@ -17,7 +18,6 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
   isSmallScreen,
 }) => {
   const bgColor: string = isSelected ? "#2A2F40" : "transparent";
-  const textColor: string = isSelected ? "white" : "white";
 
   return (
     <Button onClick={onClick} sx={{ padding: 0, minWidth: "40px" }}>
@@ -33,7 +33,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
       >
         {icon}
         {!isSmallScreen && (
-          <Typography color={textColor} fontSize="14px">
+          <Typography color={COLORS.NEUTRAL_WHITE} fontSize="14px">
             {text}
           </Typography>
         )}

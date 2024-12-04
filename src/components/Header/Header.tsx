@@ -64,6 +64,7 @@ const Header: React.FC = () => {
         <Box display="flex" gap="5px" alignItems="center">
           {headerOptions.map((e) => (
             <HeaderButton
+              key={e.path}
               text={e.title}
               icon={e.icon}
               isSelected={optionSelected === e.path}

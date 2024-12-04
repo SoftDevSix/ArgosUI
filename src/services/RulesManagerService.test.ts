@@ -3,7 +3,7 @@ import uploadProjectDataRules from "./RulesManagerService";
 import { RulesConfig } from "../types/rulesInterfaces";
 
 vi.mock("../utils/constants", () => ({
-  COVERAGE_API_BASE_URL: "http://coverage-api",
+  COVERAGE_API_BASE_URL: "https://coverage-api",
 }));
 
 describe("uploadProjectDataRules", () => {
@@ -36,7 +36,7 @@ describe("uploadProjectDataRules", () => {
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(
-      "http://coverage-api/project/12345",
+      "https://coverage-api/project/12345",
       expect.objectContaining({
         method: "POST",
         headers: { "Content-Type": "application/json" },

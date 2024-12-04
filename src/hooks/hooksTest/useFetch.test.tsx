@@ -13,13 +13,13 @@ describe("useFetch hook", () => {
       })
     );
 
-    const { result } = renderHook(() => useFetch<string>("http://example.com"));
+    const { result } = renderHook(() =>
+      useFetch<string>("https://example.com")
+    );
 
-    await act(async () => {
-      await result.current;
-    });
+    await act(async () => result.current);
 
-    expect(fetch).toHaveBeenCalledWith("http://example.com");
+    expect(fetch).toHaveBeenCalledWith("https://example.com");
     expect(result.current).toEqual({
       data: mockData,
       loading: false,

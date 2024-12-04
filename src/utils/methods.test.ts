@@ -1,6 +1,5 @@
-import { describe, it } from "vitest";
+import { describe, it, expect } from "vitest";
 import { splitUntilSecondSlash } from "./methods";
-import { expect } from "vitest";
 
 describe("splitUntilSecondSlash Utility Function", () => {
   it("should return the same string if there are fewer than two slashes", () => {
