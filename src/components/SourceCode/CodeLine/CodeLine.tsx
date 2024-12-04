@@ -50,8 +50,10 @@ const CodeLine: React.FC<CodeLineProps> = ({
         </Alert>
       )}
       <div
+        role="button"
         className={`${styles.lineWrapper} ${withoutCoverage ? styles.withoutCoverage : ""}`}
         onClick={() => setShowProblem(!showProblem)}
+        onKeyDown={() => setShowProblem(!showProblem)}
       >
         {withoutCoverage ? (
           <IconButton onClick={() => setShowProblem(!showProblem)}>
