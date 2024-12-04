@@ -10,9 +10,12 @@ import useFetch from "../../hooks/useFetch";
 import { COVERAGE_API_BASE_URL } from "../../utils/constants";
 import { ProjectCoverageInterface } from "../../types/interfaces";
 import ErrorAdvice from "../../components/ErrorAdvice";
+import { useNavigate } from "react-router-dom";
+import { PageNames } from "../../utils/pageNames";
 
 const CoverageResults: React.FC = () => {
-  const { uploadedKeys } = useUploadedKeys();
+  const navigate = useNavigate();
+  const { uploadedKeys, hasUploadedKeys } = useUploadedKeys();
 
   const [apiUrl, setApiUrl] = useState<string | null>(null);
   const { data, loading, error } = useFetch<string>(apiUrl);
@@ -22,7 +25,7 @@ const CoverageResults: React.FC = () => {
   useEffect(() => {
     if (uploadedKeys && uploadedKeys.length > 0) {
       setApiUrl(`${COVERAGE_API_BASE_URL}/coverage/project/${uploadedKeys}`);
-    }
+    } else if(!hasUploadedKeys)  navigate(`/${PageNames.PROJECT_SETUP}`)
   }, [uploadedKeys]);
 
   useEffect(() => {

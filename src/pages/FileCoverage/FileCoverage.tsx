@@ -13,9 +13,12 @@ import ErrorAdvice from "../../components/ErrorAdvice";
 import CoverageSummary from "../../components/CoverageSummary";
 import { FileCoverageInterface } from "../../types/interfaces";
 import FileMenuSideBar from "../../components/FilesSideBar/FileMenuSideBar";
+import { useNavigate } from "react-router-dom";
+import { PageNames } from "../../utils/pageNames";
 
 const FileCoverage: React.FC = () => {
-  const { uploadedKeys } = useUploadedKeys();
+  const navigate = useNavigate();
+  const { uploadedKeys, hasUploadedKeys } = useUploadedKeys();
   const [selectedFilePath, setSelectedFilePath] = useState<string | null>(null);
   const [apiUrl, setApiUrl] = useState<string | null>(null);
   const [apiFileUrl, setApiFileUrl] = useState<string | null>(null);
@@ -34,8 +37,8 @@ const FileCoverage: React.FC = () => {
       setApiUrl(
         `${FILE_MANAGER_API_BASE_URL}/fileManager/files?projectId=${uploadedKeys}`
       );
-    }
-  }, [uploadedKeys]);
+    } else if(!hasUploadedKeys) navigate(`/${PageNames.PROJECT_SETUP}`)
+  }, [hasUploadedKeys]);
 
   useEffect(() => {
     if (data) {
@@ -43,6 +46,8 @@ const FileCoverage: React.FC = () => {
       setSelectedFilePath(splitUntilSecondSlash(dataJson[20]));
     }
   }, [data]);
+
+  console.log(apiUrl)
 
   useEffect(() => {
     if (selectedFilePath) {
@@ -59,8 +64,7 @@ const FileCoverage: React.FC = () => {
     }
   }, [dataFile]);
 
-  if (loading || loadingFile)
-    return <Splash splashMessage="Getting file info..." />;
+  if (loading) return <Splash splashMessage="Getting files info..." />;
   if (error || errorFile) return <ErrorAdvice />;
 
   return (
@@ -72,33 +76,37 @@ const FileCoverage: React.FC = () => {
           setSelectedFilePath={setSelectedFilePath}
         />
       )}
-      <Container component={"section"}>
-        {selectedFilePath && filecoverageData ? (
-          <Box flex={1}>
-            <Typography variant="subtitle1">{selectedFilePath}</Typography>
-            <Box>
-              <CoverageSummary
-                fileCoverage={filecoverageData.coveragePercentage}
-                methodCoverage={filecoverageData.methodCoverage}
-                linesOfCode={filecoverageData.linesCode}
+      {loadingFile ? (
+        <Splash splashMessage="Getting file info..." />
+      ) : (
+        <Container component={"section"}>
+          {selectedFilePath && filecoverageData ? (
+            <Box flex={1}>
+              <Typography variant="subtitle1">{selectedFilePath}</Typography>
+              <Box>
+                <CoverageSummary
+                  fileCoverage={filecoverageData.coveragePercentage}
+                  methodCoverage={filecoverageData.methodCoverage}
+                  linesOfCode={filecoverageData.linesCode}
+                />
+              </Box>
+              <SourceCode
+                filePath={selectedFilePath}
+                uncoveredLines={filecoverageData?.uncoveredLines}
               />
             </Box>
-            <SourceCode
-              filePath={selectedFilePath}
-              uncoveredLines={filecoverageData?.uncoveredLines}
-            />
-          </Box>
-        ) : (
-          <Typography
-            variant="subtitle1"
-            color="warning"
-            mt={4}
-            textAlign={"center"}
-          >
-            SELECT A FILE TO PREVIEW IT
-          </Typography>
-        )}
-      </Container>
+          ) : (
+            <Typography
+              variant="subtitle1"
+              color="warning"
+              mt={4}
+              textAlign={"center"}
+            >
+              SELECT A FILE TO PREVIEW IT
+            </Typography>
+          )}
+        </Container>
+      )}
     </Box>
   );
 };

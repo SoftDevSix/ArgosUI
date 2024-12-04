@@ -15,7 +15,7 @@ export const UploadedKeysProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [uploadedKeys, setUploadedKeys] = useState<string>("");
-  const [hasUploadedKeys, setHasUploadedKeys] = useState<boolean>(false);
+  const [hasUploadedKeys, setHasUploadedKeys] = useState<boolean>(true);
 
   useEffect(() => {
     const storedKeys = localStorage.getItem(UPLOADED_KEY);
