@@ -8,6 +8,7 @@ import theme from "./utils/theme";
 import Header from "./components/Header";
 import OverviewPage from "./pages/Overview/Overview";
 import SetupAgentInMaven from "./pages/setupMaven/SetupAgentInMaven";
+import SetupAgentGradle from "./pages/SetUpGradle/SetUpAgentGradle";
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
             <Route path={PageNames.ERROR_404} Component={Error} />
             <Route path="/overview" element={<OverviewPage />} />
             <Route path="/maven" element={<SetupAgentInMaven />} />
+            <Route path="/gradle" element={<SetupAgentGradle />} />
           </Routes>
         </Container>
       </BrowserRouter>
