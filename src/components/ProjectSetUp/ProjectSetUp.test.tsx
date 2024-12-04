@@ -13,7 +13,7 @@ vi.mock("react-router-dom", async () => {
   const actual = await vi.importActual("react-router-dom");
   return {
     ...actual,
-    useNavigate: vi.fn(),
+    useNavigate: vi.fn(() => vi.fn()),
   };
 });
 
@@ -40,14 +40,6 @@ vi.mock("../Splash", () => {
   return {
     __esModule: true,
     default: vi.fn(MockSplash),
-  };
-});
-
-vi.mock("react-router-dom", async () => {
-  const actual = await vi.importActual("react-router-dom");
-  return {
-    ...actual,
-    useNavigate: vi.fn(),
   };
 });
 
@@ -136,5 +128,42 @@ describe("ProjectSetUp Component", () => {
 
       alertMock.mockRestore();
     });
+  });
+
+  it("should not proceed if validation fails (no zip file)", async () => {
+    const user = userEvent.setup();
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+
+    renderWithRouterAndContext();
+
+    const continueButton = screen.getByRole("button", { name: /continue/i });
+    await user.click(continueButton);
+
+    expect(alertMock).toHaveBeenCalledWith("No zip selected.");
+    expect(FileManagerService.default).not.toHaveBeenCalled();
+
+    alertMock.mockRestore();
+  });
+
+  it("should not proceed if validation fails (no project name)", async () => {
+    const user = userEvent.setup();
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+
+    renderWithRouterAndContext();
+
+    // Upload zip without project name
+    const fileInput = screen.getByLabelText(/upload the project/i);
+    const mockFile = new File(["dummy content"], "test.zip", {
+      type: "application/zip",
+    });
+    await user.upload(fileInput, mockFile);
+
+    const continueButton = screen.getByRole("button", { name: /continue/i });
+    await user.click(continueButton);
+
+    expect(alertMock).toHaveBeenCalledWith("Set a project name.");
+    expect(FileManagerService.default).not.toHaveBeenCalled();
+
+    alertMock.mockRestore();
   });
 });
