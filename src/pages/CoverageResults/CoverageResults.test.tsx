@@ -10,7 +10,17 @@ vi.mock("../../hooks/UseUploadedKeys", () => ({
 vi.mock("../../hooks/useFetch", () => ({
   __esModule: true,
   default: vi.fn().mockReturnValue({
-    data: '{"projectStatus":"PASSED","rating":{"actualRating":4,"requiredCodeRating":3},"coverage":{"actualCoverage":80,"requiredCoverage":90}}',
+    data: JSON.stringify({
+      projectStatus: "PASSED",
+      codeAnalysisResult: {
+        actualRating: 4,
+        expectedRating: 3
+      },
+      coverageResult: {
+        totalCoverage: 80,
+        requiredCoverage: 90
+      }
+    }),
     loading: false,
     error: null,
   }),
@@ -20,16 +30,12 @@ describe("CoverageResults component", () => {
   it("should render without crashing", () => {
     render(
       <BrowserRouter>
-        {" "}
-        {}
         <CoverageResults />
       </BrowserRouter>
     );
 
     expect(screen.getByText("Coverage Results")).toBeInTheDocument();
-
     expect(screen.getByText("PASSED")).toBeInTheDocument();
-
     expect(screen.getByText("4")).toBeInTheDocument();
     expect(screen.getByText("80.00% - Coverage")).toBeInTheDocument();
   });
