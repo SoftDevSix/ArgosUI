@@ -22,7 +22,7 @@ const Header: React.FC = () => {
   console.log(location);
 
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const headerOptions: HeaderOption[] = [
     {
@@ -47,6 +47,7 @@ const Header: React.FC = () => {
       justifyContent="space-between"
       padding="30px"
       zIndex={1000}
+      position={"fixed"}
     >
       <Box
         display="flex"
