@@ -11,6 +11,9 @@ import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import Splash from "../Splash";
 import { COLORS } from "../../utils/styleConstants";
 import uploadZipProject from "../../services/FileManagerService";
+import uploadProjectDataRules from "../../services/RulesManagerService";
+import { Rules, RulesTypes } from "../../types/types";
+import { ruleDefaults, rulesTypes } from "../../utils/rulesConstants";
 
 const ProjectSetUp: React.FC = () => {
   const navigate = useNavigate();
@@ -19,28 +22,57 @@ const ProjectSetUp: React.FC = () => {
     projectName: "",
     projectDescription: "",
   });
+  const [rulesConfig, setRulesConfig] = useState<Record<RulesTypes, Rules>>(
+    () =>
+      rulesTypes.reduce(
+        (acc, type) => {
+          acc[type] = { ...ruleDefaults[type] };
+          return acc;
+        },
+        {} as Record<RulesTypes, Rules>
+      )
+  );
 
   const [formData, setFormData] = useState<FormData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = async () => {
+  const validateForm = () => {
     if (!formData) {
-      alert("No zip selected");
-      return;
+      alert("No zip selected.");
+      return false;
     }
+
+    if (!projectData.projectName) {
+      alert("Set a project name.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm() || !formData) return;
 
     setLoading(true);
     const projectId = await uploadZipProject(formData, setUploadedKeys);
+    let dataUploaded = false;
+    if (projectId) {
+      dataUploaded = await uploadProjectDataRules(
+        projectData,
+        rulesConfig.rules,
+        projectId
+      );
+    }
     setLoading(false);
 
-    if (projectId) {
+    if (projectId && dataUploaded) {
       navigate(`/${PageNames.COVERAGE_RESULTS}`);
     } else {
-      alert("Failed to upload project.");
+      alert("Failed to upload project. Please, try again");
     }
   };
 
-  if (loading) return <Splash splashMessage="Analyzing" />;
+  if (loading) return <Splash splashMessage="Analyzing..." />;
 
   return (
     <section>
@@ -56,7 +88,10 @@ const ProjectSetUp: React.FC = () => {
           />
         </Grid>
         <Grid size={{ xs: 12, md: 12, lg: 6 }}>
-          <ProjectRules />
+          <ProjectRules
+            rulesConfig={rulesConfig}
+            setRulesConfig={setRulesConfig}
+          />
         </Grid>
         <Grid size={{ xs: 12 }} display={"flex"} justifyContent={"flex-end"}>
           <CustomButton
