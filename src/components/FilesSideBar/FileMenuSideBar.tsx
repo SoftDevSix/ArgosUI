@@ -6,7 +6,6 @@ import {
   Fab,
   useMediaQuery,
   Theme,
-  Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import DirectoryOption from "./FileMenuOption/DirectoryOption";
