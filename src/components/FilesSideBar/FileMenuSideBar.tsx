@@ -3,9 +3,10 @@ import {
   Typography,
   CssBaseline,
   Drawer,
-  IconButton,
+  Fab,
   useMediaQuery,
   Theme,
+  Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import DirectoryOption from "./FileMenuOption/DirectoryOption";
@@ -29,8 +30,10 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
 }) => {
   const [fileSelected, setFileSelected] = useState<string>(projectFiles[0]);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const isLargeScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.up("md")
+
+  // Cambia el breakpoint a "sm" para incluir tablets
+  const isLargeScreen = useMediaQuery(
+    (theme: Theme) => theme.breakpoints.up("lg") // Usamos `lg` para que tablets entren en el flujo móvil
   );
 
   const nodes: FileNode[] = organizeFiles(projectFiles.slice(1), basePath);
@@ -77,20 +80,19 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
     <>
       <CssBaseline />
       {!isLargeScreen && (
-        <IconButton
-          color="inherit"
+        <Fab
+          color="primary"
           aria-label="open drawer"
-          edge="start"
           onClick={handleDrawerToggle}
           sx={{
-            ml: 1,
-            mt: 2,
             position: "fixed",
-            zIndex: 1201,
+            bottom: 16,
+            right: 16,
+            zIndex: 1300,
           }}
         >
           <MenuIcon />
-        </IconButton>
+        </Fab>
       )}
       <Drawer
         variant={isLargeScreen ? "permanent" : "temporary"}
