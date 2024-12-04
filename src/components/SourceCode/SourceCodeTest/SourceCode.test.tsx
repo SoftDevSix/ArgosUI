@@ -68,4 +68,26 @@ describe("SourceCode Component", () => {
     expect(await screen.findByText(/line1/i)).toBeInTheDocument();
     expect(await screen.findByText(/line3/i)).toBeInTheDocument();
   });
+
+  it("renders loading state with CircularProgress", async () => {
+    mockUseFetch.mockImplementation(() => ({
+      data: null,
+      loading: true,
+      error: null,
+    }));
+
+    render(
+      <MockUploadedKeysProvider
+        value={{
+          uploadedKeys: "12345",
+          hasUploadedKeys: true,
+          setUploadedKeys: vi.fn(),
+        }}
+      >
+        <SourceCode filePath="test/path" uncoveredLines={[]} />
+      </MockUploadedKeysProvider>
+    );
+
+    expect(await screen.findByRole("progressbar")).toBeInTheDocument();
+  });
 });
