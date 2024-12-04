@@ -54,6 +54,8 @@ const CodeLine: React.FC<CodeLineProps> = ({
         className={`${styles.lineWrapper} ${withoutCoverage ? styles.withoutCoverage : ""}`}
         onClick={() => setShowProblem(!showProblem)}
         onKeyDown={() => setShowProblem(!showProblem)}
+        tabIndex={lineNumber}
+        aria-pressed={showProblem}
       >
         {withoutCoverage ? (
           <IconButton onClick={() => setShowProblem(!showProblem)}>

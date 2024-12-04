@@ -24,6 +24,8 @@ const FileMenuOption: React.FC<FileMenuOptionProps> = ({
           setSelected(fileName);
         }
       }}
+      tabIndex={0}
+      aria-pressed={isSelected}
     >
       <div className={style.fileMenuOption}>
         <CodeIcon fontSize="small" />

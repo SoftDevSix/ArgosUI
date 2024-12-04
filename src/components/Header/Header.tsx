@@ -19,8 +19,6 @@ const Header: React.FC = () => {
     location.pathname.slice(1)
   );
 
-  console.log(location);
-
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
