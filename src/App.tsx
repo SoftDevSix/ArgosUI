@@ -6,13 +6,11 @@ import Error from "./pages/Error";
 import theme from "./utils/theme";
 import CoverageResults from "./pages/CoverageResults";
 import WelcomePage from "./pages/WelcomePage";
-import { HeaderProvider } from "./components/Header/HeaderContext";
 import { UploadedKeysProvider } from "./context/UploadedKeysContext";
 import { useUploadedKeys } from "./hooks/UseUploadedKeys";
 import ProjectSetupPage from "./pages/ProjectSetup";
-import NavDrawer from "./components/NavDrawer";
 import FileCoverage from "./pages/FileCoverage";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Header from "./components/Header";
 import Splash from "./components/Splash";
 
 const App: React.FC = () => {
@@ -30,39 +28,15 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: "flex" }}>
-        {showSidebar && <NavDrawer projectName="Hardcoded Text" />}
+      <Box display={"flex"} flexDirection={"column"}>
+        {showSidebar && <Header />}
         <Routes>
           <Route path={PageNames.HOME} Component={WelcomePage} />
-          <Route
-            path={PageNames.PROJECT_SETUP}
-            Component={() => (
-              <ProtectedRoute
-                allowAccess={!hasUploadedKeys}
-                redirectTo={PageNames.COVERAGE_RESULTS}
-                Component={ProjectSetupPage}
-              />
-            )}
-          />
-          <Route
-            path={PageNames.FILE_COVERAGE}
-            Component={() => (
-              <ProtectedRoute
-                allowAccess={hasUploadedKeys}
-                redirectTo={PageNames.HOME}
-                Component={FileCoverage}
-              />
-            )}
-          />
+          <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
+          <Route path={PageNames.FILE_COVERAGE} Component={FileCoverage} />
           <Route
             path={PageNames.COVERAGE_RESULTS}
-            Component={() => (
-              <ProtectedRoute
-                allowAccess={hasUploadedKeys}
-                redirectTo={PageNames.HOME}
-                Component={CoverageResults}
-              />
-            )}
+            Component={CoverageResults}
           />
           <Route path={PageNames.ERROR_404} Component={Error} />
         </Routes>
@@ -72,13 +46,11 @@ const App: React.FC = () => {
 };
 
 export const WrappedApp: React.FC = () => (
-  <HeaderProvider>
-    <UploadedKeysProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </UploadedKeysProvider>
-  </HeaderProvider>
+  <UploadedKeysProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </UploadedKeysProvider>
 );
 
 export default WrappedApp;
