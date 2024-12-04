@@ -36,7 +36,7 @@ describe("uploadProjectDataRules", () => {
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(
-      "https://coverage-api/project/12345",
+      "https://coverage-api/rules/12345",
       expect.objectContaining({
         method: "POST",
         headers: { "Content-Type": "application/json" },
