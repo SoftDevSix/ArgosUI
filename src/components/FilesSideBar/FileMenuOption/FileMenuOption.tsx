@@ -19,8 +19,8 @@ const FileMenuOption: React.FC<FileMenuOptionProps> = ({
       className={isSelected ? style.activeBg : style.inactiveBg}
       onClick={() => !isSelected && setSelected(fileName)}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          !isSelected && setSelected(fileName);
+        if ((e.key === "Enter" || e.key === " ") && !isSelected) {
+          setSelected(fileName);
         }
       }}
     >
