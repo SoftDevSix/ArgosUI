@@ -7,6 +7,7 @@ import Error from "./pages/Error";
 import theme from "./utils/theme";
 import Header from "./components/Header";
 import OverviewPage from "./pages/Overview/Overview";
+import SetupAgentInMaven from "./pages/setupMaven/SetupAgentInMaven";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
             <Route path={PageNames.HOME} Component={Home} />
             <Route path={PageNames.ERROR_404} Component={Error} />
             <Route path="/overview" element={<OverviewPage />} />
+            <Route path="/maven" element={<SetupAgentInMaven />} />
           </Routes>
         </Container>
       </BrowserRouter>

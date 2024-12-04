@@ -18,7 +18,7 @@ const MainContent: React.FC<MainContentProps> = ({ sections, contentRefs }) => {
           }
           mb={4}
         >
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h2" gutterBottom>
             {section.title}
           </Typography>
           <Box>{section.content}</Box>

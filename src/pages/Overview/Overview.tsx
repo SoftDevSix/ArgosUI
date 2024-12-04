@@ -15,7 +15,7 @@ const OverviewPage: React.FC = () => {
           </p>
           <img
             src="src/pages/Overview/resources/Overview 1.png"
-            alt="Maven setup example"
+            alt="Over View"
             style={{
               maxWidth: "100%",
               marginTop: "16px",
