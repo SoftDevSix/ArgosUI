@@ -78,3 +78,8 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--secondary-hover);
 }
+
+button {
+  all: unset;
+  display: inline-block;
+}
