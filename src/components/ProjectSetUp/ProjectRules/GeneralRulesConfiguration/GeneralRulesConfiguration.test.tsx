@@ -43,59 +43,29 @@ describe("GeneralRulesConfiguration Component", () => {
     expect(screen.getByText(/Code Rating/i)).toBeInTheDocument();
   });
 
-  describe("handleSwitchChange Function", () => {
-    it("should update the specific rule field when handleSwitchChange is called", () => {
-      const initialMockRulesConfig: Record<RulesTypes, Rules> =
-        rulesTypes.reduce(
-          (acc, type) => {
-            acc[type] = { ...ruleDefaults[type] };
-            return acc;
-          },
-          {} as Record<RulesTypes, Rules>
-        );
+  it("should update the specific rule field when handleSwitchChange is called", () => {
+    const initialMockRulesConfig: Record<RulesTypes, Rules> = rulesTypes.reduce(
+      (acc, type) => {
+        acc[type] = { ...ruleDefaults[type] };
+        return acc;
+      },
+      {} as Record<RulesTypes, Rules>
+    );
 
-      const TestWrapper = () => {
-        const [rulesConfig, setRulesConfig] = React.useState(
-          initialMockRulesConfig
-        );
+    const TestWrapper = () => {
+      const [rulesConfig, setRulesConfig] = React.useState(
+        initialMockRulesConfig
+      );
 
-        return (
-          <GeneralRulesConfiguration
-            rulesConfig={rulesConfig}
-            setRulesConfig={setRulesConfig}
-            handleGoBack={() => {}}
-          />
-        );
-      };
+      return (
+        <GeneralRulesConfiguration
+          rulesConfig={rulesConfig}
+          setRulesConfig={setRulesConfig}
+          handleGoBack={() => {}}
+        />
+      );
+    };
 
-      render(<TestWrapper />);
-    });
-
-    it("should update different rule fields independently", () => {
-      const initialMockRulesConfig: Record<RulesTypes, Rules> =
-        rulesTypes.reduce(
-          (acc, type) => {
-            acc[type] = { ...ruleDefaults[type] };
-            return acc;
-          },
-          {} as Record<RulesTypes, Rules>
-        );
-
-      const TestWrapper = () => {
-        const [rulesConfig, setRulesConfig] = React.useState(
-          initialMockRulesConfig
-        );
-
-        return (
-          <GeneralRulesConfiguration
-            rulesConfig={rulesConfig}
-            setRulesConfig={setRulesConfig}
-            handleGoBack={() => {}}
-          />
-        );
-      };
-
-      render(<TestWrapper />);
-    });
+    render(<TestWrapper />);
   });
 });
