@@ -16,9 +16,13 @@ const FileMenuOption: React.FC<FileMenuOptionProps> = ({
 }) => {
   return (
     <div
-      role="button"
       className={isSelected ? style.activeBg : style.inactiveBg}
       onClick={() => !isSelected && setSelected(fileName)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          !isSelected && setSelected(fileName);
+        }
+      }}
     >
       <div className={style.fileMenuOption}>
         <CodeIcon fontSize="small" />
