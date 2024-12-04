@@ -13,6 +13,7 @@ import FileOption from "./FileMenuOption/FileOption";
 import styles from "./FileMenuSideBar.module.css";
 import organizeFiles, { FileNode } from "./FileNode";
 import { splitUntilSecondSlash } from "../../utils/methods";
+import FileMenuOption from "./FileMenuOption";
 
 const DRAWER_WIDTH = 300;
 

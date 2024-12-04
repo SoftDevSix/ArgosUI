@@ -19,8 +19,6 @@ const Header: React.FC = () => {
     location.pathname.slice(1)
   );
 
-  console.log(location);
-
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -64,6 +62,7 @@ const Header: React.FC = () => {
         <Box display="flex" gap="5px" alignItems="center">
           {headerOptions.map((e) => (
             <HeaderButton
+              key={e.path}
               text={e.title}
               icon={e.icon}
               isSelected={optionSelected === e.path}

@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import hljs from "highlight.js/lib/core";
 import java from "highlight.js/lib/languages/java";
 import "highlight.js/styles/atom-one-dark.css";
 import styles from "./CodeLine.module.css";
-import { Typography } from "@mui/material";
+import { Alert, Button, IconButton, Tooltip, Typography } from "@mui/material";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
 hljs.registerLanguage("java", java);
 
@@ -19,6 +20,7 @@ const CodeLine: React.FC<CodeLineProps> = ({
   lineNumber,
 }) => {
   const lineRef = useRef<HTMLDivElement>(null);
+  const [showProblem, setShowProblem] = useState(false);
 
   useEffect(() => {
     if (lineRef.current) {
@@ -26,21 +28,63 @@ const CodeLine: React.FC<CodeLineProps> = ({
     }
   }, [line]);
 
+  const problemMessage = useMemo(
+    () => `(Line ${lineNumber}): This line is not covered by tests.`,
+    [lineNumber]
+  );
+
   return (
-    <div
-      className={`${styles.lineWrapper} ${withoutCoverage ? styles.withoutCoverage : ""}`}
-    >
-      <span className={styles.lineNumber}>{lineNumber}</span>
-      <div ref={lineRef} className={styles.code}>
-        <Typography
-          fontSize={10}
-          component="pre"
-          style={{ background: "none" }}
+    <>
+      {withoutCoverage && showProblem && (
+        <Alert
+          variant="filled"
+          severity="warning"
+          style={{ fontSize: 16 }}
+          onClick={() => setShowProblem(false)}
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => setShowProblem(false)}
+            >
+              HIDE
+            </Button>
+          }
         >
-          {line}
-        </Typography>
-      </div>
-    </div>
+          {problemMessage}
+        </Alert>
+      )}
+      <button
+        onClick={() => setShowProblem(!showProblem)}
+        tabIndex={lineNumber}
+        aria-pressed={showProblem}
+        style={{ display: "block", width: "100%" }}
+      >
+        <div
+          className={`${styles.lineWrapper} ${withoutCoverage ? styles.withoutCoverage : ""}`}
+        >
+          {withoutCoverage ? (
+            <Tooltip title={problemMessage}>
+              <IconButton onClick={() => setShowProblem(!showProblem)}>
+                <ReportProblemIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <div style={{ marginRight: 36 }} />
+          )}
+          <span className={styles.lineNumber}>{lineNumber}</span>
+          <div ref={lineRef} className={styles.code}>
+            <Typography
+              fontSize={10}
+              component="pre"
+              style={{ background: "none" }}
+            >
+              {line}
+            </Typography>
+          </div>
+        </div>
+      </button>
+    </>
   );
 };
 

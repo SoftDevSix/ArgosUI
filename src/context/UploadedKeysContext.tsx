@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 import { UPLOADED_KEY } from "../utils/constants";
 
 type UploadedKeysContextType = {
@@ -35,10 +35,13 @@ export const UploadedKeysProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [uploadedKeys]);
 
+  const value = useMemo(
+    () => ({ uploadedKeys, setUploadedKeys, hasUploadedKeys }),
+    [uploadedKeys, hasUploadedKeys]
+  );
+
   return (
-    <UploadedKeysContext.Provider
-      value={{ uploadedKeys, setUploadedKeys, hasUploadedKeys }}
-    >
+    <UploadedKeysContext.Provider value={value}>
       {children}
     </UploadedKeysContext.Provider>
   );

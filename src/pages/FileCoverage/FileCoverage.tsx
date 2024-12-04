@@ -22,7 +22,7 @@ const FileCoverage: React.FC = () => {
   const [selectedFilePath, setSelectedFilePath] = useState<string | null>(null);
   const [apiUrl, setApiUrl] = useState<string | null>(null);
   const [apiFileUrl, setApiFileUrl] = useState<string | null>(null);
-  const [filecoverageData, setFileCoverageData] =
+  const [fileCoverageData, setFileCoverageData] =
     useState<FileCoverageInterface | null>(null);
 
   const { data, loading, error } = useFetch<string>(apiUrl);
@@ -52,10 +52,10 @@ const FileCoverage: React.FC = () => {
   useEffect(() => {
     if (selectedFilePath) {
       setApiFileUrl(
-        `${COVERAGE_API_BASE_URL}/coverage/file?path=${selectedFilePath}`
+        `${COVERAGE_API_BASE_URL}/coverage/project/${uploadedKeys}/file?path=${selectedFilePath}`
       );
     }
-  }, [selectedFilePath]);
+  }, [selectedFilePath, uploadedKeys]);
 
   useEffect(() => {
     if (dataFile) {
@@ -80,19 +80,19 @@ const FileCoverage: React.FC = () => {
         <Splash splashMessage="Getting file info..." />
       ) : (
         <Container component={"section"}>
-          {selectedFilePath && filecoverageData ? (
+          {selectedFilePath && fileCoverageData ? (
             <Box flex={1}>
               <Typography variant="subtitle1">{selectedFilePath}</Typography>
               <Box>
                 <CoverageSummary
-                  fileCoverage={filecoverageData.coveragePercentage}
-                  methodCoverage={filecoverageData.methodCoverage}
-                  linesOfCode={filecoverageData.linesCode}
+                  fileCoverage={fileCoverageData.coveragePercentage}
+                  methodCoverage={fileCoverageData.methodCoverage}
+                  linesOfCode={fileCoverageData.linesCode}
                 />
               </Box>
               <SourceCode
                 filePath={selectedFilePath}
-                uncoveredLines={filecoverageData?.uncoveredLines}
+                uncoveredLines={fileCoverageData?.uncoveredLines}
               />
             </Box>
           ) : (
