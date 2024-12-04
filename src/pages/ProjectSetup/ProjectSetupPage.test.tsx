@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import ProjectSetupPage from "./ProjectSetupPage";
-import { expect, it, vi } from "vitest";
-import { describe } from "vitest";
+import { expect, it, vi, describe } from "vitest";
 
 vi.mock("../../components/ProjectSetUp", () => ({
   __esModule: true,

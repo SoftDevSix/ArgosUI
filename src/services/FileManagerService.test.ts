@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import uploadZipProject from "./FileManagerService";
 
-const MOCK_FILE_MANAGER_API = "http://file-manager-api";
-const MOCK_COVERAGE_API = "http://coverage-api";
+const MOCK_FILE_MANAGER_API = "https://file-manager-api";
+const MOCK_COVERAGE_API = "https://coverage-api";
 const UPLOADED_KEY = "uploadedKey";
 
 vi.mock("../utils/constants", () => ({
-  FILE_MANAGER_API_BASE_URL: "http://file-manager-api",
-  COVERAGE_API_BASE_URL: "http://coverage-api",
+  FILE_MANAGER_API_BASE_URL: "https://file-manager-api",
+  COVERAGE_API_BASE_URL: "https://coverage-api",
   UPLOADED_KEY: "uploadedKey",
 }));
 

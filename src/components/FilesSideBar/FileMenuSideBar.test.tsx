@@ -4,13 +4,13 @@ import FileMenuSideBar from "./FileMenuSideBar";
 
 vi.mock("./FileMenuOption/FileMenuOption", () => ({
   default: vi.fn(({ fileName, isSelected, setSelected }) => (
-    <div
+    <button
       data-testid={`file-option-${fileName}`}
       className={isSelected ? "active" : "inactive"}
       onClick={() => setSelected(fileName)}
     >
       {fileName}
-    </div>
+    </button>
   )),
 }));
 

@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
-import FileMenuOption from "./FileMenuOption/FileMenuOption";
 import styles from "./FileMenuSideBar.module.css";
 import { useState } from "react";
 import { splitUntilSecondSlash } from "../../utils/methods";
+import FileMenuOption from "./FileMenuOption";
 
 interface FileMenuSideBarProps {
   proyectFiles: string[];
