@@ -36,4 +36,11 @@ describe("splitUntilSecondSlash Utility Function", () => {
 
     expect(result).toBe(input);
   });
+
+  it("should return the input as is if an error occurs", () => {
+    const input: any = null;
+    const result = splitUntilSecondSlash(input);
+
+    expect(result).toBe(input);
+  });
 });
