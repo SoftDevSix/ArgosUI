@@ -10,7 +10,7 @@ const DocumentationSideBar: React.FC = () => {
     { title: "Setup Agent in Maven", link: "/maven" },
   ];
 
-  const location = useLocation(); 
+  const location = useLocation();
 
   return (
     <div className={styles.sidebarContainer}>
