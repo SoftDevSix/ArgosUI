@@ -32,6 +32,8 @@ describe("SourceCode Component", () => {
         value={{
           uploadedKeys: "12345",
           hasUploadedKeys: true,
+          projectName: "project",
+          setProjectName: vi.fn(),
           setUploadedKeys: vi.fn(),
         }}
       >
@@ -58,6 +60,8 @@ describe("SourceCode Component", () => {
         value={{
           uploadedKeys: "12345",
           hasUploadedKeys: true,
+          projectName: "project",
+          setProjectName: vi.fn(),
           setUploadedKeys: vi.fn(),
         }}
       >
@@ -81,6 +85,8 @@ describe("SourceCode Component", () => {
         value={{
           uploadedKeys: "12345",
           hasUploadedKeys: true,
+          projectName: "project",
+          setProjectName: vi.fn(),
           setUploadedKeys: vi.fn(),
         }}
       >
@@ -103,6 +109,8 @@ describe("SourceCode Component", () => {
         value={{
           uploadedKeys: "12345",
           hasUploadedKeys: true,
+          projectName: "project",
+          setProjectName: vi.fn(),
           setUploadedKeys: vi.fn(),
         }}
       >
