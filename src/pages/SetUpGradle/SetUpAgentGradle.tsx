@@ -63,7 +63,7 @@ const SetupAgentGradle: React.FC = () => {
               }}
             />
             <li>
-              After the set up just run the tests normally using JDK or with 
+              After the set up just run the tests normally using JDK or with
               <code>./gradlew test</code> command
             </li>
           </ul>
