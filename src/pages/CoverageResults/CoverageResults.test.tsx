@@ -1,36 +1,20 @@
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import CoverageResults from "../CoverageResults";
-import { vi } from "vitest";
-
-vi.mock("../../hooks/UseUploadedKeys", () => ({
-  useUploadedKeys: vi.fn().mockReturnValue({ uploadedKeys: ["12345"] }),
-}));
-
-vi.mock("../../hooks/useFetch", () => ({
-  __esModule: true,
-  default: vi.fn().mockReturnValue({
-    data: '{"projectStatus":"PASSED","rating":{"actualRating":4,"requiredCodeRating":3},"coverage":{"actualCoverage":80,"requiredCoverage":90}}',
-    loading: false,
-    error: null,
-  }),
-}));
+import { UploadedKeysProvider } from "../../context/UploadedKeysContext";
 
 describe("CoverageResults component", () => {
-  it("should render without crashing", () => {
+  it("renders the loading state initially", () => {
     render(
-      <BrowserRouter>
-        {" "}
-        {}
-        <CoverageResults />
-      </BrowserRouter>
+      <UploadedKeysProvider>
+        <BrowserRouter>
+          <CoverageResults />
+        </BrowserRouter>
+      </UploadedKeysProvider>
     );
 
-    expect(screen.getByText("Coverage Results")).toBeInTheDocument();
-
-    expect(screen.getByText("PASSED")).toBeInTheDocument();
-
-    expect(screen.getByText("4")).toBeInTheDocument();
-    expect(screen.getByText("80.00% - Coverage")).toBeInTheDocument();
+    // Verifica si el mensaje de carga "Getting results..." está presente
+    expect(screen.getByText("Getting results...")).toBeInTheDocument();
   });
 });

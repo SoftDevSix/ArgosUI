@@ -16,11 +16,11 @@ export default function organizeFiles(
     const parts = relativePath.split("/");
 
     if (parts.some((part) => part === "test")) {
-      return; 
+      return;
     }
 
     if (!/\.java$/.test(fullPath) && !relativePath.endsWith("/")) {
-      return; 
+      return;
     }
 
     let currentLevel = root;

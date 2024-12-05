@@ -30,8 +30,8 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
   const [fileSelected, setFileSelected] = useState<string>(projectFiles[0]);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isLargeScreen = useMediaQuery(
-    (theme: Theme) => theme.breakpoints.up("lg")
+  const isLargeScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up("lg")
   );
 
   const nodes: FileNode[] = organizeFiles(projectFiles.slice(1), basePath);
@@ -83,7 +83,6 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
           aria-label="open drawer"
           onClick={handleDrawerToggle}
           sx={{
-            
             position: "fixed",
             top: 90,
             left: 16,

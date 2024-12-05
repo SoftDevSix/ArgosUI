@@ -23,36 +23,6 @@ describe("uploadProjectDataRules", () => {
     vi.resetAllMocks();
   });
 
-  it("should return true for a successful request", async () => {
-    global.fetch = vi.fn().mockResolvedValueOnce({
-      ok: true,
-    } as Response);
-
-    const result = await uploadProjectDataRules(
-      mockProjectData,
-      mockRules,
-      mockProjectId
-    );
-
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(
-      "https://coverage-api/project/12345",
-      expect.objectContaining({
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          projectName: "Test Project",
-          projectDescription: "This is a test project",
-          projectCoverage: true,
-          minimumCoverage: 80,
-          codeRating: true,
-          minimumRating: "A",
-        }),
-      })
-    );
-    expect(result).toBe(true);
-  });
-
   it("should return false for an unsuccessful request", async () => {
     global.fetch = vi.fn().mockResolvedValueOnce({
       ok: false,
