@@ -79,7 +79,7 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
       <CssBaseline />
       {!isLargeScreen && (
         <Fab
-          color="#12141D"
+          color="primary"
           aria-label="open drawer"
           onClick={handleDrawerToggle}
           sx={{
