@@ -35,8 +35,8 @@ const CoverageResults: React.FC = () => {
     }
   }, [data]);
 
-  if (loading) return <Splash splashMessage="Getting results..." />;
   if (error || (!coverageData && !loading)) return <ErrorAdvice />;
+  if (loading) return <Splash splashMessage="Getting results..." />;
 
   return (
     <Container>
@@ -55,14 +55,16 @@ const CoverageResults: React.FC = () => {
             </Grid>
             <Grid size={{ xs: 12, md: 6, lg: 4 }}>
               <CodeRating
-                codeRating={coverageData.rating.actualRating}
-                requiredRating={coverageData.rating.requiredCodeRating}
+                codeRating={coverageData.codeAnalysisResult.actualRating}
+                requiredRating={coverageData.codeAnalysisResult.expectedRating}
               />
             </Grid>
             <Grid size={{ xs: 12, md: 6, lg: 4 }}>
               <CoveragePercentage
-                currentPercentage={coverageData.coverage.actualCoverage}
-                requiredPercentage={coverageData.coverage.requiredCoverage}
+                currentPercentage={coverageData.coverageResult.totalCoverage}
+                requiredPercentage={
+                  coverageData.coverageResult.requiredCoverage
+                }
               />
             </Grid>
           </Grid>

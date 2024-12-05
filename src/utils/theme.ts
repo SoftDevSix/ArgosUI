@@ -92,7 +92,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           overflowX: "hidden",
-          paddingTop: "84px",
+          paddingTop: "120px",
           paddingBottom: "64px",
         },
       },

@@ -30,9 +30,8 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
   const [fileSelected, setFileSelected] = useState<string>(projectFiles[0]);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Cambia el breakpoint a "sm" para incluir tablets
   const isLargeScreen = useMediaQuery(
-    (theme: Theme) => theme.breakpoints.up("lg") // Usamos `lg` para que tablets entren en el flujo móvil
+    (theme: Theme) => theme.breakpoints.up("lg")
   );
 
   const nodes: FileNode[] = organizeFiles(projectFiles.slice(1), basePath);
@@ -80,14 +79,15 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
       <CssBaseline />
       {!isLargeScreen && (
         <Fab
-          color="primary"
+          color="#12141D"
           aria-label="open drawer"
           onClick={handleDrawerToggle}
           sx={{
+            
             position: "fixed",
-            bottom: 16,
-            right: 16,
-            zIndex: 1300,
+            top: 90,
+            left: 16,
+            zIndex: 4600,
           }}
         >
           <MenuIcon />
