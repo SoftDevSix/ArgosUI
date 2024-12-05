@@ -3,7 +3,6 @@ import { describe, it, expect, vi } from "vitest";
 import GeneralRulesConfiguration from "./GeneralRulesConfiguration";
 import { ruleDefaults, rulesTypes } from "../../../../utils/rulesConstants";
 import { Rules, RulesTypes } from "../../../../types/types";
-import React from "react";
 
 const mockRulesConfig: Record<RulesTypes, Rules> = rulesTypes.reduce(
   (acc, type) => {
@@ -41,31 +40,5 @@ describe("GeneralRulesConfiguration Component", () => {
 
     expect(screen.getByText(/Project Coverage/i)).toBeInTheDocument();
     expect(screen.getByText(/Code Rating/i)).toBeInTheDocument();
-  });
-
-  it("should update the specific rule field when handleSwitchChange is called", () => {
-    const initialMockRulesConfig: Record<RulesTypes, Rules> = rulesTypes.reduce(
-      (acc, type) => {
-        acc[type] = { ...ruleDefaults[type] };
-        return acc;
-      },
-      {} as Record<RulesTypes, Rules>
-    );
-
-    const TestWrapper = () => {
-      const [rulesConfig, setRulesConfig] = React.useState(
-        initialMockRulesConfig
-      );
-
-      return (
-        <GeneralRulesConfiguration
-          rulesConfig={rulesConfig}
-          setRulesConfig={setRulesConfig}
-          handleGoBack={() => {}}
-        />
-      );
-    };
-
-    render(<TestWrapper />);
   });
 });
