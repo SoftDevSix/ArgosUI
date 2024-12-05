@@ -17,9 +17,7 @@ const CoveragePercentage: React.FC<CoveragePercentageProps> = ({
 
   const colorProgress = useMemo(
     () =>
-      currentPercentage >= requiredPercentage
-        ? COLORS.SUCCESS
-        : COLORS.ERROR,
+      currentPercentage >= requiredPercentage ? COLORS.SUCCESS : COLORS.ERROR,
     [currentPercentage, requiredPercentage]
   );
 
