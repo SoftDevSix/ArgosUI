@@ -12,7 +12,7 @@ export interface MenuOption {
 }
 
 export interface ProjectCoverageInterface {
-  projectStatus: "PASSED" | "FAILED";
+  status: "PASSED" | "FAILED";
   coverageResult: {
     totalCoverage: number;
     requiredCoverage: number;
