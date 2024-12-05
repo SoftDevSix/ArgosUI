@@ -7,7 +7,6 @@ describe("CoverageResults component", () => {
   it("renders the loading state initially", () => {
     render(
       <UploadedKeysProvider>
-
         <BrowserRouter>
           <CoverageResults />
         </BrowserRouter>
