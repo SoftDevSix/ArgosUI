@@ -45,15 +45,13 @@ describe("WelcomePage", () => {
     }));
 
     renderWithRouterAndContext(
-      <>
-        <Routes>
-          <Route path="/" element={<WelcomePage />} />
-          <Route
-            path={PageNames.COVERAGE_RESULTS}
-            element={<div>Coverage Results</div>}
-          />
-        </Routes>
-      </>
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route
+          path={PageNames.COVERAGE_RESULTS}
+          element={<div>Coverage Results</div>}
+        />
+      </Routes>
     );
 
     const button = screen.getByRole("button", { name: "Analyze your project" });

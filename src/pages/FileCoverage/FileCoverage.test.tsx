@@ -1,8 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import FileCoverage from "../FileCoverage";
-import { vi } from "vitest";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import useFetch from "../../hooks/useFetch";
 
 vi.mock("../../hooks/UseUploadedKeys", () => ({
