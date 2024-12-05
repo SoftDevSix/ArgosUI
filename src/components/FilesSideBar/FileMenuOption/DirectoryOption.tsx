@@ -14,12 +14,14 @@ interface DirectoryOptionProps {
   node: FileNode;
   fileSelected: string;
   setFileSelected: (data: string, path: string) => void;
+  root?: boolean;
 }
 
 const DirectoryOption: React.FC<DirectoryOptionProps> = ({
   node,
   fileSelected,
   setFileSelected,
+  root = true,
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -30,7 +32,7 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
         sx={{
           backgroundColor: "#2A2F40",
           color: "white",
-          paddingLeft: 1.6,
+          paddingLeft: root ? 0 : 1.6,
           "&:before": { display: "none" },
         }}
         expanded={expanded}
@@ -68,6 +70,7 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
                 node={e}
                 fileSelected={fileSelected}
                 setFileSelected={setFileSelected}
+                root={false}
               />
             ) : (
               <FileOption
