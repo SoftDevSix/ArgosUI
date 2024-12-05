@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import OverviewDocumentationPage from "./pages/OverviewDocumentation";
 import SetupAgentGradleDocumentation from "./pages/SetUpGradleDocumentation/SetUpAgentGradleDocumentation";
 import SetUpMavenDocumentation from "./pages/SetUpMavenDocumentation/SetUpMavenDocumentation";
+import InstallationPage from "./pages/installation/Installation";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
             <Route path="/overview" element={<OverviewDocumentationPage />} />
             <Route path="/maven" element={<SetUpMavenDocumentation />} />
             <Route path="/gradle" element={<SetupAgentGradleDocumentation />} />
+            <Route path="/installation" element={<InstallationPage />} />
           </Routes>
         </Container>
       </BrowserRouter>
