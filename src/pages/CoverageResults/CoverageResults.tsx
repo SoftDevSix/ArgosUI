@@ -12,7 +12,7 @@ import { ProjectCoverageInterface } from "../../types/interfaces";
 import ErrorAdvice from "../../components/ErrorAdvice";
 
 const CoverageResults: React.FC = () => {
-  const { uploadedKeys } = useUploadedKeys();
+  const { uploadedKeys, projectName } = useUploadedKeys();
 
   const [apiUrl, setApiUrl] = useState<string | null>(null);
   const { data, loading, error } = useFetch<string>(apiUrl);
@@ -39,6 +39,8 @@ const CoverageResults: React.FC = () => {
     <Container>
       <div>
         <Typography variant="h1">Coverage Results</Typography>
+        <br />
+        <Typography variant="h2">Project: {projectName}</Typography>
         {coverageData && (
           <Grid
             container
