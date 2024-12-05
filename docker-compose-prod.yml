@@ -1,0 +1,11 @@
+services:
+  argos_ui_prod:
+    image: argos-ui-prod:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "5175:80"
+    volumes:
+      - .:/app
+      - /app/node_modules
