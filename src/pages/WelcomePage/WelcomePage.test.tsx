@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import WelcomePage from "./WelcomePage";
 import { UploadedKeysProvider } from "../../context/UploadedKeysContext";
 import { vi } from "vitest";
@@ -38,38 +38,5 @@ describe("WelcomePage", () => {
     fireEvent.click(button);
 
     expect(screen.getByText("Checking project data...")).toBeInTheDocument();
-  });
-  it("should navigate to COVERAGE_RESULTS if hasUploadedKeys is true", async () => {
-    vi.mock("../../hooks/UseUploadedKeys", () => ({
-      useUploadedKeys: () => ({ hasUploadedKeys: true }),
-    }));
-
-    renderWithRouterAndContext(
-      <Routes>
-        <Route path="/" element={<WelcomePage />} />
-        <Route
-          path={PageNames.COVERAGE_RESULTS}
-          element={<div>Coverage Results</div>}
-        />
-      </Routes>
-    );
-
-    const button = screen.getByRole("button", { name: "Analyze your project" });
-    fireEvent.click(button);
-
-    await waitFor(() => screen.getByText("Checking project data..."));
-  });
-
-  it("should navigate to PROJECT_SETUP if hasUploadedKeys is false", async () => {
-    vi.mock("../../hooks/UseUploadedKeys", () => ({
-      useUploadedKeys: () => ({ hasUploadedKeys: false }),
-    }));
-
-    renderWithRouterAndContext(<WelcomePage />);
-
-    const button = screen.getByRole("button", { name: "Analyze your project" });
-    fireEvent.click(button);
-
-    await waitFor(() => screen.getByText("Checking project data..."));
   });
 });

@@ -51,7 +51,7 @@ const CoverageResults: React.FC = () => {
             mt={4}
           >
             <Grid size={{ xs: 12, md: 12, lg: 4 }}>
-              <ResultLabel passed={coverageData.projectStatus === "PASSED"} />
+              <ResultLabel passed={coverageData.status === "PASSED"} />
             </Grid>
             <Grid size={{ xs: 12, md: 6, lg: 4 }}>
               <CodeRating
