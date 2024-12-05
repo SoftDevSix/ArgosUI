@@ -17,7 +17,7 @@ import { ruleDefaults, rulesTypes } from "../../utils/rulesConstants";
 
 const ProjectSetUp: React.FC = () => {
   const navigate = useNavigate();
-  const { setUploadedKeys } = useUploadedKeys();
+  const { setUploadedKeys, setProjectName } = useUploadedKeys();
   const [projectData, setProjectData] = useState<ProjectInfoData>({
     projectName: "",
     projectDescription: "",
@@ -66,6 +66,7 @@ const ProjectSetUp: React.FC = () => {
     setLoading(false);
 
     if (projectId && dataUploaded) {
+      setProjectName(projectData.projectName);
       navigate(`/${PageNames.COVERAGE_RESULTS}`);
     } else {
       alert("Failed to upload project. Please, try again");

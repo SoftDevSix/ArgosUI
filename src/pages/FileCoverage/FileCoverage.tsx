@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import useFetch from "../../hooks/useFetch";
-import { FileCoverageInterface } from "../../types/interfaces";
 import FileMenuSideBar from "../../components/FilesSideBar";
 import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import { FILE_MANAGER_API_BASE_URL } from "../../utils/constants";
@@ -14,8 +13,6 @@ const FileCoverage: React.FC = () => {
   const { uploadedKeys, hasUploadedKeys } = useUploadedKeys();
   const [selectedFilePath, setSelectedFilePath] = useState<string | null>(null);
   const [apiUrl, setApiUrl] = useState<string | null>(null);
-
-  useState<FileCoverageInterface | null>(null);
 
   const { data, loading, error } = useFetch<string>(apiUrl);
 

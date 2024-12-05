@@ -7,6 +7,8 @@ const MockUploadedKeysProvider: React.FC<{
     uploadedKeys: string;
     hasUploadedKeys: boolean;
     setUploadedKeys: (keys: string) => void;
+    projectName: string;
+    setProjectName: (name: string) => void;
   };
 }> = ({ children, value }) => {
   return (

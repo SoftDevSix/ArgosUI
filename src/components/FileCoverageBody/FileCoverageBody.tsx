@@ -30,6 +30,7 @@ const FileCoverageBody: React.FC<FileCoverageBodyPromps> = ({
   const [apiFileUrl, setApiFileUrl] = useState<string | null>(null);
   const [fileCoverageData, setFileCoverageData] =
     useState<FileCoverageInterface | null>(null);
+  const [codeLines, setCodeLines] = useState<number>(0);
 
   const {
     data: dataFile,
@@ -88,12 +89,13 @@ const FileCoverageBody: React.FC<FileCoverageBodyPromps> = ({
                   methodCoverage={parseFloat(
                     fileCoverageData.methodCoverage.toFixed(2)
                   )}
-                  linesOfCode={fileCoverageData.linesCode}
+                  linesOfCode={codeLines}
                 />
               </Box>
               <SourceCode
                 filePath={selectedFilePath}
                 uncoveredLines={fileCoverageData?.uncoveredLines}
+                setCodeLines={setCodeLines}
               />
             </>
           )

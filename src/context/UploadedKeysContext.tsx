@@ -1,10 +1,12 @@
 import React, { createContext, useEffect, useMemo, useState } from "react";
-import { UPLOADED_KEY } from "../utils/constants";
+import { PROJECT_NAME_KEY, UPLOADED_KEY } from "../utils/constants";
 
 type UploadedKeysContextType = {
   uploadedKeys: string;
   setUploadedKeys: (keys: string) => void;
   hasUploadedKeys: boolean;
+  projectName: string;
+  setProjectName: (name: string) => void;
 };
 
 const UploadedKeysContext = createContext<UploadedKeysContextType | undefined>(
@@ -16,6 +18,7 @@ export const UploadedKeysProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [uploadedKeys, setUploadedKeys] = useState<string>("");
   const [hasUploadedKeys, setHasUploadedKeys] = useState<boolean>(true);
+  const [projectName, setProjectName] = useState<string>("");
 
   useEffect(() => {
     const storedKeys = localStorage.getItem(UPLOADED_KEY);
@@ -35,9 +38,30 @@ export const UploadedKeysProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [uploadedKeys]);
 
+  useEffect(() => {
+    const storedProjectName = localStorage.getItem(PROJECT_NAME_KEY);
+    if (storedProjectName && storedProjectName !== "") {
+      setProjectName(storedProjectName);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (projectName.length > 0) {
+      localStorage.setItem(PROJECT_NAME_KEY, projectName);
+    } else {
+      localStorage.removeItem(PROJECT_NAME_KEY);
+    }
+  }, [projectName]);
+
   const value = useMemo(
-    () => ({ uploadedKeys, setUploadedKeys, hasUploadedKeys }),
-    [uploadedKeys, hasUploadedKeys]
+    () => ({
+      uploadedKeys,
+      setUploadedKeys,
+      hasUploadedKeys,
+      projectName,
+      setProjectName,
+    }),
+    [uploadedKeys, hasUploadedKeys, projectName]
   );
 
   return (

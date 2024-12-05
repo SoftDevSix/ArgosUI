@@ -21,7 +21,6 @@ export default function organizeFiles(
       "obj/",
       ".idea/",
       ".vscode/",
-      ".jar",
       "dist/",
       "out/",
     ];
@@ -30,14 +29,14 @@ export default function organizeFiles(
       return;
     }
 
-    if (!/\.java$/.test(fullPath)) {
+    if (!fullPath.endsWith(".java")) {
       return;
     }
 
     let currentLevel = root;
 
     parts.forEach((part, index) => {
-      const isFile = index === parts.length - 1 && /\.java$/.test(part);
+      const isFile = index === parts.length - 1 && fullPath.endsWith(".java");
       const existingNode = currentLevel.find((node) => node.name === part);
 
       if (existingNode) {

@@ -15,7 +15,7 @@ import { PageNames } from "../../utils/pageNames";
 
 const CoverageResults: React.FC = () => {
   const navigate = useNavigate();
-  const { uploadedKeys, hasUploadedKeys } = useUploadedKeys();
+  const { uploadedKeys, hasUploadedKeys, projectName } = useUploadedKeys();
 
   const [apiUrl, setApiUrl] = useState<string | null>(null);
   const { data, loading, error } = useFetch<string>(apiUrl);
@@ -42,6 +42,8 @@ const CoverageResults: React.FC = () => {
     <Container>
       <div>
         <Typography variant="h1">Coverage Results</Typography>
+        <br />
+        <Typography variant="h2">Project: {projectName}</Typography>
         {coverageData && (
           <Grid
             container

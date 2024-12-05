@@ -16,11 +16,13 @@ import { FILE_MANAGER_API_BASE_URL } from "../../utils/constants";
 type CodeViewerProps = {
   filePath: string;
   uncoveredLines: number[];
+  setCodeLines?: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SourceCode: React.FC<CodeViewerProps> = ({
   filePath,
   uncoveredLines,
+  setCodeLines,
 }) => {
   const { uploadedKeys } = useUploadedKeys();
 
@@ -34,6 +36,10 @@ const SourceCode: React.FC<CodeViewerProps> = ({
       );
     }
   }, [uploadedKeys, filePath]);
+
+  useEffect(() => {
+    if (setCodeLines && data) setCodeLines(data.split("\n").length);
+  }, [data, setCodeLines]);
 
   if (loading)
     return (

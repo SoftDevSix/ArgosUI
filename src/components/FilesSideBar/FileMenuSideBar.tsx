@@ -14,6 +14,7 @@ import styles from "./FileMenuSideBar.module.css";
 import organizeFiles, { FileNode } from "./FileNode";
 import { splitUntilSecondSlash } from "../../utils/methods";
 import { COLORS } from "../../utils/styleConstants";
+import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 
 const DRAWER_WIDTH = 300;
 
@@ -28,6 +29,8 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
   basePath,
   setSelectedFilePath,
 }) => {
+  const { projectName } = useUploadedKeys();
+
   const [fileSelected, setFileSelected] = useState<string>(projectFiles[0]);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -50,15 +53,14 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
     <div className={styles.FileMenuSideBar}>
       <div className={styles.FilesMenuBarTitle}>
         <Typography fontSize={"23px"} fontWeight={"bold"}>
-          Project Files
+          {projectName}
         </Typography>
       </div>
       <div className={styles.FilesMenuOptions}>
         {nodes.map((e, index) =>
           e.type === "directory" ? (
-            <div style={{ marginLeft: index * 40 }}>
+            <div style={{ marginLeft: index * 40 }} key={e.name}>
               <DirectoryOption
-                key={e.name}
                 node={e}
                 fileSelected={fileSelected}
                 setFileSelected={onFileSelected}

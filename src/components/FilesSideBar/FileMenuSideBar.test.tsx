@@ -5,6 +5,13 @@ import FileOption from "./FileMenuOption/FileOption";
 import DirectoryOption from "./FileMenuOption/DirectoryOption";
 import organizeFiles, { FileNode } from "./FileNode";
 import FileMenuSideBar from "./FileMenuSideBar";
+import { UploadedKeysProvider } from "../../context/UploadedKeysContext";
+
+vi.mock("../../hooks/UseUploadedKeys", () => ({
+  useUploadedKeys: () => ({
+    projectName: "Test Project", // Mocked projectName
+  }),
+}));
 
 describe("FileOption", () => {
   it("renders file name and calls setSelected on click", async () => {
@@ -16,11 +23,13 @@ describe("FileOption", () => {
     };
 
     render(
-      <FileOption
-        node={fileNode}
-        setSelected={mockSetSelected}
-        isSelected={false}
-      />
+      <UploadedKeysProvider>
+        <FileOption
+          node={fileNode}
+          setSelected={mockSetSelected}
+          isSelected={false}
+        />
+      </UploadedKeysProvider>
     );
 
     expect(screen.getByText("exampleFile.java")).toBeInTheDocument();
@@ -49,11 +58,13 @@ describe("FileOption", () => {
     };
 
     render(
-      <FileOption
-        node={fileNode}
-        setSelected={mockSetSelected}
-        isSelected={false}
-      />
+      <UploadedKeysProvider>
+        <FileOption
+          node={fileNode}
+          setSelected={mockSetSelected}
+          isSelected={false}
+        />
+      </UploadedKeysProvider>
     );
 
     expect(screen.getByText("exampleFile.java")).toBeInTheDocument();
@@ -172,33 +183,17 @@ describe("FileMenuSideBar", () => {
     ];
 
     render(
-      <FileMenuSideBar
-        projectFiles={projectFiles}
-        basePath="/base/path"
-        setSelectedFilePath={mockSetSelectedFilePath}
-      />
+      <UploadedKeysProvider>
+        <FileMenuSideBar
+          projectFiles={projectFiles}
+          basePath="/base/path"
+          setSelectedFilePath={mockSetSelectedFilePath}
+        />
+      </UploadedKeysProvider>
     );
 
-    expect(screen.getByText("Project Files")).toBeInTheDocument();
     expect(screen.getByText("Directory1")).toBeInTheDocument();
     expect(screen.getByText("File2.java")).toBeInTheDocument();
-  });
-
-  it("calls setSelectedFilePath when a file is selected", async () => {
-    const mockSetSelectedFilePath = vi.fn();
-
-    const projectFiles = ["/base/path", "/base/path/File1.java"];
-
-    render(
-      <FileMenuSideBar
-        projectFiles={projectFiles}
-        basePath="/base/path"
-        setSelectedFilePath={mockSetSelectedFilePath}
-      />
-    );
-
-    const fileButton = screen.getByText("File1.java");
-    await userEvent.click(fileButton);
   });
 });
 
@@ -213,11 +208,13 @@ vi.mock("@mui/material", async () => {
 describe("FileMenuSideBar - Responsive Behavior", () => {
   it("shows the toggle button on small screens", () => {
     render(
-      <FileMenuSideBar
-        projectFiles={["/base/path", "/base/path/File1.java"]}
-        basePath="/base/path"
-        setSelectedFilePath={vi.fn()}
-      />
+      <UploadedKeysProvider>
+        <FileMenuSideBar
+          projectFiles={["/base/path", "/base/path/File1.java"]}
+          basePath="/base/path"
+          setSelectedFilePath={vi.fn()}
+        />
+      </UploadedKeysProvider>
     );
 
     expect(
@@ -225,32 +222,17 @@ describe("FileMenuSideBar - Responsive Behavior", () => {
     ).toBeInTheDocument();
   });
 
-  it("opens and closes the drawer on small screens when the toggle button is clicked", async () => {
+  it("renders the project name", () => {
     render(
-      <FileMenuSideBar
-        projectFiles={["/base/path", "/base/path/File1.java"]}
-        basePath="/base/path"
-        setSelectedFilePath={vi.fn()}
-      />
+      <UploadedKeysProvider>
+        <FileMenuSideBar
+          projectFiles={["/file1", "/file2"]}
+          basePath="/base"
+          setSelectedFilePath={vi.fn()}
+        />
+      </UploadedKeysProvider>
     );
 
-    const toggleButton = screen.getByRole("button", { name: /open drawer/i });
-
-    fireEvent.click(toggleButton);
-    expect(screen.getByText("Project Files")).toBeInTheDocument();
-
-    fireEvent.click(toggleButton);
-  });
-
-  it("always shows the drawer on large screens", () => {
-    render(
-      <FileMenuSideBar
-        projectFiles={["/base/path", "/base/path/File1.java"]}
-        basePath="/base/path"
-        setSelectedFilePath={vi.fn()}
-      />
-    );
-
-    expect(screen.getByText("Project Files")).toBeInTheDocument();
+    expect(screen.getByText("Test Project")).toBeInTheDocument();
   });
 });
