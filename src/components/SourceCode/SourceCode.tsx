@@ -39,7 +39,7 @@ const SourceCode: React.FC<CodeViewerProps> = ({
 
   useEffect(() => {
     if (setCodeLines && data) setCodeLines(data.split("\n").length);
-  }, [data]);
+  }, [data, setCodeLines]);
 
   if (loading)
     return (

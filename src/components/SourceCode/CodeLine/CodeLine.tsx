@@ -5,6 +5,7 @@ import "highlight.js/styles/atom-one-dark.css";
 import styles from "./CodeLine.module.css";
 import { Alert, Button, IconButton, Tooltip, Typography } from "@mui/material";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
+import { COLORS } from "../../../utils/styleConstants";
 
 hljs.registerLanguage("java", java);
 
@@ -39,7 +40,11 @@ const CodeLine: React.FC<CodeLineProps> = ({
         <Alert
           variant="filled"
           severity="warning"
-          style={{ fontSize: 16 }}
+          style={{
+            fontSize: 16,
+            background: COLORS.GREY_BG,
+            color: COLORS.NEUTRAL_WHITE,
+          }}
           onClick={() => setShowProblem(false)}
           action={
             <Button

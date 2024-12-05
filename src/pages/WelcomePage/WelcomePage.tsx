@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import styles from "./WelcomePage.module.css";
@@ -9,8 +9,14 @@ import { COLORS } from "../../utils/styleConstants";
 
 const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
-  const { hasUploadedKeys } = useUploadedKeys();
+  const { hasUploadedKeys, uploadedKeys } = useUploadedKeys();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (uploadedKeys && uploadedKeys.length > 0) {
+      navigate(PageNames.COVERAGE_RESULTS);
+    }
+  }, [uploadedKeys, navigate]);
 
   const handleAnalyzeClick = () => {
     setLoading(true);

@@ -2,8 +2,8 @@ import React, { ReactNode, useState } from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import HeaderButton from "./HeaderButton";
 import PieChartOutlineIcon from "@mui/icons-material/PieChartOutline";
-import FindInPageIcon from "@mui/icons-material/FindInPage";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import SourceIcon from "@mui/icons-material/Source";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface HeaderOption {
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
     {
       path: "file",
       title: "File Coverage",
-      icon: <FindInPageIcon sx={{ color: "white" }} />,
+      icon: <SourceIcon sx={{ color: "white" }} />,
     },
   ];
 
