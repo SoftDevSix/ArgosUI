@@ -9,6 +9,7 @@ import { FileNode } from "../FileNode";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FileOption from "./FileOption";
 import FolderIcon from "@mui/icons-material/Folder";
+import { COLORS } from "../../../utils/styleConstants";
 
 interface DirectoryOptionProps {
   node: FileNode;
@@ -30,8 +31,8 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
       <Accordion
         disableGutters
         sx={{
-          backgroundColor: "#2A2F40",
-          color: "white",
+          backgroundColor: COLORS.PRIMARY_DEFAULT,
+          color: COLORS.NEUTRAL_WHITE,
           paddingLeft: root ? 0 : 1.6,
           "&:before": { display: "none" },
         }}
@@ -40,15 +41,15 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
       >
         <AccordionSummary
           sx={{
-            backgroundColor: "#2A2F40",
-            color: "white",
+            backgroundColor: COLORS.PRIMARY_DEFAULT,
+            color: COLORS.NEUTRAL_WHITE,
             display: "flex",
             alignItems: "center",
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
           }}
-          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+          expandIcon={<ExpandMoreIcon sx={{ color: COLORS.NEUTRAL_WHITE }} />}
           aria-controls={node.name + "-content"}
           id={node.name + "-header"}
         >
@@ -61,7 +62,7 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
           {node.name}
         </AccordionSummary>
         <AccordionDetails
-          sx={{ padding: 0, backgroundColor: "#2A2F40", color: "white" }}
+          sx={{ padding: 0, backgroundColor: COLORS.PRIMARY_DEFAULT, color: COLORS.NEUTRAL_WHITE }}
         >
           {node.children?.map((e) =>
             e.type === "directory" ? (
