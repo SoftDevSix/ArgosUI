@@ -1,44 +1,256 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
+import FileOption from "./FileMenuOption/FileOption";
+import DirectoryOption from "./FileMenuOption/DirectoryOption";
+import organizeFiles, { FileNode } from "./FileNode";
 import FileMenuSideBar from "./FileMenuSideBar";
 
-vi.mock("./FileMenuOption/FileMenuOption", () => ({
-  default: vi.fn(({ fileName, isSelected, setSelected }) => (
-    <button
-      data-testid={`file-option-${fileName}`}
-      className={isSelected ? "active" : "inactive"}
-      onClick={() => setSelected(fileName)}
-    >
-      {fileName}
-    </button>
-  )),
+describe("FileOption", () => {
+  it("renders file name and calls setSelected on click", async () => {
+    const mockSetSelected = vi.fn();
+    const fileNode: FileNode = {
+      name: "exampleFile.java",
+      filePath: "/path/to/exampleFile.java",
+      type: "file",
+    };
+
+    render(
+      <FileOption
+        node={fileNode}
+        setSelected={mockSetSelected}
+        isSelected={false}
+      />
+    );
+
+    expect(screen.getByText("exampleFile.java")).toBeInTheDocument();
+
+    const button = screen.getByRole("button");
+    await userEvent.click(button);
+
+    expect(mockSetSelected).toHaveBeenCalled();
+  });
+});
+
+describe("organizeFiles", () => {
+  it("handles an empty list of file paths", () => {
+    const result = organizeFiles([], "projects/base/projectFiles/");
+    expect(result).toEqual([]);
+  });
+});
+
+describe("FileOption", () => {
+  it("renders file name and calls setSelected on click", async () => {
+    const mockSetSelected = vi.fn();
+    const fileNode: FileNode = {
+      name: "exampleFile.java",
+      filePath: "/path/to/exampleFile.java",
+      type: "file",
+    };
+
+    render(
+      <FileOption
+        node={fileNode}
+        setSelected={mockSetSelected}
+        isSelected={false}
+      />
+    );
+
+    expect(screen.getByText("exampleFile.java")).toBeInTheDocument();
+
+    const button = screen.getByRole("button");
+    await userEvent.click(button);
+
+    expect(mockSetSelected).toHaveBeenCalled();
+  });
+});
+
+describe("DirectoryOption", () => {
+  it("renders directory name and toggles expansion", () => {
+    const mockSetFileSelected = vi.fn();
+
+    const mockNode: FileNode = {
+      name: "TestDirectory",
+      filePath: "/path/to/TestDirectory",
+      type: "directory",
+      children: [
+        {
+          name: "File1.java",
+          filePath: "/path/to/TestDirectory/File1.java",
+          type: "file",
+        },
+        {
+          name: "SubDirectory",
+          filePath: "/path/to/TestDirectory/SubDirectory",
+          type: "directory",
+          children: [
+            {
+              name: "File2.java",
+              filePath: "/path/to/TestDirectory/SubDirectory/File2.java",
+              type: "file",
+            },
+          ],
+        },
+      ],
+    };
+
+    render(
+      <DirectoryOption
+        node={mockNode}
+        fileSelected=""
+        setFileSelected={mockSetFileSelected}
+      />
+    );
+
+    expect(screen.getByText("TestDirectory")).toBeInTheDocument();
+
+    const header = screen.getByRole("button", { name: /testdirectory/i });
+    fireEvent.click(header);
+
+    expect(screen.getByText("File1.java")).toBeInTheDocument();
+    expect(screen.getByText("SubDirectory")).toBeInTheDocument();
+  });
+
+  it("calls setFileSelected when a file is clicked", () => {
+    const mockSetFileSelected = vi.fn();
+
+    const mockNode: FileNode = {
+      name: "TestDirectory",
+      filePath: "/path/to/TestDirectory",
+      type: "directory",
+      children: [
+        {
+          name: "File1.java",
+          filePath: "/path/to/TestDirectory/File1.java",
+          type: "file",
+        },
+      ],
+    };
+
+    render(
+      <DirectoryOption
+        node={mockNode}
+        fileSelected=""
+        setFileSelected={mockSetFileSelected}
+      />
+    );
+
+    const header = screen.getByRole("button", { name: /testdirectory/i });
+    fireEvent.click(header);
+
+    const fileButton = screen.getByText("File1.java");
+    fireEvent.click(fileButton);
+
+    expect(mockSetFileSelected).toHaveBeenCalledWith(
+      "File1.java",
+      "/path/to/TestDirectory/File1.java"
+    );
+  });
+});
+
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual("@mui/material");
+  return {
+    ...actual,
+    useMediaQuery: vi.fn(() => true),
+  };
+});
+
+vi.mock("@mui/material/Drawer", () => ({
+  default: vi.fn(({ children }) => <div>{children}</div>),
 }));
 
-describe("FileMenuSideBar component", () => {
-  const mockFiles = ["file1.js", "file2.js", "file3.js"];
+describe("FileMenuSideBar", () => {
+  it("renders the project files sidebar with a title", () => {
+    const mockSetSelectedFilePath = vi.fn();
 
-  it("renders the project files title", () => {
+    const projectFiles = [
+      "/base/path",
+      "/base/path/Directory1",
+      "/base/path/Directory1/File1.java",
+      "/base/path/File2.java",
+    ];
+
     render(
-      <FileMenuSideBar proyectFiles={mockFiles} optionOnClick={() => {}} />
+      <FileMenuSideBar
+        projectFiles={projectFiles}
+        basePath="/base/path"
+        setSelectedFilePath={mockSetSelectedFilePath}
+      />
     );
+
     expect(screen.getByText("Project Files")).toBeInTheDocument();
+    expect(screen.getByText("Directory1")).toBeInTheDocument();
+    expect(screen.getByText("File2.java")).toBeInTheDocument();
   });
 
-  it("renders all the file options", () => {
+  it("calls setSelectedFilePath when a file is selected", async () => {
+    const mockSetSelectedFilePath = vi.fn();
+
+    const projectFiles = ["/base/path", "/base/path/File1.java"];
+
     render(
-      <FileMenuSideBar proyectFiles={mockFiles} optionOnClick={() => {}} />
+      <FileMenuSideBar
+        projectFiles={projectFiles}
+        basePath="/base/path"
+        setSelectedFilePath={mockSetSelectedFilePath}
+      />
     );
-    mockFiles.forEach((file) => {
-      expect(screen.getByTestId(`file-option-${file}`)).toBeInTheDocument();
-    });
+
+    const fileButton = screen.getByText("File1.java");
+    await userEvent.click(fileButton);
+  });
+});
+
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual("@mui/material");
+  return {
+    ...actual,
+    useMediaQuery: vi.fn(),
+  };
+});
+
+describe("FileMenuSideBar - Responsive Behavior", () => {
+  it("shows the toggle button on small screens", () => {
+    render(
+      <FileMenuSideBar
+        projectFiles={["/base/path", "/base/path/File1.java"]}
+        basePath="/base/path"
+        setSelectedFilePath={vi.fn()}
+      />
+    );
+
+    expect(
+      screen.getByRole("button", { name: /open drawer/i })
+    ).toBeInTheDocument();
   });
 
-  it("sets the first file as selected by default", () => {
+  it("opens and closes the drawer on small screens when the toggle button is clicked", async () => {
     render(
-      <FileMenuSideBar proyectFiles={mockFiles} optionOnClick={() => {}} />
+      <FileMenuSideBar
+        projectFiles={["/base/path", "/base/path/File1.java"]}
+        basePath="/base/path"
+        setSelectedFilePath={vi.fn()}
+      />
     );
-    expect(screen.getByTestId(`file-option-${mockFiles[0]}`)).toHaveClass(
-      "active"
+
+    const toggleButton = screen.getByRole("button", { name: /open drawer/i });
+
+    fireEvent.click(toggleButton);
+    expect(screen.getByText("Project Files")).toBeInTheDocument();
+
+    fireEvent.click(toggleButton);
+  });
+
+  it("always shows the drawer on large screens", () => {
+    render(
+      <FileMenuSideBar
+        projectFiles={["/base/path", "/base/path/File1.java"]}
+        basePath="/base/path"
+        setSelectedFilePath={vi.fn()}
+      />
     );
+
+    expect(screen.getByText("Project Files")).toBeInTheDocument();
   });
 });

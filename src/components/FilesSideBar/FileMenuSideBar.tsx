@@ -1,21 +1,52 @@
-import { Typography } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Typography,
+  CssBaseline,
+  Drawer,
+  Fab,
+  useMediaQuery,
+  Theme,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import DirectoryOption from "./FileMenuOption/DirectoryOption";
+import FileOption from "./FileMenuOption/FileOption";
 import styles from "./FileMenuSideBar.module.css";
-import { useState } from "react";
+import organizeFiles, { FileNode } from "./FileNode";
 import { splitUntilSecondSlash } from "../../utils/methods";
-import FileMenuOption from "./FileMenuOption";
+import { COLORS } from "../../utils/styleConstants";
+
+const DRAWER_WIDTH = 300;
 
 interface FileMenuSideBarProps {
-  proyectFiles: string[];
-  optionOnClick: (val: string) => void;
+  projectFiles: string[];
+  basePath: string;
+  setSelectedFilePath: (e: string) => void;
 }
 
 const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
-  proyectFiles,
-  optionOnClick,
+  projectFiles,
+  basePath,
+  setSelectedFilePath,
 }) => {
-  const [fileSelected, setFileSelected] = useState<string>(proyectFiles[0]);
+  const [fileSelected, setFileSelected] = useState<string>(projectFiles[0]);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  return (
+  const isLargeScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up("lg")
+  );
+
+  const nodes: FileNode[] = organizeFiles(projectFiles.slice(1), basePath);
+
+  function onFileSelected(value: string, path: string): void {
+    setFileSelected(value);
+    setSelectedFilePath(splitUntilSecondSlash(path));
+  }
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const DrawerContent = (
     <div className={styles.FileMenuSideBar}>
       <div className={styles.FilesMenuBarTitle}>
         <Typography fontSize={"23px"} fontWeight={"bold"}>
@@ -23,19 +54,67 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
         </Typography>
       </div>
       <div className={styles.FilesMenuOptions}>
-        {proyectFiles.map((e) => (
-          <FileMenuOption
-            key={e}
-            fileName={splitUntilSecondSlash(e)}
-            isSelected={fileSelected === splitUntilSecondSlash(e)}
-            setSelected={(val) => {
-              optionOnClick(val);
-              setFileSelected(val);
-            }}
-          />
-        ))}
+        {nodes.map((e, index) =>
+          e.type === "directory" ? (
+            <div style={{ marginLeft: index * 40 }}>
+              <DirectoryOption
+                key={e.name}
+                node={e}
+                fileSelected={fileSelected}
+                setFileSelected={onFileSelected}
+              />
+            </div>
+          ) : (
+            <FileOption
+              key={e.name}
+              isSelected={fileSelected === e.name}
+              node={e}
+              setSelected={() => onFileSelected(e.name, e.filePath)}
+            />
+          )
+        )}
       </div>
     </div>
+  );
+
+  return (
+    <>
+      <CssBaseline />
+      {!isLargeScreen && (
+        <Fab
+          color="primary"
+          aria-label="open drawer"
+          onClick={handleDrawerToggle}
+          sx={{
+            position: "fixed",
+            top: 90,
+            left: 16,
+            zIndex: 4600,
+          }}
+        >
+          <MenuIcon />
+        </Fab>
+      )}
+      <Drawer
+        variant={isLargeScreen ? "permanent" : "temporary"}
+        open={isLargeScreen || mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          width: DRAWER_WIDTH,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: DRAWER_WIDTH,
+            boxSizing: "border-box",
+            position: isLargeScreen ? "relative" : "fixed",
+            backgroundColor: "#1D212F",
+            borderRight: `1px solid ${COLORS.NEUTRAL_WHITE}`,
+          },
+        }}
+      >
+        {DrawerContent}
+      </Drawer>
+    </>
   );
 };
 

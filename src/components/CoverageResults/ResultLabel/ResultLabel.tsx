@@ -9,7 +9,10 @@ interface ResultLabelProps {
 
 const ResultLabel: React.FC<ResultLabelProps> = ({ passed }) => {
   const passedLabel = useMemo(() => (passed ? "PASSED" : "FAILED"), [passed]);
-  const colorLabel = useMemo(() => (passed ? COLORS.SUCCESS : COLORS.ERROR), [passed]);
+  const colorLabel = useMemo(
+    () => (passed ? COLORS.SUCCESS : COLORS.ERROR),
+    [passed]
+  );
 
   return (
     <CenteredContainer>

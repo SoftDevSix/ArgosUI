@@ -104,4 +104,57 @@ describe("ProjectCoverageRules Component", () => {
 
     expect(setRulesConfig).not.toHaveBeenCalled();
   });
+
+  it("does not update projectCoverageThreshold if the value is negative", () => {
+    const setRulesConfig = vi.fn();
+
+    render(
+      <ProjectCoverageRules
+        rulesConfig={mockRulesConfig}
+        setRulesConfig={setRulesConfig}
+        handleSwitchChange={vi.fn()}
+      />
+    );
+
+    const inputField = screen.getByDisplayValue("80");
+    fireEvent.change(inputField, { target: { value: "-10" } });
+
+    expect(setRulesConfig).not.toHaveBeenCalled();
+  });
+
+  it("handles empty or invalid input gracefully", () => {
+    const setRulesConfig = vi.fn();
+
+    render(
+      <ProjectCoverageRules
+        rulesConfig={mockRulesConfig}
+        setRulesConfig={setRulesConfig}
+        handleSwitchChange={vi.fn()}
+      />
+    );
+
+    const inputField = screen.getByDisplayValue("80");
+
+    fireEvent.change(inputField, { target: { value: 90 } });
+
+    const callback = setRulesConfig.mock.calls[0][0];
+    const prevState = {
+      rules: {
+        codeRating: "A",
+        codeRatingEnabled: true,
+        projectCoverageEnabled: true,
+        projectCoverageThreshold: 80,
+      },
+    };
+
+    const newState = callback(prevState);
+    expect(newState).toEqual({
+      rules: {
+        codeRating: "A",
+        codeRatingEnabled: true,
+        projectCoverageEnabled: true,
+        projectCoverageThreshold: 90,
+      },
+    });
+  });
 });
