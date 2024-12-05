@@ -62,4 +62,23 @@ describe("ProjectUploader Component", () => {
 
     expect(screen.getByText(/no zip file selected/i)).toBeInTheDocument();
   });
+
+  it("shows an alert when the uploaded file is not a ZIP file", () => {
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+
+    render(<ProjectUploader setFormData={mockSetFormData} />);
+
+    const input = screen.getByLabelText(/upload the project/i);
+    const invalidFile = new File(["dummy content"], "file.txt", {
+      type: "text/plain",
+    });
+
+    fireEvent.change(input, { target: { files: [invalidFile] } });
+
+    expect(alertMock).toHaveBeenCalledWith("Please upload a valid ZIP file.");
+
+    expect(mockSetFormData).not.toHaveBeenCalled();
+
+    alertMock.mockRestore();
+  });
 });

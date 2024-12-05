@@ -17,11 +17,11 @@ const uploadProjectDataRules = async (
         },
         body: JSON.stringify({
           projectName: projectData.projectName,
-          projectDescription: projectData.projectDescription,
+          description: projectData.projectDescription,
           projectCoverage: rules.projectCoverageEnabled,
-          minimumCoverage: rules.projectCoverageThreshold,
-          codeRating: rules.codeRatingEnabled,
-          minimumRating: rules.codeRating,
+          requiredCoveragePercentage: rules.projectCoverageThreshold,
+          projectRating: rules.codeRatingEnabled,
+          requiredCodeRating: rules.codeRating,
         }),
       }
     );

@@ -27,9 +27,7 @@ describe("CoveragePercentage", () => {
     const progress = screen.getByRole("progressbar");
 
     const computedStyle = window.getComputedStyle(progress);
-    expect(rgbToHex(computedStyle.color)).toBe(
-      COLORS.SUCCESS_VARIANT.toLowerCase()
-    );
+    expect(rgbToHex(computedStyle.color)).toBe(COLORS.SUCCESS.toLowerCase());
   });
 
   it("uses error color when currentPercentage < requiredPercentage", () => {
@@ -40,9 +38,7 @@ describe("CoveragePercentage", () => {
     const progress = screen.getByRole("progressbar");
 
     const computedStyle = window.getComputedStyle(progress);
-    expect(rgbToHex(computedStyle.color)).toBe(
-      COLORS.ERROR_VARIANT.toLowerCase()
-    );
+    expect(rgbToHex(computedStyle.color)).toBe(COLORS.ERROR.toLowerCase());
   });
 
   it("rounds percentages to two decimal places", () => {

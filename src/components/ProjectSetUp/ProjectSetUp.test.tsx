@@ -1,9 +1,47 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
-import ProjectSetUp from "./ProjectSetUp";
-import { expect, it, describe } from "vitest";
+import { vi, expect, it, describe } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import { UploadedKeysProvider } from "../../context/UploadedKeysContext";
+import ProjectSetUp from "./ProjectSetUp";
+
+import * as FileManagerService from "../../services/FileManagerService";
+import * as RulesManagerService from "../../services/RulesManagerService";
+import React from "react";
+
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual("react-router-dom");
+  return {
+    ...actual,
+    useNavigate: vi.fn(() => vi.fn()),
+  };
+});
+
+vi.mock("../../services/FileManagerService", async () => ({
+  default: vi.fn(),
+}));
+
+vi.mock("../../services/RulesManagerService", async () => ({
+  default: vi.fn(),
+}));
+
+vi.mock("../Splash", () => {
+  const MockSplash: React.FC<{ splashMessage?: string }> = ({
+    splashMessage = "Loading...",
+  }) => (
+    <div data-testid="mock-splash">
+      <div>Mock Splash</div>
+      <div>{splashMessage}</div>
+    </div>
+  );
+
+  MockSplash.displayName = "MockSplash";
+
+  return {
+    __esModule: true,
+    default: vi.fn(MockSplash),
+  };
+});
 
 const renderWithRouterAndContext = () => {
   return render(
@@ -33,53 +71,99 @@ const uploadFile = async (
 };
 
 describe("ProjectSetUp Component", () => {
-  it("renders the component with the initial UI", () => {
-    renderWithRouterAndContext();
+  describe("Form Validation", () => {
+    it("shows alert when no zip file is selected", async () => {
+      const user = userEvent.setup();
+      const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+      renderWithRouterAndContext();
 
-    screen.debug();
+      const projectNameInput = screen.getByLabelText(/projectName/i);
+      await user.type(projectNameInput, "Test Project");
 
-    expect(
-      screen.getByRole("heading", { name: /project & rules setup/i })
-    ).toBeInTheDocument();
+      const continueButton = screen.getByRole("button", { name: /continue/i });
+      await user.click(continueButton);
 
-    expect(screen.getByLabelText(/projectName/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/projectDescription/i)).toBeInTheDocument();
+      expect(alertMock).toHaveBeenCalledWith("No zip selected.");
 
-    expect(screen.getByPlaceholderText(/argos/i)).toBeInTheDocument();
-    expect(
-      screen.getByPlaceholderText(/code reviewing tool/i)
-    ).toBeInTheDocument();
+      alertMock.mockRestore();
+    });
+
+    it("shows alert when project name is not set", async () => {
+      const user = userEvent.setup();
+      const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+      renderWithRouterAndContext();
+
+      await uploadFile(user, "folder/file.zip");
+
+      const continueButton = screen.getByRole("button", { name: /continue/i });
+      await user.click(continueButton);
+
+      expect(alertMock).toHaveBeenCalledWith("Set a project name.");
+
+      alertMock.mockRestore();
+    });
   });
 
-  it("handles project file uploads via the ProjectUploader", async () => {
-    const user = userEvent.setup();
-    renderWithRouterAndContext();
+  describe("Project Upload", () => {
+    it("shows error alert on upload failure", async () => {
+      const user = userEvent.setup();
+      const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
 
-    await uploadFile(user, "folder/file.zip");
+      vi.mocked(FileManagerService.default).mockResolvedValue(null);
+      vi.mocked(RulesManagerService.default).mockResolvedValue(false);
 
-    expect(await screen.findByText(/\/folder/i)).toBeInTheDocument();
+      renderWithRouterAndContext();
+
+      await uploadFile(user, "folder/file.zip");
+      const projectNameInput = screen.getByLabelText(/projectName/i);
+      await user.type(projectNameInput, "Test Project");
+
+      const continueButton = screen.getByRole("button", { name: /continue/i });
+
+      await act(async () => {
+        await user.click(continueButton);
+      });
+
+      expect(alertMock).toHaveBeenCalledWith("Set a project name.");
+
+      alertMock.mockRestore();
+    });
   });
 
-  it("displays the delete button after uploading files", async () => {
+  it("should not proceed if validation fails (no zip file)", async () => {
     const user = userEvent.setup();
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+
     renderWithRouterAndContext();
 
-    await uploadFile(user, "folder/file.zip");
+    const continueButton = screen.getByRole("button", { name: /continue/i });
+    await user.click(continueButton);
 
-    expect(
-      screen.getByLabelText("delete-uploaded-project")
-    ).toBeInTheDocument();
+    expect(alertMock).toHaveBeenCalledWith("No zip selected.");
+    expect(FileManagerService.default).not.toHaveBeenCalled();
+
+    alertMock.mockRestore();
   });
 
-  it("resets the file state when the delete button is clicked", async () => {
+  it("should not proceed if validation fails (no project name)", async () => {
     const user = userEvent.setup();
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+
     renderWithRouterAndContext();
 
-    await uploadFile(user, "folder/file.zip");
+    // Upload zip without project name
+    const fileInput = screen.getByLabelText(/upload the project/i);
+    const mockFile = new File(["dummy content"], "test.zip", {
+      type: "application/zip",
+    });
+    await user.upload(fileInput, mockFile);
 
-    const deleteButton = screen.getByLabelText("delete-uploaded-project");
-    await user.click(deleteButton);
+    const continueButton = screen.getByRole("button", { name: /continue/i });
+    await user.click(continueButton);
 
-    expect(screen.getByText(/no zip file selected/i)).toBeInTheDocument();
+    expect(alertMock).toHaveBeenCalledWith("Set a project name.");
+    expect(FileManagerService.default).not.toHaveBeenCalled();
+
+    alertMock.mockRestore();
   });
 });

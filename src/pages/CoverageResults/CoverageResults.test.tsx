@@ -13,8 +13,7 @@ describe("CoverageResults component", () => {
         </BrowserRouter>
       </UploadedKeysProvider>
     );
-
-    // Verifica si el mensaje de carga "Getting results..." está presente
+        
     expect(screen.getByText("Getting results...")).toBeInTheDocument();
   });
 });
