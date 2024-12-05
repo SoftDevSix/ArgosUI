@@ -1,5 +1,6 @@
 import React from "react";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
+import DocumentationSideBar from "../../components/DocumentationSideBar/DocumentationSidebar";
 
 const SetUpMavenDocumentation: React.FC = () => {
   const sections = [
@@ -191,7 +192,14 @@ const SetUpMavenDocumentation: React.FC = () => {
     },
   ];
 
-  return <ContentNavigator sections={sections} />;
+  return (
+    <div style={{ display: "flex", height: "100vh" }}>
+      <DocumentationSideBar />
+      <div style={{ flexGrow: 1, padding: "1rem", overflowY: "auto" }}>
+        <ContentNavigator sections={sections} />
+      </div>
+    </div>
+  );
 };
 
 export default SetUpMavenDocumentation;
