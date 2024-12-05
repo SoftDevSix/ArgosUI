@@ -62,7 +62,11 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
           {node.name}
         </AccordionSummary>
         <AccordionDetails
-          sx={{ padding: 0, backgroundColor: COLORS.PRIMARY_DEFAULT, color: COLORS.NEUTRAL_WHITE }}
+          sx={{
+            padding: 0,
+            backgroundColor: COLORS.PRIMARY_DEFAULT,
+            color: COLORS.NEUTRAL_WHITE,
+          }}
         >
           {node.children?.map((e) =>
             e.type === "directory" ? (
