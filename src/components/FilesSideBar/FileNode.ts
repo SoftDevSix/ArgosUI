@@ -12,21 +12,21 @@ export default function organizeFiles(
   const root: FileNode[] = [];
 
   filePaths.forEach((fullPath) => {
-    const relativePath = fullPath.replace(basePath, "");
+    const relativePath = fullPath.replace(basePath, "").replace(/^\/+/, "");
     const parts = relativePath.split("/");
 
     if (parts.some((part) => part === "test")) {
       return;
     }
 
-    if (!/\.java$/.test(fullPath) && !relativePath.endsWith("/")) {
+    if (!/\.java$/.test(fullPath)) {
       return;
     }
 
     let currentLevel = root;
 
     parts.forEach((part, index) => {
-      const isFile = index === parts.length - 1 && /\.\w+$/.test(part);
+      const isFile = index === parts.length - 1 && /\.java$/.test(part);
       const existingNode = currentLevel.find((node) => node.name === part);
 
       if (existingNode) {
@@ -36,7 +36,7 @@ export default function organizeFiles(
       } else {
         const newNode: FileNode = {
           name: part,
-          filePath: fullPath,
+          filePath: isFile ? fullPath : parts.slice(0, index + 1).join("/"),
           type: isFile ? "file" : "directory",
           ...(isFile ? {} : { children: [] }),
         };

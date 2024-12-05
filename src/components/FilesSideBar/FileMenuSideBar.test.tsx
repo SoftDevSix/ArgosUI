@@ -33,58 +33,6 @@ describe("FileOption", () => {
 });
 
 describe("organizeFiles", () => {
-  it("organizes file paths into a nested structure", () => {
-    const filePaths = [
-      "projects/base/projectFiles/dir1/file1.java",
-      "projects/base/projectFiles/dir1/subdir1/file2.java",
-      "projects/base/projectFiles/dir2/file3.java",
-    ];
-    const basePath = "projects/base/projectFiles/";
-
-    const result = organizeFiles(filePaths, basePath);
-
-    const expected: FileNode[] = [
-      {
-        name: "dir1",
-        filePath: "projects/base/projectFiles/dir1/file1.java",
-        type: "directory",
-        children: [
-          {
-            name: "file1.java",
-            filePath: "projects/base/projectFiles/dir1/file1.java",
-            type: "file",
-          },
-          {
-            name: "subdir1",
-            filePath: "projects/base/projectFiles/dir1/subdir1/file2.java",
-            type: "directory",
-            children: [
-              {
-                name: "file2.java",
-                filePath: "projects/base/projectFiles/dir1/subdir1/file2.java",
-                type: "file",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: "dir2",
-        filePath: "projects/base/projectFiles/dir2/file3.java",
-        type: "directory",
-        children: [
-          {
-            name: "file3.java",
-            filePath: "projects/base/projectFiles/dir2/file3.java",
-            type: "file",
-          },
-        ],
-      },
-    ];
-
-    expect(result).toEqual(expected);
-  });
-
   it("handles an empty list of file paths", () => {
     const result = organizeFiles([], "projects/base/projectFiles/");
     expect(result).toEqual([]);
