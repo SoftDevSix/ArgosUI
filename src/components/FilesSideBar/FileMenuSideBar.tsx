@@ -13,6 +13,7 @@ import FileOption from "./FileMenuOption/FileOption";
 import styles from "./FileMenuSideBar.module.css";
 import organizeFiles, { FileNode } from "./FileNode";
 import { splitUntilSecondSlash } from "../../utils/methods";
+import { COLORS } from "../../utils/styleConstants";
 
 const DRAWER_WIDTH = 300;
 
@@ -107,7 +108,7 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
             boxSizing: "border-box",
             position: isLargeScreen ? "relative" : "fixed",
             backgroundColor: "#1D212F",
-            borderRight: "1px solid white",
+            borderRight: `1px solid ${COLORS.NEUTRAL_WHITE}`,
           },
         }}
       >

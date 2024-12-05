@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { FileNode } from "../FileNode";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import { COLORS } from "../../../utils/styleConstants";
 
 interface FileOptionProps {
   node: FileNode;
@@ -26,7 +27,7 @@ const FileOption: React.FC<FileOptionProps> = ({
         fullWidth
         sx={{
           justifyContent: "flex-start",
-          color: isSelected ? "white" : "gray",
+          color: isSelected ? COLORS.NEUTRAL_WHITE : "gray",
           textTransform: "none",
         }}
       >
