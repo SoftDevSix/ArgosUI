@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { CircularProgress, Typography } from "@mui/material";
 import CenteredContainer from "../../CenteredContainer";
+import { COLORS } from "../../../utils/styleConstants";
 
 interface CoveragePercentageProps {
   currentPercentage: number;
@@ -15,7 +16,8 @@ const CoveragePercentage: React.FC<CoveragePercentageProps> = ({
   const requiredPercentageRounded = requiredPercentage.toFixed(2);
 
   const colorProgress = useMemo(
-    () => (currentPercentage >= requiredPercentage ? "success" : "error"),
+    () =>
+      currentPercentage >= requiredPercentage ? COLORS.SUCCESS : COLORS.ERROR,
     [currentPercentage, requiredPercentage]
   );
 
@@ -23,7 +25,7 @@ const CoveragePercentage: React.FC<CoveragePercentageProps> = ({
     <CenteredContainer>
       <CircularProgress
         size={300}
-        color={colorProgress}
+        sx={{ color: colorProgress }}
         variant="determinate"
         value={currentPercentage}
         aria-label="coverage-percentage"

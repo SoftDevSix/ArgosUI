@@ -42,11 +42,11 @@ describe("uploadProjectDataRules", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           projectName: "Test Project",
-          projectDescription: "This is a test project",
+          description: "This is a test project",
           projectCoverage: true,
-          minimumCoverage: 80,
-          codeRating: true,
-          minimumRating: "A",
+          requiredCoveragePercentage: 80,
+          projectRating: true,
+          requiredCodeRating: "A",
         }),
       })
     );
