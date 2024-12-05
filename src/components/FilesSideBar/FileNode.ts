@@ -14,6 +14,15 @@ export default function organizeFiles(
   filePaths.forEach((fullPath) => {
     const relativePath = fullPath.replace(basePath, "");
     const parts = relativePath.split("/");
+
+    if (parts.some((part) => part === "test")) {
+      return; 
+    }
+
+    if (!/\.java$/.test(fullPath) && !relativePath.endsWith("/")) {
+      return; 
+    }
+
     let currentLevel = root;
 
     parts.forEach((part, index) => {
