@@ -31,7 +31,13 @@ const FileOption: React.FC<FileOptionProps> = ({
         }}
       >
         <InsertDriveFileIcon sx={{ marginRight: "10px" }} />
-        <Typography width={"99%"} textAlign={"left"}>
+        <Typography
+          width={"99%"}
+          textAlign={"left"}
+          whiteSpace={"nowrap"}
+          overflow={"hidden"}
+          textOverflow={"ellipsis"}
+        >
           {node.name}
         </Typography>
       </Button>

@@ -53,14 +53,16 @@ const FileMenuSideBar: React.FC<FileMenuSideBarProps> = ({
         </Typography>
       </div>
       <div className={styles.FilesMenuOptions}>
-        {nodes.map((e) =>
+        {nodes.map((e, index) =>
           e.type === "directory" ? (
-            <DirectoryOption
-              key={e.name}
-              node={e}
-              fileSelected={fileSelected}
-              setFileSelected={onFileSelected}
-            />
+            <div style={{ marginLeft: index * 40 }}>
+              <DirectoryOption
+                key={e.name}
+                node={e}
+                fileSelected={fileSelected}
+                setFileSelected={onFileSelected}
+              />
+            </div>
           ) : (
             <FileOption
               key={e.name}

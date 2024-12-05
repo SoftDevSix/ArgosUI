@@ -30,6 +30,7 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
         sx={{
           backgroundColor: "#2A2F40",
           color: "white",
+          paddingLeft: 1.6,
           "&:before": { display: "none" },
         }}
         expanded={expanded}
@@ -41,6 +42,9 @@ const DirectoryOption: React.FC<DirectoryOptionProps> = ({
             color: "white",
             display: "flex",
             alignItems: "center",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
           expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
           aria-controls={node.name + "-content"}

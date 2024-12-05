@@ -15,7 +15,18 @@ export default function organizeFiles(
     const relativePath = fullPath.replace(basePath, "").replace(/^\/+/, "");
     const parts = relativePath.split("/");
 
-    if (parts.some((part) => part === "test")) {
+    const ignoredPaths = [
+      "test",
+      "bin/",
+      "obj/",
+      ".idea/",
+      ".vscode/",
+      ".jar",
+      "dist/",
+      "out/",
+    ];
+
+    if (parts.some((part) => ignoredPaths.includes(part))) {
       return;
     }
 
