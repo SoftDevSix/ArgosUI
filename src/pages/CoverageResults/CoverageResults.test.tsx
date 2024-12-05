@@ -14,12 +14,12 @@ vi.mock("../../hooks/useFetch", () => ({
       projectStatus: "PASSED",
       codeAnalysisResult: {
         actualRating: 4,
-        expectedRating: 3
+        expectedRating: 3,
       },
       coverageResult: {
         totalCoverage: 80,
-        requiredCoverage: 90
-      }
+        requiredCoverage: 90,
+      },
     }),
     loading: false,
     error: null,
