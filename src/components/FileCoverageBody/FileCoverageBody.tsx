@@ -42,7 +42,7 @@ const FileCoverageBody: React.FC<FileCoverageBodyPromps> = ({
       const dataJson = JSON.parse(data);
       setSelectedFilePath(splitUntilSecondSlash(dataJson[5]));
     }
-  }, [data]);
+  }, [data, setSelectedFilePath]);
 
   useEffect(() => {
     if (selectedFilePath) {

@@ -3,11 +3,11 @@ import { Box } from "@mui/material";
 import useFetch from "../../hooks/useFetch";
 import { FileCoverageInterface } from "../../types/interfaces";
 import FileMenuSideBar from "../../components/FilesSideBar";
-import FileCoverageBody from "../../components/FileCoverageBody/FileCoverageBody";
 import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import { FILE_MANAGER_API_BASE_URL } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { PageNames } from "../../utils/pageNames";
+import FileCoverageBody from "../../components/FileCoverageBody";
 
 const FileCoverage: React.FC = () => {
   const navigate = useNavigate();
