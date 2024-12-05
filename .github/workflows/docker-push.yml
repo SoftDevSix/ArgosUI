@@ -25,7 +25,7 @@ jobs:
           IMAGE_NAME: argoscs/ui
         run: |
           echo "Building Docker image..."
-          docker build -t ${IMAGE_NAME} -f Dockerfile.dev .
+          docker build -t ${IMAGE_NAME} -f Dockerfile.prod .
 
           echo "Pushing Docker image..."
           docker push ${IMAGE_NAME}
