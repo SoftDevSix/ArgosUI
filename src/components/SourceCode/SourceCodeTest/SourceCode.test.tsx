@@ -90,4 +90,28 @@ describe("SourceCode Component", () => {
 
     expect(await screen.findByRole("progressbar")).toBeInTheDocument();
   });
+
+  it("renders no content in the file message when there is no data", async () => {
+    mockUseFetch.mockImplementation(() => ({
+      data: null,
+      loading: false,
+      error: null,
+    }));
+
+    render(
+      <MockUploadedKeysProvider
+        value={{
+          uploadedKeys: "12345",
+          hasUploadedKeys: true,
+          setUploadedKeys: vi.fn(),
+        }}
+      >
+        <SourceCode filePath="test/path" uncoveredLines={[]} />
+      </MockUploadedKeysProvider>
+    );
+
+    expect(
+      await screen.findByText(/No content in the file/i)
+    ).toBeInTheDocument();
+  });
 });
