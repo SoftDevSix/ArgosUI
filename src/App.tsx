@@ -15,7 +15,7 @@ import OverviewDocumentationPage from "./pages/OverviewDocumentation";
 import SetupAgentGradleDocumentation from "./pages/SetUpGradleDocumentation/SetUpAgentGradleDocumentation";
 import SetUpMavenDocumentation from "./pages/SetUpMavenDocumentation/SetUpMavenDocumentation";
 import Splash from "./components/Splash";
-import InstallationPage from "./pages/installation";
+import InstallationPage from "./pages/Installation";
 
 const App: React.FC = () => {
   const location = useLocation();
