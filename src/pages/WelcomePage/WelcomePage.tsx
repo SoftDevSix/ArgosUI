@@ -6,6 +6,7 @@ import { PageNames } from "../../utils/pageNames";
 import Splash from "../../components/Splash";
 import CustomButton from "../../components/Form/CustomButton";
 import { COLORS } from "../../utils/styleConstants";
+import image1 from "../../assets/images/welcome-background.png";
 
 const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const WelcomePage: React.FC = () => {
   return (
     <div className={styles.container}>
       <img
-        src="src/assets/images/welcome-background.png"
+        src={image1}
         alt="Welcome background"
         style={{
           position: "absolute",

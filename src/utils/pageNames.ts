@@ -4,4 +4,8 @@ export enum PageNames {
   COVERAGE_RESULTS = "coverage",
   PROJECT_SETUP = "project-setup",
   FILE_COVERAGE = "file",
+  OVERVIEW = "overview",
+  MAVEN = "maven",
+  GRADLE = "gradle",
+  INSTALLATION = "installation",
 }
