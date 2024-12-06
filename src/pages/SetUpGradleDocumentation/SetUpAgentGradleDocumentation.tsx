@@ -45,6 +45,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
       title: "Configuration",
       content: (
         <>
+          <strong>Kotlin</strong>
           <ul>
             <img
               src={image6}
@@ -60,6 +61,32 @@ const SetupAgentGradleDocumentation: React.FC = () => {
             <li>Configure in “build.gradle.kts” the following lines: </li>
             <img
               src={image2}
+              alt="Jar Position maven"
+              style={{
+                maxWidth: "100%",
+                marginTop: "16px",
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            />
+          </ul>
+          <strong>Grovy</strong>
+          <ul>
+            <img
+              src="src/assets/images/gradle/Step-01-1 Gradle.png"
+              alt="Jar Position maven"
+              style={{
+                maxWidth: "100%",
+                marginTop: "16px",
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            />
+            <li>On the same way to kotlin configuration, Configure in “build.gradle” the following lines: </li>
+            <img
+              src="src/assets/images/gradle/Step-01-2 Gradle.png"
               alt="Jar Position maven"
               style={{
                 maxWidth: "100%",
