@@ -31,7 +31,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-        <Header />
+      <Header />
 
       <Box display={"flex"} flexDirection={"column"}>
         {showSidebar && <Header />}
@@ -44,9 +44,15 @@ const App: React.FC = () => {
             Component={CoverageResults}
           />
           <Route path={PageNames.ERROR_404} Component={Error} />
-          <Route path={PageNames.OVERVIEW} element={<OverviewDocumentationPage />} />
-            <Route path={PageNames.MAVEN} element={<SetUpMavenDocumentation />} />
-            <Route path={PageNames.GRADLE} element={<SetupAgentGradleDocumentation />} />
+          <Route
+            path={PageNames.OVERVIEW}
+            element={<OverviewDocumentationPage />}
+          />
+          <Route path={PageNames.MAVEN} element={<SetUpMavenDocumentation />} />
+          <Route
+            path={PageNames.GRADLE}
+            element={<SetupAgentGradleDocumentation />}
+          />
         </Routes>
       </Box>
     </ThemeProvider>

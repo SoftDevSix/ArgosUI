@@ -6,7 +6,7 @@ import { PageNames } from "../../utils/pageNames";
 import Splash from "../../components/Splash";
 import CustomButton from "../../components/Form/CustomButton";
 import { COLORS } from "../../utils/styleConstants";
-import image1 from "../../assets/images/welcome-background.png"
+import image1 from "../../assets/images/welcome-background.png";
 
 const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
