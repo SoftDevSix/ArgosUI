@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import MainContent from "./MainContent";
+import React from "react";
 
 describe("MainContent component", () => {
   const mockSections = [
@@ -26,8 +27,13 @@ describe("MainContent component", () => {
       const sectionTitle = screen.getByText(title);
       expect(sectionTitle).toBeInTheDocument();
 
-      const sectionContent = screen.getByText((content as any).props.children);
-      expect(sectionContent).toBeInTheDocument();
+      if (React.isValidElement(content)) {
+        const container = document.createElement("div");
+        render(content, { container });
+
+        const contentText = container.textContent;
+        expect(screen.getByText(contentText || "")).toBeInTheDocument();
+      }
     });
   });
 
