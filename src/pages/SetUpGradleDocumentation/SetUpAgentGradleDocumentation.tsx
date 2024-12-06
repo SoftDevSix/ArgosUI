@@ -6,6 +6,7 @@ import image3 from "../../assets/images/gradle/Step-03 Gradle.png";
 import image4 from "../../assets/images/gradle/Step-04 Gradle.png";
 import image5 from "../../assets/images/gradle/Step-05 Gradle.png";
 import image6 from "../../assets/images/gradle/Step-06 Gradle.png";
+import DocumentationSideBar from "../../components/DocumentationSideBar";
 
 const SetupAgentGradleDocumentation: React.FC = () => {
   const sections = [
@@ -151,7 +152,12 @@ const SetupAgentGradleDocumentation: React.FC = () => {
     },
   ];
 
-  return <ContentNavigator sections={sections} />;
+  return (
+    <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+      <DocumentationSideBar />
+      <ContentNavigator sections={sections} />
+    </div>
+  );
 };
 
 export default SetupAgentGradleDocumentation;

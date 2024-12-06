@@ -8,6 +8,7 @@ import image5 from "../../assets/images/maven/Step-05 Maven.png";
 import image6 from "../../assets/images/maven/Step-06 Maven.png";
 import image7 from "../../assets/images/maven/Step-07 Maven.png";
 import image8 from "../../assets/images/maven/Step-08 Maven.png";
+import DocumentationSideBar from "../../components/DocumentationSideBar";
 
 const SetUpMavenDocumentation: React.FC = () => {
   const sections = [
@@ -199,7 +200,12 @@ const SetUpMavenDocumentation: React.FC = () => {
     },
   ];
 
-  return <ContentNavigator sections={sections} />;
+  return (
+    <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+      <DocumentationSideBar />
+      <ContentNavigator sections={sections} />
+    </div>
+  );
 };
 
 export default SetUpMavenDocumentation;

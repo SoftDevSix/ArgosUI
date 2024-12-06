@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   List,
@@ -16,7 +16,6 @@ interface ContentbarProps {
 const styles = {
   container: {
     width: "20%",
-    backgroundColor: "#1a1a1a",
     color: "white",
     padding: 2,
   },
@@ -29,6 +28,13 @@ const Contentbar: React.FC<ContentbarProps> = ({
   sections,
   onScrollToSection,
 }) => {
+  const [selectedSection, setSelectedSection] = useState<string | null>(null);
+
+  const handleSectionClick = (id: string) => {
+    setSelectedSection(id);
+    onScrollToSection(id);
+  };
+
   return (
     <Box sx={styles.container}>
       <Typography variant="h6" sx={styles.title}>
@@ -37,8 +43,18 @@ const Contentbar: React.FC<ContentbarProps> = ({
       <List>
         {sections.map((section) => (
           <ListItem key={section.id} disablePadding>
-            <ListItemButton onClick={() => onScrollToSection(section.id)}>
-              <ListItemText primary={section.title} />
+            <ListItemButton onClick={() => handleSectionClick(section.id)}>
+              <ListItemText
+                primary={section.title}
+                style={{
+                  borderBottom:
+                    selectedSection === section.id ? "2px solid #e3e" : "none",
+                  display: "inline",
+                  flex: "none",
+                  paddingBottom: selectedSection === section.id ? 1 : 0,
+                  color: selectedSection === section.id ? "#FFFFFF" : "#686D7E",
+                }}
+              />
             </ListItemButton>
           </ListItem>
         ))}

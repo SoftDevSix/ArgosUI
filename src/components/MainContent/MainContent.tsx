@@ -8,7 +8,7 @@ interface MainContentProps {
 
 const styles = {
   container: {
-    width: "80%",
+    flex: 1,
     overflow: "auto",
     padding: 4,
   },
