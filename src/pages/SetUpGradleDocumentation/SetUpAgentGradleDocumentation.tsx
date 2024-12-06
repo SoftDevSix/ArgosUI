@@ -84,7 +84,10 @@ const SetupAgentGradleDocumentation: React.FC = () => {
                 marginRight: "auto",
               }}
             />
-            <li>On the same way to kotlin configuration, Configure in “build.gradle” the following lines: </li>
+            <li>
+              On the same way to kotlin configuration, Configure in
+              “build.gradle” the following lines:{" "}
+            </li>
             <img
               src="src/assets/images/gradle/Step-01-2 Gradle.png"
               alt="Jar Position maven"
