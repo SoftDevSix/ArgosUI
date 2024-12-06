@@ -92,5 +92,4 @@ describe("Header", () => {
 
     expect(screen.getByText("Argos")).toBeInTheDocument();
   });
-
 });
