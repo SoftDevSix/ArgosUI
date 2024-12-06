@@ -6,9 +6,9 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import theme from "./utils/theme";
 import Header from "./components/Header";
-import OverviewPage from "./pages/Overview/Overview";
-import SetupAgentInMaven from "./pages/setupMaven/SetupAgentInMaven";
-import SetupAgentGradle from "./pages/SetUpGradle/SetUpAgentGradle";
+import OverviewDocumentationPage from "./pages/OverviewDocumentation";
+import SetupAgentGradleDocumentation from "./pages/SetUpGradleDocumentation/SetUpAgentGradleDocumentation";
+import SetUpMavenDocumentation from "./pages/SetUpMavenDocumentation/SetUpMavenDocumentation";
 
 const App: React.FC = () => {
   return (
@@ -20,9 +20,9 @@ const App: React.FC = () => {
           <Routes>
             <Route path={PageNames.HOME} Component={Home} />
             <Route path={PageNames.ERROR_404} Component={Error} />
-            <Route path="/overview" element={<OverviewPage />} />
-            <Route path="/maven" element={<SetupAgentInMaven />} />
-            <Route path="/gradle" element={<SetupAgentGradle />} />
+            <Route path="/overview" element={<OverviewDocumentationPage />} />
+            <Route path="/maven" element={<SetUpMavenDocumentation />} />
+            <Route path="/gradle" element={<SetupAgentGradleDocumentation />} />
           </Routes>
         </Container>
       </BrowserRouter>

@@ -1,7 +1,7 @@
 import React from "react";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
 
-const OverviewPage: React.FC = () => {
+const OverviewDocumentationPage: React.FC = () => {
   const sections = [
     {
       id: "overview",
@@ -14,7 +14,7 @@ const OverviewPage: React.FC = () => {
             for example:
           </p>
           <img
-            src="src/pages/Overview/resources/Overview 1.png"
+            src="src/assets/images/overview/Overview 1.png"
             alt="Over View"
             style={{
               maxWidth: "100%",
@@ -64,4 +64,4 @@ const OverviewPage: React.FC = () => {
   return <ContentNavigator sections={sections} />;
 };
 
-export default OverviewPage;
+export default OverviewDocumentationPage;

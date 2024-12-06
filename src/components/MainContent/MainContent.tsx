@@ -6,9 +6,23 @@ interface MainContentProps {
   contentRefs: React.MutableRefObject<{ [key: string]: HTMLDivElement | null }>;
 }
 
+const styles = {
+  container: {
+    width: "80%",
+    overflow: "auto",
+    padding: 4,
+  },
+  section: {
+    marginBottom: 4,
+  },
+  title: {
+    marginBottom: 2,
+  },
+};
+
 const MainContent: React.FC<MainContentProps> = ({ sections, contentRefs }) => {
   return (
-    <Box width="80%" overflow="auto" p={4}>
+    <Box sx={styles.container}>
       {sections.map((section) => (
         <Box
           key={section.id}
@@ -16,9 +30,9 @@ const MainContent: React.FC<MainContentProps> = ({ sections, contentRefs }) => {
           ref={(el: HTMLDivElement | null) =>
             (contentRefs.current[section.id] = el)
           }
-          mb={4}
+          sx={styles.section}
         >
-          <Typography variant="h2" gutterBottom>
+          <Typography variant="h2" gutterBottom sx={styles.title}>
             {section.title}
           </Typography>
           <Box>{section.content}</Box>

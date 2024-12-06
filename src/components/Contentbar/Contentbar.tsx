@@ -8,15 +8,30 @@ import {
   Typography,
 } from "@mui/material";
 
-interface SidebarProps {
+interface ContentbarProps {
   sections: { id: string; title: string }[];
   onScrollToSection: (id: string) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ sections, onScrollToSection }) => {
+const styles = {
+  container: {
+    width: "20%",
+    backgroundColor: "#1a1a1a",
+    color: "white",
+    padding: 2,
+  },
+  title: {
+    marginBottom: 2,
+  },
+};
+
+const Contentbar: React.FC<ContentbarProps> = ({
+  sections,
+  onScrollToSection,
+}) => {
   return (
-    <Box width="20%" bgcolor="#1a1a1a" color="white" p={2}>
-      <Typography variant="h6" gutterBottom>
+    <Box sx={styles.container}>
+      <Typography variant="h6" sx={styles.title}>
         Contents
       </Typography>
       <List>
@@ -32,4 +47,4 @@ const Sidebar: React.FC<SidebarProps> = ({ sections, onScrollToSection }) => {
   );
 };
 
-export default Sidebar;
+export default Contentbar;
