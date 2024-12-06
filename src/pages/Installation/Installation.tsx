@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./InstallationPage.module.css";
-import DocumentationSideBar from "../../components/DocumentationSideBar";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
+import DocumentationSideBar from "../../components/DocumentationSideBar";
+import styles from "./InstallationPage.module.css";
 
 const InstallationPage: React.FC = () => {
   const sections = [

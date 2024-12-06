@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./DocumentationSideBar.module.css";
 
 const DocumentationSideBar: React.FC = () => {
@@ -10,11 +10,13 @@ const DocumentationSideBar: React.FC = () => {
     { title: "Setup Agent in Maven", link: "/maven" },
   ];
 
+  const location = useLocation();
+
   return (
     <div className={styles.sidebarContainer}>
       <ul className={styles.sidebarList}>
-        {sections.map((section, index) => (
-          <li key={index} className={styles.sidebarItem}>
+        {sections.map((section) => (
+          <li key={section.link} className={styles.sidebarItem}>
             <Link
               to={section.link}
               className={`${styles.sidebarLink} ${

@@ -7,4 +7,5 @@ export enum PageNames {
   OVERVIEW = "overview",
   MAVEN = "maven",
   GRADLE = "gradle",
+  INSTALLATION = "installation",
 }

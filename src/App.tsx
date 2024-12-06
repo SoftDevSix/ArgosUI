@@ -15,17 +15,21 @@ import OverviewDocumentationPage from "./pages/OverviewDocumentation";
 import SetupAgentGradleDocumentation from "./pages/SetUpGradleDocumentation/SetUpAgentGradleDocumentation";
 import SetUpMavenDocumentation from "./pages/SetUpMavenDocumentation/SetUpMavenDocumentation";
 import Splash from "./components/Splash";
+import InstallationPage from "./pages/Installation";
 
 const App: React.FC = () => {
   const location = useLocation();
   const { hasUploadedKeys } = useUploadedKeys();
 
-  const showSidebar = ![
-    PageNames.HOME,
-    `/${PageNames.PROJECT_SETUP}`,
+  const showSidebar = ![PageNames.HOME, `/${PageNames.PROJECT_SETUP}`].includes(
+    location.pathname
+  );
+
+  const hideHeaderButtons = [
     `/${PageNames.OVERVIEW}`,
     `/${PageNames.MAVEN}`,
     `/${PageNames.GRADLE}`,
+    `/${PageNames.INSTALLATION}`,
   ].includes(location.pathname);
 
   if (hasUploadedKeys === null) {
@@ -36,7 +40,7 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box display={"flex"} flexDirection={"column"}>
-        {showSidebar && <Header />}
+        {showSidebar && <Header hideButtons={hideHeaderButtons} />}
         <Routes>
           <Route path={PageNames.HOME} Component={WelcomePage} />
           <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
@@ -55,6 +59,7 @@ const App: React.FC = () => {
             path={PageNames.GRADLE}
             element={<SetupAgentGradleDocumentation />}
           />
+          <Route path={PageNames.INSTALLATION} element={<InstallationPage />} />
         </Routes>
       </Box>
     </ThemeProvider>

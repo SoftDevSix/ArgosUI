@@ -17,7 +17,7 @@ interface ContentbarProps {
 const styles = {
   container: {
     width: "20%",
-    color: COLORS.NEUTRAL_WHITE,
+    color: COLORS.GREY_DISABLED,
     padding: 2,
   },
   title: {
@@ -55,7 +55,7 @@ const Contentbar: React.FC<ContentbarProps> = ({
                   paddingBottom: selectedSection === section.id ? 1 : 0,
                   color:
                     selectedSection === section.id
-                      ? "#FFFFFF"
+                      ? COLORS.NEUTRAL_WHITE
                       : COLORS.GREY_DISABLED,
                 }}
               />
