@@ -1,0 +1,36 @@
+.lineWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  position: relative;
+}
+
+.lineNumber {
+  width: 40px;
+  text-align: right;
+  padding-right: 16px;
+  font-size: 18px;
+  color: #888;
+}
+
+.code {
+  flex: 1;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: transparent;
+  color: #f8f8f2;
+}
+
+.lineWrapper::after {
+  content: attr(data-line-number);
+  font-size: 20px;
+  color: #888;
+  text-align: right;
+  width: 40px;
+  margin-left: 10px;
+}
+.withoutCoverage {
+  background-color: #710a0f;
+  cursor: pointer;
+}

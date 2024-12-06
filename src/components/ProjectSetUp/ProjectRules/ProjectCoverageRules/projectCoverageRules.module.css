@@ -1,0 +1,7 @@
+.fieldPercentageContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 1px;
+  padding: 4px 0;
+  border-radius: 1px;
+}

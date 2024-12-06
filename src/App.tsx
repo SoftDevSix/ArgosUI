@@ -1,33 +1,64 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { PageNames } from "./utils/pageNames";
-import { Container, CssBaseline, ThemeProvider } from "@mui/material";
-import Home from "./pages/Home";
+import { CssBaseline, ThemeProvider, Box } from "@mui/material";
 import Error from "./pages/Error";
 import theme from "./utils/theme";
+import CoverageResults from "./pages/CoverageResults";
+import WelcomePage from "./pages/WelcomePage";
+import { UploadedKeysProvider } from "./context/UploadedKeysContext";
+import { useUploadedKeys } from "./hooks/UseUploadedKeys";
+import ProjectSetupPage from "./pages/ProjectSetup";
+import FileCoverage from "./pages/FileCoverage";
 import Header from "./components/Header";
 import OverviewDocumentationPage from "./pages/OverviewDocumentation";
 import SetupAgentGradleDocumentation from "./pages/SetUpGradleDocumentation/SetUpAgentGradleDocumentation";
 import SetUpMavenDocumentation from "./pages/SetUpMavenDocumentation/SetUpMavenDocumentation";
+import Splash from "./components/Splash";
 
 const App: React.FC = () => {
+  const location = useLocation();
+  const { hasUploadedKeys } = useUploadedKeys();
+
+  const showSidebar = ![PageNames.HOME, `/${PageNames.PROJECT_SETUP}`].includes(
+    location.pathname
+  );
+
+  if (hasUploadedKeys === null) {
+    return <Splash />;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
         <Header />
-        <Container>
-          <Routes>
-            <Route path={PageNames.HOME} Component={Home} />
-            <Route path={PageNames.ERROR_404} Component={Error} />
-            <Route path="/overview" element={<OverviewDocumentationPage />} />
-            <Route path="/maven" element={<SetUpMavenDocumentation />} />
-            <Route path="/gradle" element={<SetupAgentGradleDocumentation />} />
-          </Routes>
-        </Container>
-      </BrowserRouter>
+
+      <Box display={"flex"} flexDirection={"column"}>
+        {showSidebar && <Header />}
+        <Routes>
+          <Route path={PageNames.HOME} Component={WelcomePage} />
+          <Route path={PageNames.PROJECT_SETUP} Component={ProjectSetupPage} />
+          <Route path={PageNames.FILE_COVERAGE} Component={FileCoverage} />
+          <Route
+            path={PageNames.COVERAGE_RESULTS}
+            Component={CoverageResults}
+          />
+          <Route path={PageNames.ERROR_404} Component={Error} />
+          <Route path={PageNames.OVERVIEW} element={<OverviewDocumentationPage />} />
+            <Route path={PageNames.MAVEN} element={<SetUpMavenDocumentation />} />
+            <Route path={PageNames.GRADLE} element={<SetupAgentGradleDocumentation />} />
+        </Routes>
+      </Box>
     </ThemeProvider>
   );
 };
 
-export default App;
+export const WrappedApp: React.FC = () => (
+  <UploadedKeysProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </UploadedKeysProvider>
+);
+
+export default WrappedApp;

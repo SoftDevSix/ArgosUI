@@ -1,0 +1,48 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.title {
+  position: relative;
+  z-index: 2;
+  font-size: 100px;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 2;
+  font-size: 50px;
+  color: white;
+  text-align: center;
+}
+
+.button {
+  margin-top: 40px !important;
+  position: relative;
+  z-index: 2;
+  font-size: 24px !important;
+  padding: 12px 40px !important;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
