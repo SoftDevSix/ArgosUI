@@ -6,11 +6,14 @@ export const FONT_WEIGHTS = {
 };
 
 export const FONT_SIZES = {
-  H1: "32px",
+  H1: "64px",
   H2: "24px",
   H3: "18.72px",
   H4: "16px",
   BODY1: "16px",
+  SUBTITLE1: "32px",
+  SUBTITLE2: "28px",
+  CAPTION: "14px",
 };
 
 export const COLORS = {
@@ -21,8 +24,10 @@ export const COLORS = {
   LINK: "#93C5FD",
   NEUTRAL_WHITE: "#FFF",
   NEUTRAL_BLACK: "#000",
-  ERROR: "#FCA5A5",
-  SUCCESS: "#86EFAC",
+  ERROR: "#FF0000",
+  ERROR_VARIANT: "#d32f2f",
+  SUCCESS: "#34BF49",
+  SUCCESS_VARIANT: "#2e7d32",
   WARNING_DEFAULT: "#FEF08A",
   WARNING_HEAVY: "#FDBA74",
   WARNING_CRITICAL: "#D97706",
@@ -30,5 +35,10 @@ export const COLORS = {
   YELLOW: "#ffd700",
   ORANGE: "#ff9800",
   RED: "#ff5722",
+  GREY_BG: "#313647",
+  BODY_2: "#BBBBBB",
+  CAPTION: "#686D7E",
+  PASS_BUTTON: "#75DE9B",
+  GREY_DISABLED: "#2C2C3C",
   SECONDARY_TEXT: "#6c7693",
 };
