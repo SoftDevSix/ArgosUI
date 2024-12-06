@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Box,
   List,
@@ -7,6 +6,8 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
+import { COLORS } from "../../utils/styleConstants";
 
 interface ContentbarProps {
   sections: { id: string; title: string }[];
@@ -16,7 +17,7 @@ interface ContentbarProps {
 const styles = {
   container: {
     width: "20%",
-    color: "white",
+    color: COLORS.NEUTRAL_WHITE,
     padding: 2,
   },
   title: {
@@ -52,7 +53,10 @@ const Contentbar: React.FC<ContentbarProps> = ({
                   display: "inline",
                   flex: "none",
                   paddingBottom: selectedSection === section.id ? 1 : 0,
-                  color: selectedSection === section.id ? "#FFFFFF" : "#686D7E",
+                  color:
+                    selectedSection === section.id
+                      ? "#FFFFFF"
+                      : COLORS.GREY_DISABLED,
                 }}
               />
             </ListItemButton>

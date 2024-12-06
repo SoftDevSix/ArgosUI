@@ -20,9 +20,13 @@ const App: React.FC = () => {
   const location = useLocation();
   const { hasUploadedKeys } = useUploadedKeys();
 
-  const showSidebar = ![PageNames.HOME, `/${PageNames.PROJECT_SETUP}`].includes(
-    location.pathname
-  );
+  const showSidebar = ![
+    PageNames.HOME,
+    `/${PageNames.PROJECT_SETUP}`,
+    `/${PageNames.OVERVIEW}`,
+    `/${PageNames.MAVEN}`,
+    `/${PageNames.GRADLE}`,
+  ].includes(location.pathname);
 
   if (hasUploadedKeys === null) {
     return <Splash />;
@@ -31,8 +35,6 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
-
       <Box display={"flex"} flexDirection={"column"}>
         {showSidebar && <Header />}
         <Routes>
