@@ -7,6 +7,8 @@ import image5 from "../../assets/images/gradle/Step-05 Gradle.png";
 import image6 from "../../assets/images/gradle/Step-06 Gradle.png";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
 import DocumentationSideBar from "../../components/DocumentationSideBar";
+import grovyImage from "../../assets/images/gradle/Step-01-1 Gradle.png";
+import grovyImage2 from "../../assets/images/gradle/Step-01-2 Gradle.png";
 
 const SetupAgentGradleDocumentation: React.FC = () => {
   const sections = [
@@ -44,40 +46,73 @@ const SetupAgentGradleDocumentation: React.FC = () => {
       id: "step-2",
       title: "Configuration",
       content: (
-        <ul>
-          <img
-            src={image6}
-            alt="Jar Position maven"
-            style={{
-              maxWidth: "100%",
-              marginTop: "16px",
-              display: "block",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          />
-          <li>
-            Configure in <code>build.gradle.kts</code> the following lines:
-          </li>
-          <img
-            src={image2}
-            alt="Jar Position Maven"
-            style={{
-              maxWidth: "100%",
-              marginTop: "16px",
-              display: "block",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          />
-          <li>
-            <span>
-              After the setup, just run the tests normally using JDK or with the
-            </span>
-            <code>{" ./gradlew test "}</code>
-            <span>command.</span>
-          </li>
-        </ul>
+        <>
+          <strong>Kotlin</strong>
+          <ul>
+            <img
+              src={image6}
+              alt="Jar Position maven"
+              style={{
+                maxWidth: "100%",
+                marginTop: "16px",
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            />
+            <li>
+              Configure in <code>build.gradle.kts</code> the following lines:
+            </li>
+            <img
+              src={image2}
+              alt="Jar Position Maven"
+              style={{
+                maxWidth: "100%",
+                marginTop: "16px",
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            />
+          </ul>
+          <strong>Grovy</strong>
+          <ul>
+            <img
+              src={grovyImage}
+              alt="Jar Position maven"
+              style={{
+                maxWidth: "100%",
+                marginTop: "16px",
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            />
+            <li>
+              On the same way to kotlin configuration, Configure in
+              “build.gradle” the following lines:{" "}
+            </li>
+            <img
+              src={grovyImage2}
+              alt="Jar Position maven"
+              style={{
+                maxWidth: "100%",
+                marginTop: "16px",
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            />
+            <li>
+              <span>
+                After the setup, just run the tests normally using JDK or with
+                the
+              </span>
+              <code>{" ./gradlew test "}</code>
+              <span>command.</span>
+            </li>
+          </ul>
+        </>
       ),
     },
     {
