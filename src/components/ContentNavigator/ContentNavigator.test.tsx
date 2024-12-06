@@ -25,7 +25,7 @@ describe("ContentNavigator component", () => {
       const sectionContent = screen.getByText(section.content.props.children);
       expect(sectionContent).toBeInTheDocument();
     });
-  });  
+  });
 
   it("should handle empty sections gracefully", () => {
     render(<ContentNavigator sections={[]} />);

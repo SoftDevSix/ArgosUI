@@ -49,7 +49,9 @@ describe("Contentbar component", () => {
   });
 
   it("should not fail if sections prop is empty", () => {
-    render(<Contentbar sections={[]} onScrollToSection={mockOnScrollToSection} />);
+    render(
+      <Contentbar sections={[]} onScrollToSection={mockOnScrollToSection} />
+    );
     const listItems = screen.queryAllByRole("listitem");
     expect(listItems.length).toBe(0);
   });

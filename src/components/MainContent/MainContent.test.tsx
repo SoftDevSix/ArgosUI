@@ -15,7 +15,9 @@ describe("MainContent component", () => {
   }>;
 
   const renderComponent = () => {
-    return render(<MainContent sections={mockSections} contentRefs={mockRefs} />);
+    return render(
+      <MainContent sections={mockSections} contentRefs={mockRefs} />
+    );
   };
 
   it("should render all sections with their titles and content", () => {
