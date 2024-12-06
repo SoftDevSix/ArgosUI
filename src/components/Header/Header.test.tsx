@@ -48,7 +48,6 @@ describe("HeaderButton", () => {
       />
     );
 
-    // Verifica que el texto no se muestre en pantallas pequeñas
     expect(screen.queryByText("Home")).toBeNull();
   });
 
