@@ -1,6 +1,6 @@
 services:
   argos_ui_prod:
-    image: argos-ui-prod:latest
+    image: argoscs/ui:latest
     build:
       context: .
       dockerfile: Dockerfile.prod
