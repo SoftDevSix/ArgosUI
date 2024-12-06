@@ -1,21 +1,29 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { MemoryRouter } from "react-router-dom";
+
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
-import OverviewDocumentationPage from "./OverviewDocumentation";
+import InstallationPage from "./Installation";
 
 vi.mock("../../components/ContentNavigator/ContentNavigator", () => ({
   __esModule: true,
   default: vi.fn(() => <div data-testid="content-navigator"></div>),
 }));
 
-describe("OverviewDocumentationPage component", () => {
+vi.mock("../../components/DocumentationSideBar", () => ({
+  __esModule: true,
+  default: vi.fn(() => <div data-testid="documentation-sidebar"></div>),
+}));
+
+describe("InstallationPage component", () => {
+  it("should render the DocumentationSideBar component", () => {
+    render(<InstallationPage />);
+
+    const documentationSidebar = screen.getByTestId("documentation-sidebar");
+    expect(documentationSidebar).toBeInTheDocument();
+  });
+
   it("should render the ContentNavigator component", () => {
-    render(
-      <MemoryRouter>
-        <OverviewDocumentationPage />
-      </MemoryRouter>
-    );
+    render(<InstallationPage />);
 
     const contentNavigator = screen.getByTestId("content-navigator");
     expect(contentNavigator).toBeInTheDocument();
@@ -24,27 +32,23 @@ describe("OverviewDocumentationPage component", () => {
   it("should pass the correct sections prop to ContentNavigator", () => {
     const expectedSections = [
       {
-        id: "overview",
-        title: "Agent Description",
+        id: "download",
+        title: "Download",
         content: expect.any(Object),
       },
       {
-        id: "requirements",
-        title: "Requirements",
+        id: "move",
+        title: "Move the File",
         content: expect.any(Object),
       },
       {
-        id: "limitations",
-        title: "Limitations",
+        id: "extructure",
+        title: "Structure Example",
         content: expect.any(Object),
       },
     ];
 
-    render(
-      <MemoryRouter>
-        <OverviewDocumentationPage />
-      </MemoryRouter>
-    );
+    render(<InstallationPage />);
 
     expect(ContentNavigator).toHaveBeenCalledWith(
       { sections: expectedSections },

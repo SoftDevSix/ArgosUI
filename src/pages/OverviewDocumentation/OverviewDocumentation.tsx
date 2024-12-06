@@ -1,5 +1,6 @@
 import React from "react";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
+import DocumentationSideBar from "../../components/DocumentationSideBar";
 
 const OverviewDocumentationPage: React.FC = () => {
   const sections = [
@@ -61,7 +62,12 @@ const OverviewDocumentationPage: React.FC = () => {
     },
   ];
 
-  return <ContentNavigator sections={sections} />;
+  return (
+    <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+      <DocumentationSideBar />
+      <ContentNavigator sections={sections} />
+    </div>
+  );
 };
 
 export default OverviewDocumentationPage;
