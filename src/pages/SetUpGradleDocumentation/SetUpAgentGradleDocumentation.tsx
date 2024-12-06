@@ -1,5 +1,6 @@
 import React from "react";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
+import DocumentationSideBar from "../../components/DocumentationSideBar/DocumentationSidebar";
 
 const SetupAgentGradleDocumentation: React.FC = () => {
   const sections = [
@@ -145,7 +146,12 @@ const SetupAgentGradleDocumentation: React.FC = () => {
     },
   ];
 
-  return <ContentNavigator sections={sections} />;
+  return (
+    <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+      <DocumentationSideBar />
+      <ContentNavigator sections={sections} />
+    </div>
+  );
 };
 
 export default SetupAgentGradleDocumentation;
