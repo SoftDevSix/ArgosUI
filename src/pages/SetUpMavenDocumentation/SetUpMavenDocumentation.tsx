@@ -1,5 +1,13 @@
 import React from "react";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
+import image1 from "../../assets/images/maven/Step-01 Maven.png";
+import image2 from "../../assets/images/maven/Step-02 Maven.png";
+import image3 from "../../assets/images/maven/Step-03 Maven.png";
+import image4 from "../../assets/images/maven/Step-04 Maven.png";
+import image5 from "../../assets/images/maven/Step-05 Maven.png";
+import image6 from "../../assets/images/maven/Step-06 Maven.png";
+import image7 from "../../assets/images/maven/Step-07 Maven.png";
+import image8 from "../../assets/images/maven/Step-08 Maven.png";
 
 const SetUpMavenDocumentation: React.FC = () => {
   const sections = [
@@ -20,7 +28,7 @@ const SetUpMavenDocumentation: React.FC = () => {
         <>
           <p>Move/copy the jar to the project principal directory</p>
           <img
-            src="src/assets/images/maven/Step-01 Maven.png"
+            src={image1}
             alt="Jar Position maven"
             style={{
               maxWidth: "100%",
@@ -43,7 +51,7 @@ const SetUpMavenDocumentation: React.FC = () => {
             <li>• Go to run tab </li>
             <li>• Go to edit configuration </li>
             <img
-              src="src/assets/images/maven/Step-02 Maven.png"
+              src={image2}
               alt="Edit Configuration maven"
               style={{
                 maxWidth: "100%",
@@ -58,7 +66,7 @@ const SetUpMavenDocumentation: React.FC = () => {
               JUnit Option{" "}
             </li>
             <img
-              src="src/assets/images/maven/Step-03 Maven.png"
+              src={image3}
               alt="Edit Configuration maven"
               style={{
                 maxWidth: "100%",
@@ -73,7 +81,7 @@ const SetUpMavenDocumentation: React.FC = () => {
               it like “JavaInstrumentation”{" "}
             </li>
             <img
-              src="src/assets/images/maven/Step-04 Maven.png"
+              src={image4}
               alt="Edit Configuration maven"
               style={{
                 maxWidth: "100%",
@@ -98,7 +106,7 @@ const SetUpMavenDocumentation: React.FC = () => {
             </li>
             <li>• Apply the configuration and run the new configuration</li>
             <img
-              src="src/assets/images/maven/Step-05 Maven.png"
+              src={image5}
               alt="Edit Configuration maven"
               style={{
                 maxWidth: "100%",
@@ -122,7 +130,7 @@ const SetUpMavenDocumentation: React.FC = () => {
       content: (
         <>
           <img
-            src="src/assets/images/maven/Step-06 Maven.png"
+            src={image6}
             alt="Jar Position maven"
             style={{
               maxWidth: "100%",
@@ -147,7 +155,7 @@ const SetUpMavenDocumentation: React.FC = () => {
       content: (
         <>
           <img
-            src="src/assets/images/maven/Step-07 Maven.png"
+            src={image7}
             alt="Jar Position maven"
             style={{
               maxWidth: "100%",
@@ -175,7 +183,7 @@ const SetUpMavenDocumentation: React.FC = () => {
               </a>
             </li>
             <img
-              src="src/assets/images/maven/Step-08 Maven.png"
+              src={image8}
               alt="Jar Position maven"
               style={{
                 maxWidth: "100%",

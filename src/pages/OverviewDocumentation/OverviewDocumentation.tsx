@@ -1,5 +1,6 @@
 import React from "react";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
+import image1 from "../../assets/images/overview/Overview 1.png";
 
 const OverviewDocumentationPage: React.FC = () => {
   const sections = [
@@ -14,7 +15,7 @@ const OverviewDocumentationPage: React.FC = () => {
             for example:
           </p>
           <img
-            src="src/assets/images/overview/Overview 1.png"
+            src={image1}
             alt="Over View"
             style={{
               maxWidth: "100%",

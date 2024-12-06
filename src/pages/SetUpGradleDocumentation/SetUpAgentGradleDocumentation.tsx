@@ -1,5 +1,11 @@
 import React from "react";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
+import image1 from "../../assets/images/gradle/Step-01 Gradle.png";
+import image2 from "../../assets/images/gradle/Step-02 Gradle.png";
+import image3 from "../../assets/images/gradle/Step-03 Gradle.png";
+import image4 from "../../assets/images/gradle/Step-04 Gradle.png";
+import image5 from "../../assets/images/gradle/Step-05 Gradle.png";
+import image6 from "../../assets/images/gradle/Step-06 Gradle.png";
 
 const SetupAgentGradleDocumentation: React.FC = () => {
   const sections = [
@@ -20,7 +26,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
         <>
           <p>Move/copy the jar to the project principal directory</p>
           <img
-            src="src/assets/images/gradle/Step-01 Gradle.png"
+            src={image1}
             alt="Jar Position maven"
             style={{
               maxWidth: "100%",
@@ -40,7 +46,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
         <>
           <ul>
             <img
-              src="src/assets/images/gradle/Step-06 Gradle.png"
+              src={image6}
               alt="Jar Position maven"
               style={{
                 maxWidth: "100%",
@@ -52,7 +58,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
             />
             <li>Configure in “build.gradle.kts” the following lines: </li>
             <img
-              src="src/assets/images/gradle/Step-02 Gradle.png"
+              src={image2}
               alt="Jar Position maven"
               style={{
                 maxWidth: "100%",
@@ -76,7 +82,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
       content: (
         <>
           <img
-            src="src/assets/images/gradle/Step-04 Gradle.png"
+            src={image4}
             alt="Jar Position maven"
             style={{
               maxWidth: "100%",
@@ -101,7 +107,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
       content: (
         <>
           <img
-            src="src/assets/images/gradle/Step-03 Gradle.png"
+            src={image3}
             alt="Jar Position maven"
             style={{
               maxWidth: "100%",
@@ -129,7 +135,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
               </a>
             </li>
             <img
-              src="src/assets/images/gradle/Step-05 Gradle.png"
+              src={image5}
               alt="Jar Position maven"
               style={{
                 maxWidth: "100%",
