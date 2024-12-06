@@ -1,7 +1,8 @@
 import React from "react";
-import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
 import image1 from "../../assets/images/overview/Overview 1.png";
+import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
 import DocumentationSideBar from "../../components/DocumentationSideBar";
+import HeaderDocumentation from "../../components/HeaderDocumentation";
 
 const OverviewDocumentationPage: React.FC = () => {
   const sections = [
@@ -65,6 +66,7 @@ const OverviewDocumentationPage: React.FC = () => {
 
   return (
     <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+      <HeaderDocumentation />
       <DocumentationSideBar />
       <ContentNavigator sections={sections} />
     </div>

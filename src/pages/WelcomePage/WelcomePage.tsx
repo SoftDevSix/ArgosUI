@@ -62,6 +62,13 @@ const WelcomePage: React.FC = () => {
       >
         Analyze your project
       </CustomButton>
+      <p
+        className={styles.note}
+        onClick={() => navigate(PageNames.OVERVIEW)}
+        style={{ cursor: "pointer" }}
+      >
+        Check documentation
+      </p>
     </div>
   );
 };

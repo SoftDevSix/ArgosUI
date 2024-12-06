@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "./InstallationPage.module.css";
-import DocumentationSideBar from "../../components/DocumentationSideBar";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
+import DocumentationSideBar from "../../components/DocumentationSideBar";
+import HeaderDocumentation from "../../components/HeaderDocumentation";
+import styles from "./InstallationPage.module.css";
 
 const InstallationPage: React.FC = () => {
   const sections = [
@@ -85,6 +86,7 @@ const InstallationPage: React.FC = () => {
 
   return (
     <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+      <HeaderDocumentation />
       <DocumentationSideBar />
       <ContentNavigator sections={sections} />
     </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
 import image1 from "../../assets/images/maven/Step-01 Maven.png";
 import image2 from "../../assets/images/maven/Step-02 Maven.png";
 import image3 from "../../assets/images/maven/Step-03 Maven.png";
@@ -8,7 +7,9 @@ import image5 from "../../assets/images/maven/Step-05 Maven.png";
 import image6 from "../../assets/images/maven/Step-06 Maven.png";
 import image7 from "../../assets/images/maven/Step-07 Maven.png";
 import image8 from "../../assets/images/maven/Step-08 Maven.png";
+import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
 import DocumentationSideBar from "../../components/DocumentationSideBar";
+import HeaderDocumentation from "../../components/HeaderDocumentation";
 
 const SetUpMavenDocumentation: React.FC = () => {
   const sections = [
@@ -202,6 +203,7 @@ const SetUpMavenDocumentation: React.FC = () => {
 
   return (
     <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+      <HeaderDocumentation />
       <DocumentationSideBar />
       <ContentNavigator sections={sections} />
     </div>
