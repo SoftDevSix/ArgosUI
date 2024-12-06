@@ -7,6 +7,8 @@ import image4 from "../../assets/images/gradle/Step-04 Gradle.png";
 import image5 from "../../assets/images/gradle/Step-05 Gradle.png";
 import image6 from "../../assets/images/gradle/Step-06 Gradle.png";
 import DocumentationSideBar from "../../components/DocumentationSideBar";
+import grovyImage from "../../assets/images/gradle/Step-01-1 Gradle.png";
+import grovyImage2 from "../../assets/images/gradle/Step-01-2 Gradle.png";
 
 const SetupAgentGradleDocumentation: React.FC = () => {
   const sections = [
@@ -74,7 +76,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
           <strong>Grovy</strong>
           <ul>
             <img
-              src="src/assets/images/gradle/Step-01-1 Gradle.png"
+              src={grovyImage}
               alt="Jar Position maven"
               style={{
                 maxWidth: "100%",
@@ -89,7 +91,7 @@ const SetupAgentGradleDocumentation: React.FC = () => {
               “build.gradle” the following lines:{" "}
             </li>
             <img
-              src="src/assets/images/gradle/Step-01-2 Gradle.png"
+              src={grovyImage2}
               alt="Jar Position maven"
               style={{
                 maxWidth: "100%",
