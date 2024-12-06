@@ -5,7 +5,7 @@ import ProjectForm from "./ProjectForm";
 import { Typography } from "@mui/material";
 import ProjectRules from "./ProjectRules";
 import CustomButton from "../Form/CustomButton";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PageNames } from "../../utils/pageNames";
 import { useUploadedKeys } from "../../hooks/UseUploadedKeys";
 import Splash from "../Splash";
@@ -110,6 +110,10 @@ const ProjectSetUp: React.FC = () => {
           </CustomButton>
         </Grid>
       </Grid>
+
+      <Link to={PageNames.OVERVIEW}>
+        <Typography>Check documentation</Typography>
+      </Link>
     </section>
   );
 };

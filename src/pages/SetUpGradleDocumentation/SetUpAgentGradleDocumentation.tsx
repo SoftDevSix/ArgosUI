@@ -7,7 +7,6 @@ import image5 from "../../assets/images/gradle/Step-05 Gradle.png";
 import image6 from "../../assets/images/gradle/Step-06 Gradle.png";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
 import DocumentationSideBar from "../../components/DocumentationSideBar";
-import HeaderDocumentation from "../../components/HeaderDocumentation";
 
 const SetupAgentGradleDocumentation: React.FC = () => {
   const sections = [
@@ -72,8 +71,11 @@ const SetupAgentGradleDocumentation: React.FC = () => {
             }}
           />
           <li>
-            After the setup, just run the tests normally using JDK or with the
-            <code> ./gradlew test </code> command.
+            <span>
+              After the setup, just run the tests normally using JDK or with the
+            </span>
+            <code>{" ./gradlew test "}</code>
+            <span>command.</span>
           </li>
         </ul>
       ),
@@ -153,7 +155,6 @@ const SetupAgentGradleDocumentation: React.FC = () => {
 
   return (
     <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
-      <HeaderDocumentation />
       <DocumentationSideBar />
       <ContentNavigator sections={sections} />
     </div>

@@ -9,7 +9,6 @@ import image7 from "../../assets/images/maven/Step-07 Maven.png";
 import image8 from "../../assets/images/maven/Step-08 Maven.png";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
 import DocumentationSideBar from "../../components/DocumentationSideBar";
-import HeaderDocumentation from "../../components/HeaderDocumentation";
 
 const SetUpMavenDocumentation: React.FC = () => {
   const sections = [
@@ -203,7 +202,6 @@ const SetUpMavenDocumentation: React.FC = () => {
 
   return (
     <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
-      <HeaderDocumentation />
       <DocumentationSideBar />
       <ContentNavigator sections={sections} />
     </div>

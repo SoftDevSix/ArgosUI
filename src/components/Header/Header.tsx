@@ -12,7 +12,11 @@ interface HeaderOption {
   icon: ReactNode;
 }
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  hideButtons?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ hideButtons }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [optionSelected, setOptionSelected] = useState(
@@ -59,21 +63,23 @@ const Header: React.FC = () => {
         >
           Argos
         </Typography>
-        <Box display="flex" gap="5px" alignItems="center">
-          {headerOptions.map((e) => (
-            <HeaderButton
-              key={e.path}
-              text={e.title}
-              icon={e.icon}
-              isSelected={optionSelected === e.path}
-              onClick={() => {
-                setOptionSelected(e.path);
-                navigate(e.path);
-              }}
-              isSmallScreen={isSmallScreen}
-            />
-          ))}
-        </Box>
+        {!hideButtons && (
+          <Box display="flex" gap="5px" alignItems="center">
+            {headerOptions.map((e) => (
+              <HeaderButton
+                key={e.path}
+                text={e.title}
+                icon={e.icon}
+                isSelected={optionSelected === e.path}
+                onClick={() => {
+                  setOptionSelected(e.path);
+                  navigate(e.path);
+                }}
+                isSmallScreen={isSmallScreen}
+              />
+            ))}
+          </Box>
+        )}
       </Box>
       <HeaderButton
         text="Analyze New Project"
