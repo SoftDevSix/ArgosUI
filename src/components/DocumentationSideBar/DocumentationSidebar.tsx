@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./DocumentationSideBar.module.css";
 
 const DocumentationSideBar: React.FC = () => {
@@ -9,8 +9,6 @@ const DocumentationSideBar: React.FC = () => {
     { title: "Setup Agent in Gradlew", link: "/gradle" },
     { title: "Setup Agent in Maven", link: "/maven" },
   ];
-
-  const location = useLocation();
 
   return (
     <div className={styles.sidebarContainer}>

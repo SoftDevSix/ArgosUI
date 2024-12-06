@@ -1,6 +1,6 @@
 import React from "react";
 import ContentNavigator from "../../components/ContentNavigator/ContentNavigator";
-import DocumentationSideBar from "../../components/DocumentationSideBar/DocumentationSidebar";
+import DocumentationSideBar from "../../components/DocumentationSideBar";
 
 const SetupAgentGradleDocumentation: React.FC = () => {
   const sections = [

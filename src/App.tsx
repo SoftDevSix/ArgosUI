@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import OverviewDocumentationPage from "./pages/OverviewDocumentation";
 import SetupAgentGradleDocumentation from "./pages/SetUpGradleDocumentation/SetUpAgentGradleDocumentation";
 import SetUpMavenDocumentation from "./pages/SetUpMavenDocumentation/SetUpMavenDocumentation";
-import InstallationPage from "./components/installation/Installation";
+import InstallationPage from "./pages/installation";
 
 const App: React.FC = () => {
   return (
