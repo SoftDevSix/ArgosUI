@@ -50,6 +50,7 @@ const Header: React.FC<HeaderProps> = ({ hideButtons }) => {
       padding="30px"
       zIndex={1000}
       position={"fixed"}
+      top={0}
     >
       <Box
         display="flex"

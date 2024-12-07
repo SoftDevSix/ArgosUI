@@ -4,6 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
+      args:
+        VITE_ARGOS_API_BASE_URL: ${VITE_ARGOS_API_BASE_URL}
+        VITE_FILE_MANAGER_API_BASE_URL: ${VITE_FILE_MANAGER_API_BASE_URL}
     ports:
       - "5175:80"
     volumes:

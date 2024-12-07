@@ -17,7 +17,8 @@ const ProjectUploader: React.FC<ProjectUploaderProps> = ({ setFormData }) => {
     try {
       if (files && files.length > 0) {
         const zipFile = files[0];
-        if (zipFile.type !== "application/zip") {
+        const fileName = zipFile.name.toLowerCase();
+        if (!fileName.endsWith(".zip")) {
           alert("Please upload a valid ZIP file.");
           return;
         }
