@@ -84,7 +84,7 @@ const InstallationPage: React.FC = () => {
   ];
 
   return (
-    <div style={{ display: "flex", height: "100%", overflow: "auto" }}>
+    <div style={{ display: "flex", overflow: "auto" }}>
       <DocumentationSideBar />
       <ContentNavigator sections={sections} />
     </div>

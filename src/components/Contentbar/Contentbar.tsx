@@ -19,6 +19,11 @@ const styles = {
     width: "20%",
     color: COLORS.GREY_DISABLED,
     padding: 2,
+    position: "sticky",
+    height: "calc(100vh - 75px)",
+    overflowY: "auto",
+    top: "75px",
+    marginTop: "75px",
   },
   title: {
     marginBottom: 2,
