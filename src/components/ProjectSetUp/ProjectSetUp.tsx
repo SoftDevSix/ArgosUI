@@ -111,7 +111,7 @@ const ProjectSetUp: React.FC = () => {
         </Grid>
       </Grid>
 
-      <Link to={PageNames.OVERVIEW}>
+      <Link to={`/${PageNames.OVERVIEW}`}>
         <Typography>Check documentation</Typography>
       </Link>
     </section>

@@ -4,6 +4,11 @@
   color: #fff;
   padding: 1rem;
   border-right: 1px solid white;
+  height: calc(100vh - 75px);
+  overflow-y: auto;
+  top: 75px;
+  margin-top: 75px;
+  position: sticky;
 }
 
 .sidebarList {
