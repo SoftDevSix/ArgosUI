@@ -1,4 +1,4 @@
-FROM node:18 AS build
+FROM node:20 AS build
 
 WORKDIR /app
 
@@ -7,6 +7,12 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
+ARG VITE_FILE_MANAGER_API_BASE_URL
+ARG VITE_ARGOS_API_BASE_URL
+
+RUN test -n "$VITE_FILE_MANAGER_API_BASE_URL" || (echo "Error: VITE_FILE_MANAGER_API_BASE_URL cannot be empty" && exit 1)
+RUN test -n "$VITE_ARGOS_API_BASE_URL" || (echo "Error: VITE_ARGOS_API_BASE_URL cannot be empty" && exit 1)
 
 RUN npm run build
 
