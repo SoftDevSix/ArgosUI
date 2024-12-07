@@ -23,9 +23,11 @@ jobs:
         env:
           DOCKER_USERNAME: argoscs
           IMAGE_NAME: argoscs/ui
+          VITE_FILE_MANAGER_API_BASE_URL: ${{ vars.VITE_ARGOS_API_BASE_URL}}
+          VITE_ARGOS_API_BASE_URL: ${{ vars.VITE_ARGOS_API_BASE_URL}}
         run: |
           echo "Building Docker image..."
-          docker build -t ${IMAGE_NAME} -f Dockerfile.prod .
+          docker build -t ${IMAGE_NAME} -f Dockerfile.prod . --build-arg VITE_FILE_MANAGER_API_BASE_URL=${VITE_FILE_MANAGER_API_BASE_URL} --build-arg VITE_ARGOS_API_BASE_URL=${VITE_ARGOS_API_BASE_URL}
 
           echo "Pushing Docker image..."
           docker push ${IMAGE_NAME}
